@@ -4,3 +4,4 @@ Single Cell Variational Inference of the Dose Response (scVIDR) a  variational a
 ## Preprint
 https://www.biorxiv.org/content/10.1101/2022.10.05.510890v1
 
+## Usage
