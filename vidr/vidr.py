@@ -199,7 +199,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
                 return predicted_adata_dict, delta
             else:
                 return predicted_adata_dict, delta, reg
-   
+   #Code taken from Lotfollahi et al's scGen from its pytorch implementation.
     def reg_mean_plot(
         self,
         adata,
