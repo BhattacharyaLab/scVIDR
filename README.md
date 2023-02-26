@@ -7,11 +7,15 @@ Single Cell Variational Inference of the Dose Response (scVIDR) a  variational a
 https://www.biorxiv.org/content/10.1101/2022.10.05.510890v1
 
 ## Installation
+git clone https://github.com/BhattacharyaLab/scVIDR.git
+cd scVIDR
 pip3 install -r requirements.txt
 
 ## Data
 To get the data directory for figure notebooks: 
 https://drive.google.com/file/d/11fzDbp0B19Dy47MtD742Jl4Hz2bdSiiq/view?usp=sharing
+
+Once you download `data.zip` copy it to scVIDR/data and unzip it there.
 
 ## Single dose model training
 
