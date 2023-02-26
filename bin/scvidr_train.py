@@ -21,7 +21,7 @@ from utils import normalize_data, prepare_data #, create_cell_dose_column
 # questions
 # do we want model training params as CLI arguments
 
-parser = argparse.ArgumentParser(description="Train a scVIDR model on a hd5a dataset")
+parser = argparse.ArgumentParser(description="Train a VAE model applicable to scGen and scVIDR using a hd5a input dataset")
 
 parser.add_argument('hd5a_data_file', help='The data file containing the raw reads in hd5a format')
 parser.add_argument('model_path', help='Path to the directory where the trained model will be saved')

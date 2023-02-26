@@ -21,14 +21,14 @@ from utils import normalize_data, prepare_data #, create_cell_dose_column
 # questions
 # do we want model training params as CLI arguments
 
-parser = argparse.ArgumentParser(description="Train a scVIDR model on a hd5a dataset")
+parser = argparse.ArgumentParser(description="Evaluate a pretrained scGen and scVIDR models on a hd5a input dataset")
 
 parser.add_argument('hd5a_data_file', help='The data file containing the raw reads in hd5a format')
 parser.add_argument('model_path', help='Path to the directory where the trained model will be saved')
 parser.add_argument('--dose_column', help='Name of the column within obs dataframe representing the dose', default='Dose')
 parser.add_argument('--celltype_column', help='Name of the column within obs dataframe representing the cell type', default='celltype')
 parser.add_argument('--test_celltype', help='Name of the cell type to be left out for testing - surround by quotation marks for cell types containing spaces', default='Hepatocytes - portal')
-parser.add_argument('--control_dose', help='Treated dose', default='0')
+parser.add_argument('--control_dose', help='Control dose', default='0')
 parser.add_argument('--treated_dose', help='Treated dose', default='30')
 # e.g. --celltypes_keep "Hepatocytes - central;Hepatocytes - portal;Cholangiocytes;Stellate Cells;Portal Fibroblasts;Endothelial Cells"
 parser.add_argument('--celltypes_keep', help='Cell types to keep in the dataset during training/testing - either a file containing list of cell types (one cell type per line) or semicolon separated list of cell types (put in quotation marks) - default all available cell types', default='ALL')
