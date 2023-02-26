@@ -17,6 +17,19 @@ from sklearn.linear_model import LinearRegression
 from scipy import sparse
 from scipy import stats
 
+
+def create_cell_dose_column(adata, celltype_column, dose_column):
+    return adata.obs.apply(lambda x: f'{x[celltype_column]}_{x[dose_column]}', axis=1)
+
+
+def normalize_data(adata):
+    sc.pp.normalize_total(adata)
+    sc.pp.log1p(adata)
+    sc.pp.highly_variable_genes(adata, n_top_genes=5000)
+
+    return adata[:,adata.var.highly_variable]
+
+
 def prepare_data(
         adata,
         cell_type_key,
@@ -29,9 +42,7 @@ def prepare_data(
     This preprocessing step assumes cell ranger data and non-logarithmized data
     """
     if not normalized:
-        sc.pp.noramlize_total(adata)
-        sc.pp.log1p(adata)
-        sc.pp.highly_variable_genes(adata, n_top_genes = 5000)
+        adata = normalize_data(adata)
     train_adata = adata[~((adata.obs[cell_type_key] == cell_type_to_predict) & 
         (adata.obs[treatment_key] == treatment_to_predict))]
     test_adata = adata[((adata.obs[cell_type_key] == cell_type_to_predict) & 
