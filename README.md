@@ -21,22 +21,42 @@ usage: scvidr_train.py [-h] [--dose_column DOSE_COLUMN] [--celltype_column CELLT
 
 Train a scVIDR model on a hd5a dataset
 
-```
 positional arguments:
+```
   hd5a_data_file        The data file containing the raw reads in hd5a format
 
   model_path            Path to the directory where the trained model will be saved
 
-optional arguments:
+```
 
+optional arguments:
+```
   --dose_column DOSE_COLUMN
                         Name of the column within obs dataframe representing the dose
   --celltype_column CELLTYPE_COLUMN
                         Name of the column within obs dataframe representing the cell type
   --test_celltype TEST_CELLTYPE
-                        Name of the cell type to be left out for testing - put in quotation marks for cell types containing spaces
+                        Name of the cell type to be left out for testing - surround by quotation marks for cell types containing spaces
   --treated_dose TREATED_DOSE
                         Treated dose
   --celltypes_keep CELLTYPES_KEEP
-                        Cell types to keep in the dataset during training/testing - put in quotation marks and separate with semicolon
+                        Cell types to keep in the dataset during training/testing - either a file containing list of cell typ
 ```
+
+
+To train all the single cell types model used in the manuscript execute
+
+```
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - portal" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - central.pt/
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - portal" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - portal.pt/
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Cholangiocytes" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Cholangiocytes.pt/
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Stellate Cells" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Stellate Cells.pt/
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Portal Fibroblasts" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Portal Fibroblasts.pt/
+python scvidr_train.py --celltypes_keep ../metadata/liver_celltypes --test_celltype "Endothelial Cells" ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Endothelial Cells.pt/
+
+**Note**: all of these models are available pretrained
+
+
+
+
+

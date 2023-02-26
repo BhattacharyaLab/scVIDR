@@ -1,4 +1,5 @@
 #Create Access to my code
+import os
 import sys
 sys.path.insert(1, '../vidr')
 
@@ -26,10 +27,10 @@ parser.add_argument('hd5a_data_file', help='The data file containing the raw rea
 parser.add_argument('model_path', help='Path to the directory where the trained model will be saved')
 parser.add_argument('--dose_column', help='Name of the column within obs dataframe representing the dose', default='Dose')
 parser.add_argument('--celltype_column', help='Name of the column within obs dataframe representing the cell type', default='celltype')
-parser.add_argument('--test_celltype', help='Name of the cell type to be left out for testing - put in quotation marks for cell types containing spaces', default='Hepatocytes - portal')
+parser.add_argument('--test_celltype', help='Name of the cell type to be left out for testing - surround by quotation marks for cell types containing spaces', default='Hepatocytes - portal')
 parser.add_argument('--treated_dose', help='Treated dose', default='30')
 # e.g. --celltypes_keep "Hepatocytes - central;Hepatocytes - portal;Cholangiocytes;Stellate Cells;Portal Fibroblasts;Endothelial Cells"
-parser.add_argument('--celltypes_keep', help='Cell types to keep in the dataset during training/testing - put in quotation marks and separate with semicolon', default='ALL')
+parser.add_argument('--celltypes_keep', help='Cell types to keep in the dataset during training/testing - either a file containing list of cell types (one cell type per line) or semicolon separated list of cell types (put in quotation marks) - default all available cell types', default='ALL')
 
 script_args = parser.parse_args()
 
@@ -45,7 +46,11 @@ MODEL_OUTPUT_DIR = script_args.model_path
 CELLTYPES_OF_INTEREST = script_args.celltypes_keep
 
 if CELLTYPES_OF_INTEREST != 'ALL':
-    CELLTYPES_OF_INTEREST = CELLTYPES_OF_INTEREST.split(';')
+    if os.path.exists(CELLTYPES_OF_INTEREST):
+        with open(CELLTYPES_OF_INTEREST) as f:
+            CELLTYPES_OF_INTEREST = f.read().strip().split('\n')
+    else:
+        CELLTYPES_OF_INTEREST = CELLTYPES_OF_INTEREST.split(';')
 
 
 logging.info(f'Loading data file: {DATA_PATH}\n\n')
@@ -67,6 +72,8 @@ if CELLTYPES_OF_INTEREST == 'ALL':
 for cell_type in CELLTYPES_OF_INTEREST:
     if not cell_type in available_cell_types:
         raise ValueError(f'Unknown cell type of interest: {cell_type}')
+    else:
+        logging.info(f'--- {cell_type} EXISTS')
 logging.info('---- DONE')
     
 
@@ -86,7 +93,6 @@ train_adata, test_adata = prepare_data(
     normalized = True
 )
 
-# - DF: I do not see "cell_dose" used anywhere in training
 #train_adata.obs["cell_dose"] = create_cell_dose_column(train_adata, CELLTYPE_COLUMN, DOSE_COLUMN)
 model = VIDR(train_adata, linear_decoder = False)
 
@@ -102,5 +108,3 @@ logging.info('---- DONE')
 logging.info('Saving model to: {MODEL_OUTPUT_DIR}') 
 model.save(MODEL_OUTPUT_DIR)
 logging.info('---- DONE')
- 
-# TODO: save metadata - DOSE_COLUMN, CELLTYPE_COLUMN, TEST_CELLTYPE, TREATED_DOSE, CELLTYPES_OF_INTEREST
