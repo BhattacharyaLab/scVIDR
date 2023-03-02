@@ -89,7 +89,8 @@ check_dose('treated dose', TREATED_DOSE, available_doses)
 
 if TRAIN_COMMAND == MULTI_DOSE_COMMAND:
     if len(available_doses) < 3:
-        raise ValueError(f'Multi dose training mode expects more than two doses (Only {len(available_doses)} doses available in the input dataset.)')
+        raise ValueError(f'Multi dose training mode expects more than two doses (Only {len(available_doses)} doses available in the input dataset)')
+
 
 logging.info(f'Doses available in the dataset: ')
 for dose in available_doses:

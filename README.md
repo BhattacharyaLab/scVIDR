@@ -30,7 +30,7 @@ To train a multi dose VAE model run the `scvidr_train.py multi_dose` command (Fi
 
 
 Both types of models expect an AnnData file in the h5ad format as input. In addition to the scRNAseq data, the obs table is also expected to contain a dose and a cell type column.
-The single dose model expects exactly two distinct doses, whereas the multi dose model expects at least three.
+The single dose model expects at least two distinct doses, whereas the multi dose model expects at least three.
 
 Command arguments are the same for both types of models and are listed below.
 
