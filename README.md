@@ -97,14 +97,14 @@ python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadat
 
 ## Single dose model evaluation
 ```
-usage: scvidr_eval.py [-h] [--dose_column DOSE_COLUMN] [--celltype_column CELLTYPE_COLUMN] [--test_celltype TEST_CELLTYPE] [--control_dose CONTROL_DOSE] [--treated_dose TREATED_DOSE] [--celltypes_keep CELLTYPES_KEEP] hd5a_data_file model_path
+usage: scvidr_eval.py [-h] [--dose_column DOSE_COLUMN] [--celltype_column CELLTYPE_COLUMN] [--test_celltype TEST_CELLTYPE] [--control_dose CONTROL_DOSE] [--treated_dose TREATED_DOSE] [--celltypes_keep CELLTYPES_KEEP] h5ad_data_file model_path
 ```
 
 Evaluate a pretrained scGen and scVIDR models on a hd5a input dataset
 
 positional arguments:
 ```
-  hd5a_data_file        The data file containing the raw reads in hd5a format
+  h5ad_data_file        The data file containing the raw reads in hd5a format
 
   model_path            Path to the directory where the trained model will be saved
 ```
