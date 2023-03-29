@@ -21,9 +21,9 @@ from utils import normalize_data, prepare_data #, create_cell_dose_column
 # questions
 # do we want model training params as CLI arguments
 
-parser = argparse.ArgumentParser(description="Evaluate a pretrained scGen and scVIDR models on a hd5a input dataset")
+parser = argparse.ArgumentParser(description="Evaluate a pretrained scGen and scVIDR models on a h5ad input dataset")
 
-parser.add_argument('hd5a_data_file', help='The data file containing the raw reads in hd5a format')
+parser.add_argument('h5ad_data_file', help='The data file containing the raw reads in h5ad format')
 parser.add_argument('model_path', help='Path to the directory where the trained model will be saved')
 parser.add_argument('--dose_column', help='Name of the column within obs dataframe representing the dose', default='Dose')
 parser.add_argument('--celltype_column', help='Name of the column within obs dataframe representing the cell type', default='celltype')
@@ -36,7 +36,7 @@ parser.add_argument('--celltypes_keep', help='Cell types to keep in the dataset 
 script_args = parser.parse_args()
 
 # loading CLI arguments
-DATA_PATH = script_args.hd5a_data_file
+DATA_PATH = script_args.h5ad_data_file
 CELLTYPE_COLUMN = script_args.celltype_column
 DOSE_COLUMN = script_args.dose_column
 TEST_CELLTYPE = script_args.test_celltype
