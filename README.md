@@ -10,8 +10,11 @@ https://www.biorxiv.org/content/10.1101/2022.10.05.510890v1
 ```
 git clone https://github.com/BhattacharyaLab/scVIDR.git
 cd scVIDR
+conda create -n scVIDR python=3.8.5
+conda activate scVIDR
 pip3 install -r requirements.txt
 pip3 install geomloss==0.2.5
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu111
 ```
 
 ## Data
