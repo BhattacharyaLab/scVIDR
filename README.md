@@ -14,7 +14,7 @@ conda create -n scVIDR python=3.8.5
 conda activate scVIDR
 pip3 install -r requirements.txt
 pip3 install geomloss==0.2.5
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu111
+pip install torch==1.8.1+cu111 torchaudio==0.8.1 torchvision==0.9.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 ## Data
@@ -107,7 +107,7 @@ Evaluate a pretrained scGen and scVIDR models on a hd5a input dataset
 
 positional arguments:
 ```
-  h5ad_data_file        The data file containing the raw reads in hd5a format
+  h5ad_data_file        The data file containing the raw reads in h5ad format
 
   model_path            Path to the directory where the trained model will be saved
 ```
