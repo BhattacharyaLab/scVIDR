@@ -43,7 +43,7 @@ Train a VAE model applicable to scGen and scVIDR using a h5ad input dataset
 
 positional arguments:
 ```
-  h5ad_data_file        The data file containing the raw reads in hd5a format
+  h5ad_data_file        The data file containing the raw reads in h5ad format
 
   model_path            Path to the directory where the trained model will be saved
 
