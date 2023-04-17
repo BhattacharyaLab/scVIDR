@@ -144,7 +144,7 @@ optional arguments:
                         marks) - default all available cell types (default
                         "ALL")
 ```
-Example of model prediction code:
+Example of single does prediction command:
 ```
 python scvidr_predict.py single_dose ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/SingleDose_TCDD \--model scVIDR --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes - portal --control_dose 0 --treated_dose 30 --celltypes_keep ../metadata/liver_celltypes
 ```
@@ -196,7 +196,8 @@ optional arguments:
                         marks) - default all available cell types (default
                         "ALL")
 ```
-example of multidose prediction
+
+Example of multidose prediction command:
 ```
 python scvidr_predict.py multi_dose ../data/nault2021_multiDose.h5ad ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/MultiDose_TCDD \--model scVIDR --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes - portal --control_dose 0.0 --treated_dose 30.0 --celltypes_keep ../metadata/liver_celltypes
 ```
