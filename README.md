@@ -176,3 +176,7 @@ optional arguments:
                         marks) - default all available cell types (default
                         "ALL")
 ```
+Example of model prediction code:
+```
+python scvidr_predict.py single_dose ../data/nault2021_singleDose.h5ad ../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/SingleDose_TCDD \--model scVIDR --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes - portal --control_dose 0 --treated_dose 30 --celltypes_keep ../metadata/liver_celltypes
+```
