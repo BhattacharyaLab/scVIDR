@@ -32,6 +32,8 @@ parser_multi = subparsers.add_parser(MULTI_DOSE_COMMAND, help='Create cell predi
 for subparser in [parser_single, parser_multi]: 
     subparser.add_argument('h5ad_data_file', help='The data file containing the raw reads in h5ad format')
     subparser.add_argument('model_path', help='Path to the directory where the trained model was saved in the model training step')
+    subparser.add_argument('output_path', help='Path to the driectory where the anndata will be output to in an h5ad format')
+    subparser.add_argument('--model', help='Use scVIDR or scGen for prediciton (defualt "scVIDR")', default='scVIDR')
     subparser.add_argument('--dose_column', help='Name of the column within obs dataframe representing the dose (default "Dose")', default='Dose')
     subparser.add_argument('--celltype_column', help='Name of the column within obs dataframe representing the cell type (default "celltype")', default='celltype')
     subparser.add_argument('--test_celltype', help='Name of the cell type to be left out for testing - surround by quotation marks for cell types containing spaces (default "Hepatocytes - portal"', default='Hepatocytes - portal')
@@ -54,8 +56,11 @@ CONTROL_DOSE = script_args.control_dose
 TREATED_DOSE = script_args.treated_dose
 
 MODEL_OUTPUT_DIR = script_args.model_path
+H5AD_OUTPUT_DIR = script_args.output_path
 
 CELLTYPES_OF_INTEREST = script_args.celltypes_keep
+
+MODEL = script_args.model
 
 TRAIN_COMMAND = script_args.train_command
 
@@ -170,7 +175,7 @@ if is_multi_dose:
 
 
 
-logging.info('Loading model: {MODEL_OUTPUT_DIR}') 
+logging.info(f'Loading model: {MODEL_OUTPUT_DIR}') 
 model = VIDR(train_adata, linear_decoder = False)
 model = model.load(MODEL_OUTPUT_DIR, train_adata)
 
@@ -224,38 +229,37 @@ dose_column_type = adata.obs[DOSE_COLUMN].dtype
 
 
 # predict scGen and scVIDR cell data
-pred_scgen, delta_scgen, reg_scgen = model_predict(
+pred, delta, reg = model_predict(
     model=model,
     control_dose=CONTROL_DOSE, 
     treated_dose=TREATED_DOSE, 
     test_celltype=TEST_CELLTYPE, 
-    model_name='scGen',
+    model_name=MODEL,
     dose_column_type=dose_column_type,
     doses=available_doses, 
     multi_dose=is_multi_dose
 )
 
-pred_scvidr, delta_scvidr, reg_scvidr = model_predict(
-    model=model, 
-    control_dose=CONTROL_DOSE, 
-    treated_dose=TREATED_DOSE,
-    test_celltype=TEST_CELLTYPE, 
-    model_name='scVIDR',
-    dose_column_type=dose_column_type,
-    doses=available_doses,
-    multi_dose=is_multi_dose
-)
 
-
-pred_dict = {}
-ctrl_adata = adata[((adata.obs['celltype'] == TEST_CELLTYPE) & (adata.obs[DOSE_COLUMN] == CONTROL_DOSE))]
-for dose in pred_dict.keys():
-    stim_adata = adata[((adata.obs['celltype'] == TEST_CELLTYPE) & (adata.obs['Dose'] == dose))]
-    pred_dict[dose] = ctrl_adata.concatenate(stim_adata, pred_scgen[dose], pred_scvidr[dose])
-    pred_dict[dose].obs['Model'] = pred_dict[dose].obs['Model'].fillna('experiment')
+#pred_dict = {}
+#ctrl_adata = adata[((adata.obs['celltype'] == TEST_CELLTYPE) & (adata.obs[DOSE_COLUMN] == CONTROL_DOSE))]
+#for dose in pred_dict.keys():
+#    stim_adata = adata[((adata.obs['celltype'] == TEST_CELLTYPE) & (adata.obs['Dose'] == dose))]
+#    pred_dict[dose] = ctrl_adata.concatenate(stim_adata, pred_scgen[dose], pred_scvidr[dose])
+#    pred_dict[dose].obs['Model'] = pred_dict[dose].obs['Model'].fillna('experiment')
 
     
 
 #eval_data = ctrl_adata.concatenate(treat_adata, pred_scgen, pred_scvidr)
 
 # TODO: save pred_dict
+#Check if output directory exists
+if not os.path.isdir(H5AD_OUTPUT_DIR):
+    os.mkdir(H5AD_OUTPUT_DIR)
+    for dose in pred.keys():
+        pred[dose].write_h5ad(f"{H5AD_OUTPUT_DIR}_PRED.h5ad")
+        logging.info(f"---- Saved Predicted Output: {H5AD_OUTPUT_DIR}/{dose}_PRED.h5ad")
+else:
+    for dose in pred.keys():
+        pred[dose].write_h5ad(f"{H5AD_OUTPUT_DIR}_PRED.h5ad")
+        logging.info(f"---- Saved Predicted Output: {H5AD_OUTPUT_DIR}/{dose}_PRED.h5ad")
