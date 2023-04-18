@@ -209,8 +209,8 @@ figure       | notebook path| Description|
 | [*Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure3.ipynb)| notebooks/Figure3.ipynb| Multi Dose TCDD|
 | [*Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure4.ipynb)| notebooks/Figure4.ipynb| Gene Scores|
 | [*Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure5.ipynb)| notebooks/Figure5.ipynb| Pseudodose|
-| [*Supplemental Figure 1*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure2.ipynb)| notebooks/SupplementalFigure2.ipynb|PCA of $\delta$| 
-| [*Supplemental Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure3.ipynb)| notebooks/SupplementalFigure3.ipynb| Single Dose IFNB|
+| [*Supplemental Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure2.ipynb)| notebooks/SupplementalFigure2.ipynb|PCA of $\delta$| 
+| [*Supplemental Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure3.ipynb)| notebooks/SupplementalFigure3.ipynb| Single Dose IFNB|
 | [*Supplemental Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure4.ipynb)| notebooks/SupplementalFigure4.ipynb| Multi Dose sciplex|
 | [*Supplemental Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure5.ipynb)| notebooks/SupplementalFigure5.ipynb| scVIDR Analysis TCDD|
 | [*Supplemental Figure 6*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure6.ipynb)| notebooks/SupplementalFigure6.ipynb| scVIDR Analysis sciplex|
