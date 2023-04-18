@@ -201,23 +201,6 @@ Example of multidose prediction command:
 ```
 python scvidr_predict.py multi_dose ../data/nault2021_multiDose.h5ad ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/MultiDose_TCDD \--model scVIDR --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes - portal --control_dose 0.0 --treated_dose 30.0 --celltypes_keep ../metadata/liver_celltypes
 ```
-## Notebooks for figures
-
-figure       | notebook path| Description|
----------------| ---------------| ---------------|
-| [*Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure2.ipynb)| notebooks/Figure2.ipynb| Single Dose TCDD| 
-| [*Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure3.ipynb)| notebooks/Figure3.ipynb| Multi Dose TCDD|
-| [*Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure4.ipynb)| notebooks/Figure4.ipynb| Gene Scores|
-| [*Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure5.ipynb)| notebooks/Figure5.ipynb| Pseudodose|
-| [*Supplemental Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure2.ipynb)| notebooks/SupplementalFigure2.ipynb|PCA of $\delta$| 
-| [*Supplemental Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure3.ipynb)| notebooks/SupplementalFigure3.ipynb| Single Dose IFNB|
-| [*Supplemental Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure4.ipynb)| notebooks/SupplementalFigure4.ipynb| Multi Dose sciplex|
-| [*Supplemental Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure5.ipynb)| notebooks/SupplementalFigure5.ipynb| scVIDR Analysis TCDD|
-| [*Supplemental Figure 6*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure6.ipynb)| notebooks/SupplementalFigure6.ipynb| scVIDR Analysis sciplex|
-| [*Supplemental Figure 7*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure7.ipynb)| notebooks/SupplementalFigure7.ipynb| scVIDR cross study| 
-| [*Supplemental Figure 8*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure8.ipynb)| notebooks/SupplementalFigure8.ipynb| scVIDR cross species|
-| [*Supplemental Figure 9*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure9.ipynb)| notebooks/SupplementalFigure9.ipynb| scVIDR equal scGen|
-
 ## Calculate Gene Scores
 ```
 usage: scvidr_genescores.py [-h] [--dose_column DOSE_COLUMN]
@@ -274,3 +257,22 @@ Example of calculating gene_scores:
 
 python scvidr_genescores.py ../data/nault2021_multiDose.h5ad ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/MultiDose_TCDD  --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes\ -\ portal --control_dose 0.0 --treated_dose 30.0 --celltypes_keep ../metadata/liver_celltypes
 ```
+
+
+## Notebooks for figures
+
+figure       | notebook path| Description|
+---------------| ---------------| ---------------|
+| [*Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure2.ipynb)| notebooks/Figure2.ipynb| Single Dose TCDD| 
+| [*Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure3.ipynb)| notebooks/Figure3.ipynb| Multi Dose TCDD|
+| [*Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure4.ipynb)| notebooks/Figure4.ipynb| Gene Scores|
+| [*Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/Figure5.ipynb)| notebooks/Figure5.ipynb| Pseudodose|
+| [*Supplemental Figure 2*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure2.ipynb)| notebooks/SupplementalFigure2.ipynb|PCA of $\delta$| 
+| [*Supplemental Figure 3*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure3.ipynb)| notebooks/SupplementalFigure3.ipynb| Single Dose IFNB|
+| [*Supplemental Figure 4*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure4.ipynb)| notebooks/SupplementalFigure4.ipynb| Multi Dose sciplex|
+| [*Supplemental Figure 5*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure5.ipynb)| notebooks/SupplementalFigure5.ipynb| scVIDR Analysis TCDD|
+| [*Supplemental Figure 6*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure6.ipynb)| notebooks/SupplementalFigure6.ipynb| scVIDR Analysis sciplex|
+| [*Supplemental Figure 7*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure7.ipynb)| notebooks/SupplementalFigure7.ipynb| scVIDR cross study| 
+| [*Supplemental Figure 8*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure8.ipynb)| notebooks/SupplementalFigure8.ipynb| scVIDR cross species|
+| [*Supplemental Figure 9*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure9.ipynb)| notebooks/SupplementalFigure9.ipynb| scVIDR equal scGen|
+
