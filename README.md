@@ -217,3 +217,60 @@ figure       | notebook path| Description|
 | [*Supplemental Figure 7*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure7.ipynb)| notebooks/SupplementalFigure7.ipynb| scVIDR cross study| 
 | [*Supplemental Figure 8*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure8.ipynb)| notebooks/SupplementalFigure8.ipynb| scVIDR cross species|
 | [*Supplemental Figure 9*](https://nbviewer.org/github/BhattacharyaLab/scVIDR/blob/main/notebooks/SupplementalFigure9.ipynb)| notebooks/SupplementalFigure9.ipynb| scVIDR equal scGen|
+
+## Calculate Gene Scores
+```
+usage: scvidr_genescores.py [-h] [--dose_column DOSE_COLUMN]
+                            [--celltype_column CELLTYPE_COLUMN]
+                            [--test_celltype TEST_CELLTYPE]
+                            [--control_dose CONTROL_DOSE]
+                            [--treated_dose TREATED_DOSE]
+                            [--celltypes_keep CELLTYPES_KEEP]
+                            [--training_size TRAINING_SIZE]
+                            h5ad_data_file model_path output_path
+```
+Interpret scVIDR predictions using ridge regression. Outputs CSV file of gene
+scores.
+
+positional arguments:
+```
+  h5ad_data_file        The data file containing the raw reads in h5ad format
+  model_path            Path to the directory where the trained model was
+                        saved in the model training step
+  output_path           Path to the driectory where the gene scores will be
+                        saved as a csv file
+```
+
+optional arguments:
+```
+  -h, --help            show this help message and exit
+  --dose_column DOSE_COLUMN
+                        Name of the column within obs dataframe representing
+                        the dose (default "Dose")
+  --celltype_column CELLTYPE_COLUMN
+                        Name of the column within obs dataframe representing
+                        the cell type (default "celltype")
+  --test_celltype TEST_CELLTYPE
+                        Name of the cell type to be left out for testing -
+                        surround by quotation marks for cell types containing
+                        spaces (default "Hepatocytes - portal"
+  --control_dose CONTROL_DOSE
+                        Control dose (default "0")
+  --treated_dose TREATED_DOSE
+                        Treated dose (default "30")
+  --celltypes_keep CELLTYPES_KEEP
+                        Cell types to keep in the dataset during
+                        training/testing - either a file containing list of
+                        cell types (one cell type per line) or semicolon
+                        separated list of cell types (surround in quotation
+                        marks) - default all available cell types (default
+                        "ALL")
+  --training_size TRAINING_SIZE
+                        Number of samples generated from latent distribution
+```
+
+Example of calculating gene_scores:
+```
+
+python scvidr_genescores.py ../data/nault2021_multiDose.h5ad ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes\ -\ portal.pt/ ../data/MultiDose_TCDD  --dose_column Dose --celltype_column celltype --test_celltype Hepatocytes\ -\ portal --control_dose 0.0 --treated_dose 30.0 --celltypes_keep ../metadata/liver_celltypes
+```
