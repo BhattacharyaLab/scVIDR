@@ -1,3 +1,8 @@
+Developed by Omar Kana <kanaomar@msu.edu>
+CLI integration by David Filipovic <filipov4@msu.edu>
+
+Maintained by David Filipovic <filipov4@msu.edu>
+
 # scVIDR
 Single Cell Variational Inference of the Dose Response (scVIDR) a  variational autoencoder tool used to predict expression of chemcial perturbations across cell types.
 
