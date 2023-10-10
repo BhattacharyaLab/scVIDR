@@ -1,4 +1,5 @@
 Developed by Omar Kana <kanaomar@msu.edu>
+
 CLI integration by David Filipovic <filipov4@msu.edu>
 
 Maintained by David Filipovic <filipov4@msu.edu>
