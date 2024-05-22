@@ -6,7 +6,7 @@ from torch.nn import functional as F
 
 #Import single cell modules
 import scanpy as sc
-from scvi.data import setup_anndata
+from scvi.data import setup_anndata # setup_anndata is no longer available in scvi.data
 from scvi.dataloaders import AnnDataLoader
 
 #Other important modules
