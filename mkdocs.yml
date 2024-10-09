@@ -32,9 +32,9 @@ plugins:
 # Site Navigation
 nav:
   - Home: index.md
-  - Guide:
-      - Getting Started: guide/getting-started.md
-      - Installation: guide/installation.md
+  - Installation:
+      - Getting Started: installation/getting-started.md
+      - Installation: installation/installation.md
   - Reference:
       - Reference Introduction: reference/reference-introduction.md
   - Explanation:
