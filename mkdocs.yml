@@ -1,0 +1,70 @@
+# Project Information
+site_name: scVIDR
+site_description: Comprehensive project documentation for scVIDR.
+
+
+
+# Theme Configuration
+theme:
+  name: material  # MkDocs Material theme
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - search.share
+    - toc.integrate
+    - content.code.annotate
+  palette:
+    primary: green
+    accent: light blue
+  font:
+    text: "Roboto"
+    code: "Roboto Mono"
+  
+# Plugins Configuration
+plugins:
+  - search  # Enables search functionality
+  - mkdocstrings:
+      default_handler: python  # For generating Python API documentation
+  - awesome-pages  # Organizes pages automatically
+
+# Site Navigation
+nav:
+  - Home: index.md
+  - Guide:
+      - Getting Started: guide/getting-started.md
+      - Installation: guide/installation.md
+  - Reference:
+      - Reference Introduction: reference/reference-introduction.md
+  - Explanation:
+      - Explanation Introduction: explanation/explanation-introduction.md
+  - Tutorial:
+      - Tutorial Introduction: tutorials/tutorials-introduction.md
+    
+    
+
+# MkDocStrings Configuration
+# Here you can add specific configurations for mkdocstrings
+mkdocstrings:
+  handlers:
+    python:
+      selection:
+        docstring_style: google  # or 'numpy', 'sphinx', etc.
+      rendering:
+        show_source: true  # Option to show the source code links in the docs
+
+# Extra Configuration for Awesome Pages Plugin
+# This plugin automatically manages navigation using .pages files if required
+awesome_pages:
+  collapse: true  # Collapses nested pages in the navigation sidebar
+  strict: true  # Ensures that everything in the folder structure is included
+
+# Markdown Extensions (optional, if you want to enhance Markdown capabilities)
+markdown_extensions:
+  - admonition  # For notes, warnings, and other content boxes
+  - codehilite  # Code highlighting
+  - toc:  # Table of contents generation
+      permalink: true
+  - pymdownx.superfences  # Enhances code block handling
+
