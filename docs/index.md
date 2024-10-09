@@ -14,11 +14,10 @@ you through the installation process and help you set up the project on your loc
 
 ## Table of Contents
 
-1. **[Getting Started](guide/getting-started.md)**
-    - How to install and configure the project
-2. **[Installation](installation/installation.md)**
+
+1. **[Installation](installation/installation.md)**
     - For information on how to install **scVIDR**, use the above link.
-3. **[API](reference/reference-introduction.md)**
+2. **[API](API/API-introduction.md)**
     - Explore the API documentation for developers
 
 
