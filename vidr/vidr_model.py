@@ -14,7 +14,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class VIDRModel(BaseModuleClass):
     """
-    Variational AutoEncoder for latent space arithmetic for perutrbation prediction.
+    Variational AutoEncoder for latent space arithmetic for perturbation prediction.
 
     Parameters
     ----------

@@ -180,51 +180,51 @@ def prepare_cont_data(
 ):
     ''' Prepares training and testing data for analysis based on cell type and dose conditions.
 
-This function filters an `AnnData` object into train and test datasets. 
-The test set includes the specified cell type to predict and doses greater than the control dose.
-The training set includes all other data.
+    This function filters an `AnnData` object into train and test datasets. 
+    The test set includes the specified cell type to predict and doses greater than the control dose.
+    The training set includes all other data.
 
-The function also normalizes the data if it's not already normalized, using Scanpy's normalization functions.
+    The function also normalizes the data if it's not already normalized, using Scanpy's normalization functions.
 
-Args:
-    adata (AnnData): The AnnData object containing single-cell or similar biological data.
-    cell_type_key (str): The column name in `adata.obs` that contains cell type information.
-    treatment_key (str): The column name in `adata.obs` that contains treatment or condition information.
-    dose_key (str): The column name in `adata.obs` that contains dose information.
-    cell_type_to_predict (str): The cell type to be separated out for testing/prediction.
-    control_dose (float): The dose level used as a threshold for separating training and test data.
-    normalized (bool, optional): Whether the data is already normalized. Defaults to False.
+    Args:
+        adata (AnnData): The AnnData object containing single-cell or similar biological data.
+        cell_type_key (str): The column name in `adata.obs` that contains cell type information.
+        treatment_key (str): The column name in `adata.obs` that contains treatment or condition information.
+        dose_key (str): The column name in `adata.obs` that contains dose information.
+        cell_type_to_predict (str): The cell type to be separated out for testing/prediction.
+        control_dose (float): The dose level used as a threshold for separating training and test data.
+        normalized (bool, optional): Whether the data is already normalized. Defaults to False.
 
-Returns:
-    train_adata (AnnData): The training dataset, containing all cells except those with the specified
-        `cell_type_to_predict` and doses greater than the `control_dose`.
-    test_adata (AnnData): The test dataset, containing only the cells with the specified 
-        `cell_type_to_predict` and doses greater than the `control_dose`.
+    Returns:
+        train_adata (AnnData): The training dataset, containing all cells except those with the specified
+            `cell_type_to_predict` and doses greater than the `control_dose`.
+        test_adata (AnnData): The test dataset, containing only the cells with the specified 
+            `cell_type_to_predict` and doses greater than the `control_dose`.
 
-Example:
-    Create training and testing datasets from an AnnData object with cell type information in the 
-    'cell_type' column of adata.obs and dose information in the 'dose' column of adata.obs.
-    To select T-cells treated with doses greater than 100 as your testing set:
+    Example:
+        Create training and testing datasets from an AnnData object with cell type information in the 
+        'cell_type' column of adata.obs and dose information in the 'dose' column of adata.obs.
+        To select T-cells treated with doses greater than 100 as your testing set:
 
-    ```python
-    train_adata, test_adata = prepare_cont_data(
-        adata, 
-        cell_type_key='cell_type', 
-        treatment_key='treatment', 
-        dose_key='dose', 
-        cell_type_to_predict='T-cell', 
-        control_dose=100, 
-        normalized=False
-    )
-    ```
+        ```python
+        train_adata, test_adata = prepare_cont_data(
+            adata, 
+            cell_type_key='cell_type', 
+            treatment_key='treatment', 
+            dose_key='dose', 
+            cell_type_to_predict='T-cell', 
+            control_dose=100, 
+            normalized=False
+        )
+        ```
 
-    This will return two `AnnData` objects: `test_adata` containing only T-cells with doses greater than 100,
-    and `train_adata` containing all other cells.
+        This will return two `AnnData` objects: `test_adata` containing only T-cells with doses greater than 100,
+        and `train_adata` containing all other cells.
 
 
-Note:
-    **This preprocessing step assumes the data is in the format output by Cell Ranger and is not 
-    logarithmized by default unless specified.**
+    Note:
+        **This preprocessing step assumes the data is in the format output by Cell Ranger and is not 
+        logarithmized by default unless specified.**
 '''
     if not normalized:
         sc.pp.normalize_total(adata)
