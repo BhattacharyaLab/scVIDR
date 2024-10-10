@@ -3,17 +3,17 @@ name: Deploy MkDocs Documentation to GitHub Pages
 on:
   push:
     branches:
-      - main  # Change this to the default branch of your repository if it's different (e.g., 'master')
+      - main  # Adjust this to the default branch if necessary (e.g., 'master')
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4  # Updated to v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4  # Updated to v4
         with:
           python-version: '3.x'
 
@@ -22,7 +22,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs
           pip install mkdocs-material
-          pip install mkdocstrings
+          pip install mkdocstrings[python]  # Install mkdocstrings with the Python handler
           pip install mkdocs-awesome-pages-plugin
 
       - name: Build documentation
@@ -32,4 +32,4 @@ jobs:
         run: mkdocs gh-deploy --force --clean --quiet
         env:
           CI: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
