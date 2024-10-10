@@ -1,7 +1,6 @@
-#Import PCA Model
+# Import PCA Model
 from sklearn.decomposition import PCA
 
-from typing import Optional, Sequence
 
 import numpy
 import numpy as np
@@ -12,10 +11,11 @@ from anndata import AnnData
 from matplotlib import pyplot
 from scipy import sparse, stats
 
-#Create Access to my code
+# Create Access to my code
 from utils import *
 
-class PCAEval():
+
+class PCAEval:
     """
     Implementation of scGen model for batch removal and perturbation prediction.
     Parameters
@@ -47,31 +47,28 @@ class PCAEval():
         super(PCAEval, self).__init__()
         self.adata = adata
 
-        self.pca = PCA(
-            n_components = latent_dim, 
-            svd_solver = 'arpack'
-        )
+        self.pca = PCA(n_components=latent_dim, svd_solver="arpack")
         if sparse.issparse(self.adata.X):
-                self.adata.X = self.adata.X.A
-        
+            self.adata.X = self.adata.X.A
+
         self.pca.fit(adata.X)
 
         self._model_summary_string = (
-            "PCA Model with the following params: \n latent_dim: {}").format(
+            "PCA Model with the following params: \n latent_dim: {}"
+        ).format(
             latent_dim,
         )
 
-
     def predict(
         self,
-        cell_type_key = None,
-        treatment_key = None,
+        cell_type_key=None,
+        treatment_key=None,
         ctrl_key=None,
         treat_key=None,
         cell_type_to_predict=None,
-        regression = False,
-        continuous = False,
-	doses = None,
+        regression=False,
+        continuous=False,
+        doses=None,
     ) -> AnnData:
         """
         Predicts the cell type provided by the user in treatulated condition.
@@ -100,65 +97,100 @@ class PCAEval():
         treat_x = self.adata[self.adata.obs[treatment_key] == treat_key]
         ctrl_x = random_sample(ctrl_x, cell_type_key)
         treat_x = random_sample(treat_x, cell_type_key)
-        
-        #Balancing across treatments 
+
+        # Balancing across treatments
         new_adata = ctrl_x.concatenate(treat_x)
-        new_adata = random_sample(new_adata, treatment_key, max_or_min = "min", replacement = False)
+        new_adata = random_sample(
+            new_adata, treatment_key, max_or_min="min", replacement=False
+        )
         if sparse.issparse(new_adata.X):
-                new_adata.X = new_adata.X.A
-        
-        #Getting testing data
-        ctrl_data = new_adata[(new_adata.obs[cell_type_key] == cell_type_to_predict) & (new_adata.obs[treatment_key] == ctrl_key)]
+            new_adata.X = new_adata.X.A
+
+        # Getting testing data
+        ctrl_data = new_adata[
+            (new_adata.obs[cell_type_key] == cell_type_to_predict)
+            & (new_adata.obs[treatment_key] == ctrl_key)
+        ]
         latent_cd = self.pca.transform(ctrl_data.X)
-        
-        #Are we regressing the delta on the latent space or not
+
+        # Are we regressing the delta on the latent space or not
         if not regression:
-            #No regression on latent space
+            # No regression on latent space
             ctrl_x = new_adata[new_adata.obs[treatment_key] == ctrl_key].copy()
             treat_x = new_adata[new_adata.obs[treatment_key] == treat_key].copy()
-            #Compress data to latent space and then calculate the delta
-            latent_ctrl = np.average(self.pca.transform(ctrl_x.X), axis = 0)
-            latent_treat = np.average(self.pca.transform(treat_x.X), axis = 0)
+            # Compress data to latent space and then calculate the delta
+            latent_ctrl = np.average(self.pca.transform(ctrl_x.X), axis=0)
+            latent_treat = np.average(self.pca.transform(treat_x.X), axis=0)
             delta = latent_treat - latent_ctrl
         else:
-            #Regression on latent space
-            latent_X =  self.pca.transform(new_adata.X)
-            latent_adata = sc.AnnData(X=latent_X, obs = new_adata.obs.copy())
-            #Get deltas and control centroids for each cell tpye in the training dataset
+            # Regression on latent space
+            latent_X = self.pca.transform(new_adata.X)
+            latent_adata = sc.AnnData(X=latent_X, obs=new_adata.obs.copy())
+            # Get deltas and control centroids for each cell tpye in the training dataset
             deltas = []
             latent_centroids = []
             cell_types = np.unique(latent_adata.obs[cell_type_key])
             for cell in cell_types:
                 if cell != cell_type_to_predict:
-                    latent_ctrl = latent_adata[(latent_adata.obs[cell_type_key] == cell) & (latent_adata.obs[treatment_key] == ctrl_key)]
-                    latent_treat = latent_adata[(latent_adata.obs[cell_type_key] == cell) & (latent_adata.obs[treatment_key] == treat_key)]
-                    ctrl_centroid = np.average(latent_ctrl.X, axis = 0)
-                    treat_centroid = np.average(latent_treat.X, axis = 0)
-                    delta = np.average(latent_treat.X, axis = 0) - np.average(latent_ctrl.X, axis = 0)
+                    latent_ctrl = latent_adata[
+                        (latent_adata.obs[cell_type_key] == cell)
+                        & (latent_adata.obs[treatment_key] == ctrl_key)
+                    ]
+                    latent_treat = latent_adata[
+                        (latent_adata.obs[cell_type_key] == cell)
+                        & (latent_adata.obs[treatment_key] == treat_key)
+                    ]
+                    ctrl_centroid = np.average(latent_ctrl.X, axis=0)
+                    treat_centroid = np.average(latent_treat.X, axis=0)
+                    delta = np.average(latent_treat.X, axis=0) - np.average(
+                        latent_ctrl.X, axis=0
+                    )
                     deltas.append(delta)
                     latent_centroids.append(ctrl_centroid)
             lr = LinearRegression()
             reg = lr.fit(latent_centroids, deltas)
-            delta = reg.predict([np.average(latent_cd, axis = 0)])[0]
-        
-        #Continuous or Binary Perturbation
+            delta = reg.predict([np.average(latent_cd, axis=0)])[0]
+
+        # Continuous or Binary Perturbation
         if not continuous:
             treat_pred = delta + latent_cd
             predicted_cells = self.pca.inverse_transform(treat_pred)
-            predicted_adata = sc.AnnData(X=predicted_cells , obs=ctrl_data.obs.copy(), var=ctrl_data.var.copy(),obsm=ctrl_data.obsm.copy(),)
+            predicted_adata = sc.AnnData(
+                X=predicted_cells,
+                obs=ctrl_data.obs.copy(),
+                var=ctrl_data.var.copy(),
+                obsm=ctrl_data.obsm.copy(),
+            )
             if not regression:
                 return predicted_adata, delta
             else:
                 return predicted_adata, delta, reg
         else:
-            treat_pred_dict = {d:delta*(np.log1p(d)/np.log1p(max(doses))) + latent_cd  for d in doses if d > min(doses)}
-            predicted_cells_dict = {d:self.pca.inverse_transform(treat_pred_dict[d]) for d in doses if d > min(doses)}
-            predicted_adata_dict = {d:sc.AnnData(X=predicted_cells_dict[d], obs=ctrl_data.obs.copy(), var=ctrl_data.var.copy(),obsm=ctrl_data.obsm.copy(),) for d in doses if d > min(doses)}
+            treat_pred_dict = {
+                d: delta * (np.log1p(d) / np.log1p(max(doses))) + latent_cd
+                for d in doses
+                if d > min(doses)
+            }
+            predicted_cells_dict = {
+                d: self.pca.inverse_transform(treat_pred_dict[d])
+                for d in doses
+                if d > min(doses)
+            }
+            predicted_adata_dict = {
+                d: sc.AnnData(
+                    X=predicted_cells_dict[d],
+                    obs=ctrl_data.obs.copy(),
+                    var=ctrl_data.var.copy(),
+                    obsm=ctrl_data.obsm.copy(),
+                )
+                for d in doses
+                if d > min(doses)
+            }
             if not regression:
                 return predicted_adata_dict, delta
             else:
                 return predicted_adata_dict, delta, reg
-   
+
     def reg_mean_plot(
         self,
         adata,
@@ -237,7 +269,7 @@ class PCAEval():
 
         if sparse.issparse(adata.X):
             adata.X = adata.X.A
-            
+
         diff_genes = top_100_genes
         treat = adata[adata.obs[condition_key] == axis_keys["y"]]
         ctrl = adata[adata.obs[condition_key] == axis_keys["x"]]
@@ -253,12 +285,12 @@ class PCAEval():
                 x_diff, y_diff
             )
             if verbose:
-                print("top_100 DEGs mean: ", r_value_diff ** 2)
+                print("top_100 DEGs mean: ", r_value_diff**2)
         x = numpy.average(ctrl.X, axis=0)
         y = numpy.average(treat.X, axis=0)
         m, b, r_value, p_value, std_err = stats.linregress(x, y)
         if verbose:
-            print("All genes mean: ", r_value ** 2)
+            print("All genes mean: ", r_value**2)
         df = pd.DataFrame({axis_keys["x"]: x, axis_keys["y"]: y})
         ax = sns.regplot(x=axis_keys["x"], y=axis_keys["y"], data=df)
         ax.tick_params(labelsize=fontsize)
@@ -313,12 +345,11 @@ class PCAEval():
             pyplot.show()
         pyplot.close()
         if diff_genes is not None:
-            return r_value ** 2, r_value_diff ** 2
+            return r_value**2, r_value_diff**2
         else:
-            return r_value ** 2
-        
-        
-        def get_gene_perturb_coef(self,delta):
+            return r_value**2
+
+        def get_gene_perturb_coef(self, delta):
             """
             Getting gene coeficients for delta.
             If you have done linear regression input the regression weights for the delta.
@@ -328,25 +359,32 @@ class PCAEval():
             """
             if self.is_trained_ & self._is_linear_decoder:
                 W = model.module.decoder[0].weight.cpu().detach().numpy()
-                gene_weights = np.dot(W,delta)
-                gene_weight_df = pd.DataFrame({i:j for (i,j) in zip(train.var_names, gene_weights)},  index = ["gene_weights"]).T
+                gene_weights = np.dot(W, delta)
+                gene_weight_df = pd.DataFrame(
+                    {i: j for (i, j) in zip(train.var_names, gene_weights)},
+                    index=["gene_weights"],
+                ).T
                 return gene_weights_df
             else:
-                raise Exception("Either model isn't trained or has a non-linear decoder.")
-            
-        def get_pseudo_dose(self, delta, cell_types = None):
+                raise Exception(
+                    "Either model isn't trained or has a non-linear decoder."
+                )
+
+        def get_pseudo_dose(self, delta, cell_types=None):
             """
             Calculating the pseudotime ordering of the cells by orthogonally projecting cells onto the span of the delta.
             """
-            cell_type_key = self.scvi_setup_dict_["categorical_mappings"]["_scvi_labels"]["original_key"]
+            cell_type_key = self.scvi_setup_dict_["categorical_mappings"][
+                "_scvi_labels"
+            ]["original_key"]
             if cell_types == None:
                 adata = self.adata
             else:
                 adata = self.adata[self.adata.obs[cell_type_key].isin(cell_types), :]
-            
+
             pt_values = []
             for i in adata.X:
-                pt_value = np.dot(i,delta)/np.dot(delta,delta)
+                pt_value = np.dot(i, delta) / np.dot(delta, delta)
                 pt_values.append(pt_value)
-            
+
             return np.array(pt_values)

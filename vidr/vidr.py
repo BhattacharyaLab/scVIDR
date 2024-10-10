@@ -1,4 +1,3 @@
-from typing import Optional, Sequence
 
 import numpy
 import numpy as np
@@ -11,9 +10,10 @@ from matplotlib import pyplot
 from scipy import sparse, stats
 from scvi.model.base import BaseModelClass, UnsupervisedTrainingMixin, VAEMixin
 
-#Create Access to my code
+# Create Access to my code
 from utils import *
 from vidr_model import VIDRModel
+
 
 class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
     """
@@ -46,7 +46,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         latent_dim: int = 100,
         n_hidden_layers: int = 2,
         dropout_rate: float = 0.2,
-        kl_weight = 5e-5,
+        kl_weight=5e-5,
         linear_decoder: bool = False,
         continuous: bool = False,
         nca_loss: bool = False,
@@ -56,7 +56,15 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         super(VIDR, self).__init__(adata)
         self.adata = adata
         self._is_linear_decoder = linear_decoder
-        dose_loss = np.log1p(self.adata.uns['_scvi']['categorical_mappings']['_scvi_batch']['mapping'].astype(float)) if dose_loss else None
+        dose_loss = (
+            np.log1p(
+                self.adata.uns["_scvi"]["categorical_mappings"]["_scvi_batch"][
+                    "mapping"
+                ].astype(float)
+            )
+            if dose_loss
+            else None
+        )
         print(dose_loss)
         self.module = VIDRModel(
             input_dim=adata.shape[1],
@@ -64,10 +72,10 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
             latent_dim=latent_dim,
             n_hidden_layers=n_hidden_layers,
             dropout_rate=dropout_rate,
-            linear_decoder = linear_decoder,
-	    kl_weight = kl_weight,
-	    nca_loss = nca_loss,
-	    dose_loss = dose_loss,
+            linear_decoder=linear_decoder,
+            kl_weight=kl_weight,
+            nca_loss=nca_loss,
+            dose_loss=dose_loss,
         )
         self._model_summary_string = (
             "VIDR Model with the following params: \nhidden_dim: {}, latent_dim: {}, n_layers: {}, dropout_rate: "
@@ -85,10 +93,10 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         ctrl_key=None,
         treat_key=None,
         cell_type_to_predict=None,
-        regression = False,
-        continuous = False,
-        low_dose = False,
-        doses = None,
+        regression=False,
+        continuous=False,
+        low_dose=False,
+        doses=None,
     ) -> AnnData:
         """
         Predicts the cell type provided by the user in treatulated condition.
@@ -113,8 +121,8 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         """
         if not self.is_trained_:
             raise Exception(
-                            "It looks like your model hasn't been trained, please train it with model.train"
-                            )
+                "It looks like your model hasn't been trained, please train it with model.train"
+            )
         # use keys registered from `setup_anndata()`
         cell_type_key = self.scvi_setup_dict_["categorical_mappings"]["_scvi_labels"][
             "original_key"
@@ -127,79 +135,148 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         treat_x = self.adata[self.adata.obs[treatment_key] == treat_key]
         ctrl_x = random_sample(ctrl_x, cell_type_key)
         treat_x = random_sample(treat_x, cell_type_key)
-        
-        #Balancing across treatments 
+
+        # Balancing across treatments
         new_adata = ctrl_x.concatenate(treat_x)
-        new_adata = random_sample(new_adata, treatment_key, max_or_min = "min", replacement = False)
-        
-        #Densify Sparse Matrix
+        new_adata = random_sample(
+            new_adata, treatment_key, max_or_min="min", replacement=False
+        )
+
+        # Densify Sparse Matrix
         if sparse.issparse(new_adata.X):
-                new_adata.X = new_adata.X.A
-        
-        #Control Data 
+            new_adata.X = new_adata.X.A
+
+        # Control Data
         if not low_dose:
-            ctrl_data = new_adata[(new_adata.obs[cell_type_key] == cell_type_to_predict) & (new_adata.obs[treatment_key] == ctrl_key)]
+            ctrl_data = new_adata[
+                (new_adata.obs[cell_type_key] == cell_type_to_predict)
+                & (new_adata.obs[treatment_key] == ctrl_key)
+            ]
             latent_cd = self.get_latent_representation(ctrl_data)
         else:
-            ctrl_data = new_adata[(new_adata.obs[cell_type_key] == cell_type_to_predict) & (new_adata.obs[treatment_key] == treat_key)]
+            ctrl_data = new_adata[
+                (new_adata.obs[cell_type_key] == cell_type_to_predict)
+                & (new_adata.obs[treatment_key] == treat_key)
+            ]
             latent_cd = self.get_latent_representation(ctrl_data)
 
         if sparse.issparse(new_adata.X):
-                new_adata.X = new_adata.X.A
-        
-        #Are we regressing the delta on the latent space or not
+            new_adata.X = new_adata.X.A
+
+        # Are we regressing the delta on the latent space or not
         if not regression:
-            #No regression on latent space
+            # No regression on latent space
             ctrl_x = new_adata[new_adata.obs[treatment_key] == ctrl_key].copy()
             treat_x = new_adata[new_adata.obs[treatment_key] == treat_key].copy()
-            #Compress data to latent space and then calculate the delta
-            latent_ctrl = np.average(self.get_latent_representation(ctrl_x), axis = 0)
-            latent_treat = np.average(self.get_latent_representation(treat_x), axis = 0)
+            # Compress data to latent space and then calculate the delta
+            latent_ctrl = np.average(self.get_latent_representation(ctrl_x), axis=0)
+            latent_treat = np.average(self.get_latent_representation(treat_x), axis=0)
             delta = latent_treat - latent_ctrl
         else:
-            #Regression on latent space
-            latent_X =  self.get_latent_representation(new_adata)
-            latent_adata = sc.AnnData(X=latent_X, obs = new_adata.obs.copy())
-            #Get deltas and control centroids for each cell tpye in the training dataset
+            # Regression on latent space
+            latent_X = self.get_latent_representation(new_adata)
+            latent_adata = sc.AnnData(X=latent_X, obs=new_adata.obs.copy())
+            # Get deltas and control centroids for each cell tpye in the training dataset
             deltas = []
             latent_centroids = []
             cell_types = np.unique(latent_adata.obs[cell_type_key])
             for cell in cell_types:
                 if cell != cell_type_to_predict:
-                    latent_ctrl = latent_adata[(latent_adata.obs[cell_type_key] == cell) & (latent_adata.obs[treatment_key] == ctrl_key)]
-                    latent_treat = latent_adata[(latent_adata.obs[cell_type_key] == cell) & (latent_adata.obs[treatment_key] == treat_key)]
-                    ctrl_centroid = np.average(latent_ctrl.X, axis = 0)
-                    treat_centroid = np.average(latent_treat.X, axis = 0)
-                    delta = np.average(latent_treat.X, axis = 0) - np.average(latent_ctrl.X, axis = 0)
+                    latent_ctrl = latent_adata[
+                        (latent_adata.obs[cell_type_key] == cell)
+                        & (latent_adata.obs[treatment_key] == ctrl_key)
+                    ]
+                    latent_treat = latent_adata[
+                        (latent_adata.obs[cell_type_key] == cell)
+                        & (latent_adata.obs[treatment_key] == treat_key)
+                    ]
+                    ctrl_centroid = np.average(latent_ctrl.X, axis=0)
+                    treat_centroid = np.average(latent_treat.X, axis=0)
+                    delta = np.average(latent_treat.X, axis=0) - np.average(
+                        latent_ctrl.X, axis=0
+                    )
                     deltas.append(delta)
                     latent_centroids.append(ctrl_centroid)
             lr = LinearRegression()
             reg = lr.fit(latent_centroids, deltas)
-            delta = reg.predict([np.average(latent_cd, axis = 0)])[0]
-        
-        #Continuous or Binary Perturbation
+            delta = reg.predict([np.average(latent_cd, axis=0)])[0]
+
+        # Continuous or Binary Perturbation
         if not continuous:
             treat_pred = delta + latent_cd
-            predicted_cells = self.module.generative(torch.Tensor(treat_pred))["px"].cpu().detach().numpy()
-            predicted_adata = sc.AnnData(X=predicted_cells , obs=ctrl_data.obs.copy(), var=ctrl_data.var.copy(),obsm=ctrl_data.obsm.copy(),)
+            predicted_cells = (
+                self.module.generative(torch.Tensor(treat_pred))["px"]
+                .cpu()
+                .detach()
+                .numpy()
+            )
+            predicted_adata = sc.AnnData(
+                X=predicted_cells,
+                obs=ctrl_data.obs.copy(),
+                var=ctrl_data.var.copy(),
+                obsm=ctrl_data.obsm.copy(),
+            )
             if not regression:
                 return predicted_adata, delta
             else:
                 return predicted_adata, delta, reg
         else:
             if not low_dose:
-                treat_pred_dict = {d:delta*(np.log1p(d)/np.log1p(max(doses))) + latent_cd  for d in doses if d > min(doses)}
-                predicted_cells_dict = {d:self.module.generative(torch.Tensor(treat_pred_dict[d]))["px"].cpu().detach().numpy() for d in doses if d > min(doses)}
-                predicted_adata_dict = {d:sc.AnnData(X=predicted_cells_dict[d], obs=ctrl_data.obs.copy(), var=ctrl_data.var.copy(),obsm=ctrl_data.obsm.copy(),) for d in doses if d > min(doses)}
+                treat_pred_dict = {
+                    d: delta * (np.log1p(d) / np.log1p(max(doses))) + latent_cd
+                    for d in doses
+                    if d > min(doses)
+                }
+                predicted_cells_dict = {
+                    d: self.module.generative(torch.Tensor(treat_pred_dict[d]))["px"]
+                    .cpu()
+                    .detach()
+                    .numpy()
+                    for d in doses
+                    if d > min(doses)
+                }
+                predicted_adata_dict = {
+                    d: sc.AnnData(
+                        X=predicted_cells_dict[d],
+                        obs=ctrl_data.obs.copy(),
+                        var=ctrl_data.var.copy(),
+                        obsm=ctrl_data.obsm.copy(),
+                    )
+                    for d in doses
+                    if d > min(doses)
+                }
             else:
-                treat_pred_dict = {d:latent_cd - delta*((np.log1p(max(doses)) - np.log1p(d))/np.log1p(max(doses)))  for d in doses if d < max(doses)}
-                predicted_cells_dict = {d:self.module.generative(torch.Tensor(treat_pred_dict[d]))["px"].cpu().detach().numpy() for d in doses if d < max(doses)}
-                predicted_adata_dict = {d:sc.AnnData(X=predicted_cells_dict[d], obs=ctrl_data.obs.copy(), var=ctrl_data.var.copy(),obsm=ctrl_data.obsm.copy(),) for d in doses if d < max(doses)}
+                treat_pred_dict = {
+                    d: latent_cd
+                    - delta
+                    * ((np.log1p(max(doses)) - np.log1p(d)) / np.log1p(max(doses)))
+                    for d in doses
+                    if d < max(doses)
+                }
+                predicted_cells_dict = {
+                    d: self.module.generative(torch.Tensor(treat_pred_dict[d]))["px"]
+                    .cpu()
+                    .detach()
+                    .numpy()
+                    for d in doses
+                    if d < max(doses)
+                }
+                predicted_adata_dict = {
+                    d: sc.AnnData(
+                        X=predicted_cells_dict[d],
+                        obs=ctrl_data.obs.copy(),
+                        var=ctrl_data.var.copy(),
+                        obsm=ctrl_data.obsm.copy(),
+                    )
+                    for d in doses
+                    if d < max(doses)
+                }
             if not regression:
                 return predicted_adata_dict, delta
             else:
                 return predicted_adata_dict, delta, reg
-   #Code taken from Lotfollahi et al's scGen from its pytorch implementation.
+
+    # Code taken from Lotfollahi et al's scGen from its pytorch implementation.
     def reg_mean_plot(
         self,
         adata,
@@ -296,12 +373,12 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
                 x_diff, y_diff
             )
             if verbose:
-                print("top_100 DEGs mean: ", r_value_diff ** 2)
+                print("top_100 DEGs mean: ", r_value_diff**2)
         x = numpy.average(ctrl.X, axis=0)
         y = numpy.average(treat.X, axis=0)
         m, b, r_value, p_value, std_err = stats.linregress(x, y)
         if verbose:
-            print("All genes mean: ", r_value ** 2)
+            print("All genes mean: ", r_value**2)
         df = pd.DataFrame({axis_keys["x"]: x, axis_keys["y"]: y})
         ax = sns.regplot(x=axis_keys["x"], y=axis_keys["y"], data=df)
         ax.tick_params(labelsize=fontsize)
@@ -356,7 +433,6 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
             pyplot.show()
         pyplot.close()
         if diff_genes is not None:
-            return r_value ** 2, r_value_diff ** 2
+            return r_value**2, r_value_diff**2
         else:
-            return r_value ** 2
-        
+            return r_value**2
