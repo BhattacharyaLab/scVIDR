@@ -178,9 +178,54 @@ def prepare_cont_data(
     control_dose,
     normalized=False,
 ):
-    """
-    This preprocessing step assumes cell ranger data and non-logarithmized data
-    """
+    ''' Prepares training and testing data for analysis based on cell type and dose conditions.
+
+This function filters an `AnnData` object into train and test datasets. 
+The test set includes the specified cell type to predict and doses greater than the control dose.
+The training set includes all other data.
+
+The function also normalizes the data if it's not already normalized, using Scanpy's normalization functions.
+
+Args:
+    adata (AnnData): The AnnData object containing single-cell or similar biological data.
+    cell_type_key (str): The column name in `adata.obs` that contains cell type information.
+    treatment_key (str): The column name in `adata.obs` that contains treatment or condition information.
+    dose_key (str): The column name in `adata.obs` that contains dose information.
+    cell_type_to_predict (str): The cell type to be separated out for testing/prediction.
+    control_dose (float): The dose level used as a threshold for separating training and test data.
+    normalized (bool, optional): Whether the data is already normalized. Defaults to False.
+
+Returns:
+    train_adata (AnnData): The training dataset, containing all cells except those with the specified
+        `cell_type_to_predict` and doses greater than the `control_dose`.
+    test_adata (AnnData): The test dataset, containing only the cells with the specified 
+        `cell_type_to_predict` and doses greater than the `control_dose`.
+
+Example:
+    Create training and testing datasets from an AnnData object with cell type information in the 
+    'cell_type' column of adata.obs and dose information in the 'dose' column of adata.obs.
+    To select T-cells treated with doses greater than 100 as your testing set:
+
+    ```python
+    train_adata, test_adata = prepare_cont_data(
+        adata, 
+        cell_type_key='cell_type', 
+        treatment_key='treatment', 
+        dose_key='dose', 
+        cell_type_to_predict='T-cell', 
+        control_dose=100, 
+        normalized=False
+    )
+    ```
+
+    This will return two `AnnData` objects: `test_adata` containing only T-cells with doses greater than 100,
+    and `train_adata` containing all other cells.
+
+
+Note:
+    **This preprocessing step assumes the data is in the format output by Cell Ranger and is not 
+    logarithmized by default unless specified.**
+'''
     if not normalized:
         sc.pp.normalize_total(adata)
         sc.pp.log1p(adata)
@@ -214,7 +259,21 @@ def calculate_r2_singledose(
     random_sample_coef=None,
     n_iter: int = 1,
 ):
-    # Set condition key
+    '''_summary_
+
+    Args:
+        adata (AnnData): _description_
+        cell (str): _description_
+        model (str): _description_
+        condition_key (str): _description_
+        axis_keys (dict): _description_
+        diff_genes (_type_, optional): _description_. Defaults to None.
+        random_sample_coef (_type_, optional): _description_. Defaults to None.
+        n_iter (int, optional): _description_. Defaults to 1.
+
+    Returns:
+        _type_: _description_
+    '''
 
     # Densify sparse matrix
     if sparse.issparse(adata.X):
@@ -276,7 +335,21 @@ def calculate_r2_multidose(
     random_sample_coef=None,
     n_iter: int = 1,
 ):
-    # Set condition key
+    '''_summary_
+
+    Args:
+        adata (_type_): _description_
+        cell (str): _description_
+        model (str): _description_
+        condition_key (str): _description_
+        axis_keys (dict): _description_
+        diff_genes (_type_, optional): _description_. Defaults to None.
+        random_sample_coef (_type_, optional): _description_. Defaults to None.
+        n_iter (int, optional): _description_. Defaults to 1.
+
+    Returns:
+        _type_: _description_
+    '''
 
     # Densify sparse matrix
     if sparse.issparse(adata.X):
@@ -329,23 +402,43 @@ def calculate_r2_multidose(
 
 
 def random_sample(adata, key, max_or_min="max", replacement=True):
-    """
-    Makes the populations of each cell group equal based on the property of interest.
-    Will take the populations of each group within the property of interest and take an equal random sample of each group.
+    '''Randomly samples and balances the populations of each cell group 
+    based on the property of interest.
 
-    Parameters
-    ----------
+ 
 
-    adata: anndata object to balance populations for
-    key: property of interest to balance
-    max_or_min: to make the maximum population size or minimum population size as the size we want all populations to be at
-    replacement: sampling with or without replacement. If max_or_min == "max", we automatically sample with replacement.
+    This function randomly samples cells from groups defined by a specified key so that each group 
+    has an equal number of cells. It can sample to match either the largest group size or the smallest 
+    group size, with or without replacement.
 
-    Return
-    ----------
-    resampled_adata: AnnData
-    an anndata object containing equal size populations for each group within the property of interest.
-    """
+    Args:
+        adata (AnnData): The AnnData object containing the data to balance.
+        key (str): The column in `adata.obs` representing the property used to group cells.
+        max_or_min (str, optional): Whether to equalize the populations based on the maximum or minimum 
+            group size. Defaults to "max".
+        replacement (bool, optional): Whether to sample with replacement. If `max_or_min` is "max", 
+            sampling will always be done with replacement. Defaults to True.
+
+    Returns:
+        AnnData: An AnnData object containing equal-sized populations for each group within the 
+        specified property.
+
+    Example:
+        Create an AnnData object `adata` with cell type information in the 'cell_type' column 
+        and sample the data so that all cell types are balanced to the size of the smallest group:
+
+        ```python
+        resampled_adata = random_sample(
+            adata, 
+            key='cell_type', 
+            max_or_min='min', 
+            replacement=False
+        )
+        ```
+
+        In this example, `resampled_adata` will contain equal numbers of cells for each cell type, 
+        with the smallest group size used for sampling. Sampling will be done without replacement.
+    '''
     # list of groups within property of interest and find their cell population sizes
     pop_dict = Counter(adata.obs[key])
     # Find whether we want to take the maximum or the minimum size of the population

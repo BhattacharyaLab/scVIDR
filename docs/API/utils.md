@@ -12,3 +12,19 @@
 ### prepare_data
 ::: vidr.utils.prepare_data
 
+## prepare_cont_data
+### prepare_cont_data
+::: vidr.utils.prepare_cont_data
+
+## calculate_r2_singledose
+### calculate_r2_singledose
+::: vidr.utils.calculate_r2_singledose
+
+
+## calculate_r2_multidose
+### calculate_r2_multidose
+::: vidr.utils.calculate_r2_multidose
+
+## random_sample
+### random_sample
+::: vidr.utils.random_sample
