@@ -1,4 +1,4 @@
-# VIDR Encoder & Decoder Classes in modules.py
+# VIDR Encoder & Decoder Classes and Associated Methods in modules.py
 
 
 

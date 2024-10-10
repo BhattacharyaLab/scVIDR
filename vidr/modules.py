@@ -95,7 +95,9 @@ class VIDREncoder(nn.Module):
             inputs (_type_): _description_
 
         Returns:
-            _type_: _description_
+            mean (float): _description_
+            var (float): _description_
+            latent_rep (): _description_
         '''
         # encode
         results = self.encoder(inputs)
@@ -183,7 +185,7 @@ class VIDRDecoder(nn.Module):
             latent_rep (torch.Tensor): The latent representation to decode.
 
         Returns:
-            torch.Tensor: The reconstructed data.
+            x_hat (torch.Tensor): The reconstructed data.
         '''
         # decode
         x_hat = self.decoder(latent_rep)
