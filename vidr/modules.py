@@ -76,7 +76,7 @@ class VIDREncoder(nn.Module):
         self.log_var = nn.Linear(hidden_dim, latent_dim)
 
     def forward(self, inputs):
-        ''' Forward pass of the encoder.
+        """Forward pass of the encoder.
         
         Encodes the input data into a latent representation by
         computing the mean and variance, then sampling using 
@@ -90,15 +90,7 @@ class VIDREncoder(nn.Module):
                 - mean (torch.Tensor): The mean of the latent distribution.
                 - var (torch.Tensor): The variance of the latent distribution.
                 - latent_rep (torch.Tensor): The reparameterized latent representation.
-
-        Args:
-            inputs (_type_): _description_
-
-        Returns:
-            mean (float): _description_
-            var (float): _description_
-            latent_rep (): _description_
-        '''
+        """
         # encode
         results = self.encoder(inputs)
         mean = self.mean(results)
@@ -176,7 +168,7 @@ class VIDRDecoder(nn.Module):
         self.decoder = nn.Sequential(*modules)
 
     def forward(self, latent_rep):
-        ''' Forward pass of the decoder.
+        """Forward pass of the decoder.
         
         Decodes the latent representation back into
         the original input space.
@@ -185,8 +177,8 @@ class VIDRDecoder(nn.Module):
             latent_rep (torch.Tensor): The latent representation to decode.
 
         Returns:
-            x_hat (torch.Tensor): The reconstructed data.
-        '''
+            torch.Tensor: The reconstructed data.
+        """
         # decode
         x_hat = self.decoder(latent_rep)
         return x_hat
