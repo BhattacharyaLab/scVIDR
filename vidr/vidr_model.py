@@ -5,7 +5,7 @@ from torch.distributions import kl_divergence as kl
 from scvi.module.base import BaseModuleClass, LossRecorder, auto_move_data
 from scvi import _CONSTANTS
 import numpy as np
-from modules import *
+from modules import VIDREncoder, VIDRDecoder
 from collections import Counter
 
 # at beginning of the script
@@ -48,13 +48,10 @@ class VIDRModel(BaseModuleClass):
         self.nca_loss = nca_loss
         self.dose_loss = dose_loss
 
-        # Encoder   
-
+        # Encoder
         self.encoder = VIDREncoder(input_dim, latent_dim, hidden_dim, n_hidden_layers)
 
         # Decoder
-        # Include Input Module
-
         self.nonlin_decoder = VIDRDecoder(
             input_dim, latent_dim, hidden_dim, n_hidden_layers
         )
@@ -66,7 +63,7 @@ class VIDRModel(BaseModuleClass):
 
         self.decoder = self.lin_decoder if linear_decoder else self.nonlin_decoder
 
-    def _get_inference_input(self, tensors):
+    def _get_inference_input(self, tensors: dict) -> dict:
         """
         Prepares the input for the inference model.
 
@@ -76,14 +73,11 @@ class VIDRModel(BaseModuleClass):
         Returns:
             dict: Dictionary containing the input for the inference model.
         """
-        
         x = tensors[_CONSTANTS.X_KEY]
-        input_dict = dict(
-            x=x,
-        )
+        input_dict = dict(x=x)
         return input_dict
 
-    def _get_generative_input(self, tensors, inference_outputs):
+    def _get_generative_input(self, tensors: dict, inference_outputs: dict) -> dict:
         """
         Prepares the input for the generative model.
 
@@ -95,14 +89,12 @@ class VIDRModel(BaseModuleClass):
             dict: Dictionary containing the input for the generative model.
         """
         z = inference_outputs["z"]
-        input_dict = {
-            "z": z,
-        }
+        input_dict = {"z": z}
         return input_dict
 
     @auto_move_data
-    def inference(self, x):
-       """
+    def inference(self, x: torch.Tensor) -> dict:
+        """
         High level inference method.
         Runs the inference (encoder) model.
 
@@ -113,12 +105,11 @@ class VIDRModel(BaseModuleClass):
             dict: Dictionary containing the outputs of the inference model.
         """
         mean, var, latent_rep = self.encoder(x)
-
         outputs = dict(z=latent_rep, qz_m=mean, qz_v=var)
         return outputs
 
     @auto_move_data
-    def generative(self, z):
+    def generative(self, z: torch.Tensor) -> dict:
         """
         Runs the generative model.
 
@@ -129,15 +120,14 @@ class VIDRModel(BaseModuleClass):
             dict: Dictionary containing the outputs of the generative model.
         """
         px = self.decoder(z)
-
         return dict(px=px)
 
     def loss(
         self,
-        tensors,
-        inference_outputs,
-        generative_outputs,
-    ):
+        tensors: dict,
+        inference_outputs: dict,
+        generative_outputs: dict,
+    ) -> LossRecorder:
         """
         Computes the loss for the model.
 
@@ -190,8 +180,8 @@ class VIDRModel(BaseModuleClass):
     @torch.no_grad()
     def sample(
         self,
-        tensors,
-        n_samples=1,
+        tensors: dict,
+        n_samples: int = 1,
     ) -> np.ndarray:
         """
         Generate observation samples from the posterior predictive distribution.
@@ -216,7 +206,7 @@ class VIDRModel(BaseModuleClass):
         px = Normal(generative_outputs["px"], 1).sample()
         return px.cpu().numpy()
 
-    def get_reconstruction_loss(self, x, x_hat) -> torch.Tensor:
+    def get_reconstruction_loss(self, x: torch.Tensor, x_hat: torch.Tensor) -> torch.Tensor:
         """
         Computes the reconstruction loss.
 
@@ -230,7 +220,7 @@ class VIDRModel(BaseModuleClass):
         loss = ((x - x_hat) ** 2).sum(dim=1)
         return loss
 
-    def get_nca_loss(self, z, disc, cont) -> torch.Tensor:
+    def get_nca_loss(self, z: torch.Tensor, disc: list, cont: list) -> torch.Tensor:
         """
         Computes the NCA loss.
 
@@ -257,7 +247,7 @@ class VIDRModel(BaseModuleClass):
         p = torch.softmax(-p, dim=1)
 
         # Calculating Latent Loss for Discrete Labels
-        if disc != None:
+        if disc is not None:
             cells = len(disc[0])
             masks = np.zeros((cells, cells))
             maxVal = 0
@@ -283,7 +273,7 @@ class VIDRModel(BaseModuleClass):
         else:
             losses += [torch.tensor(0, device=device)]
 
-        if cont != None:
+        if cont is not None:
             cells = len(cont[0])
             n_cont_weights = len(cont)
 
@@ -322,7 +312,7 @@ class VIDRModel(BaseModuleClass):
 
         disc_loss = torch.sum(scaled_losses[0])
 
-        if cont != None:
+        if cont is not None:
             cont_loss = torch.sum(*scaled_losses[1:])
         else:
             cont_loss = torch.tensor(0, device=device)
