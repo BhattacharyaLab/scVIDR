@@ -75,36 +75,28 @@ class PCAEval:
         Predicts the cell type provided by the user in the treated condition.
 
         Args:
-            ctrl_key (str): 
-                Key for the `control` part of the `data` found in `condition_key`.
-            treat_key (str): 
-                Key for the `treated` part of the `data` found in `condition_key`.
-            adata_to_predict (AnnData): 
-                AnnData object for unperturbed cells to be predicted.
-            celltype_to_predict (str): 
-                The cell type to be predicted.
-            restrict_arithmetic_to (str or dict): 
-                Dictionary of cell types to observe for prediction.
+            cell_type_key (str, optional): 
+                Key for the cell type information in `adata.obs`. Defaults to None.
+            treatment_key (str, optional): 
+                Key for the treatment or condition information in `adata.obs`. Defaults to None.
+            ctrl_key (str, optional): 
+                Key for the control condition in `treatment_key`. Defaults to None.
+            treat_key (str, optional): 
+                Key for the treated condition in `treatment_key`. Defaults to None.
+            cell_type_to_predict (str, optional): 
+                The cell type to be predicted. Defaults to None.
+            regression (bool, optional): 
+                Whether to perform regression on the latent space. Defaults to False.
+            continuous (bool, optional): 
+                Whether to predict continuous doses. Defaults to False.
+            doses (list, optional): 
+                List of doses to predict if `continuous` is True. Defaults to None.
 
         Returns:
-            numpy.ndarray: 
-                Predicted cells in the primary space.
-            float: 
-                Difference (delta) between treated and control cells in latent space.
-        
-
-        Args:
-            cell_type_key (_type_, optional): _description_. Defaults to None.
-            treatment_key (_type_, optional): _description_. Defaults to None.
-            ctrl_key (_type_, optional): _description_. Defaults to None.
-            treat_key (_type_, optional): _description_. Defaults to None.
-            cell_type_to_predict (_type_, optional): _description_. Defaults to None.
-            regression (bool, optional): _description_. Defaults to False.
-            continuous (bool, optional): _description_. Defaults to False.
-            doses (_type_, optional): _description_. Defaults to None.
-
-        Returns:
-            AnnData: _description_
+            AnnData: 
+                An AnnData object containing the predicted cells in the primary space.
+                If `regression` is True, also returns the regression model.
+                If `continuous` is True, returns a dictionary of AnnData objects for each dose.
         '''
 
         # use keys registered from `setup_anndata()

@@ -16,24 +16,18 @@ class VIDRModel(BaseModuleClass):
     """
     Variational AutoEncoder for latent space arithmetic for perturbation prediction.
 
-    Parameters
-    ----------
-    input_dim
-        Number of input genes
-    hidden_dim
-        Number of nodes per hidden layer
-    latent_dim
-        Dimensionality of the latent space
-    n_hidden_layers
-        Number of hidden layers used for encoder and decoder NNs
-    dropout_rate
-        Dropout rate for neural networks
-    kl_weight
-        Weight for kl divergence
-    linear_decoder
-        Boolean for whether or not to use linear decoder for a more interpretable model.
+    Args:
+        input_dim (int): Number of input genes.
+        hidden_dim (int, optional): Number of nodes per hidden layer. Defaults to 800.
+        latent_dim (int, optional): Dimensionality of the latent space. Defaults to 10.
+        n_hidden_layers (int, optional): Number of hidden layers used for encoder and decoder NNs. Defaults to 2.
+        dropout_rate (float, optional): Dropout rate for neural networks. Defaults to 0.1.
+        latent_distribution (str, optional): Distribution of the latent space. Defaults to "normal".
+        kl_weight (float, optional): Weight for KL divergence. Defaults to 0.00005.
+        linear_decoder (bool, optional): Whether to use a linear decoder for a more interpretable model. Defaults to True.
+        nca_loss (bool, optional): Whether to use NCA loss. Defaults to False.
+        dose_loss (optional): Dose loss. Defaults to None.
     """
-
     def __init__(
         self,
         input_dim: int,
@@ -55,17 +49,7 @@ class VIDRModel(BaseModuleClass):
         self.nca_loss = nca_loss
         self.dose_loss = dose_loss
 
-        #         self.encoder = Encoder(
-        #             input_dim,
-        #             latent_dim,
-        #             n_layers=n_layers,
-        #             hidden_dim=hidden_dim,
-        #             dropout_rate=dropout_rate,
-        #             distribution=latent_distribution,
-        #             use_batch_norm= True,
-        #             use_layer_norm=False,
-        #             activation_fn=torch.nn.LeakyReLU,
-        #         )
+        # Encoder   
 
         self.encoder = VIDREncoder(input_dim, latent_dim, hidden_dim, n_hidden_layers)
 
@@ -84,6 +68,16 @@ class VIDRModel(BaseModuleClass):
         self.decoder = self.lin_decoder if linear_decoder else self.nonlin_decoder
 
     def _get_inference_input(self, tensors):
+        """
+        Prepares the input for the inference model.
+
+        Args:
+            tensors (dict): Dictionary of input tensors.
+
+        Returns:
+            dict: Dictionary containing the input for the inference model.
+        """
+        
         x = tensors[_CONSTANTS.X_KEY]
         input_dict = dict(
             x=x,
@@ -91,6 +85,16 @@ class VIDRModel(BaseModuleClass):
         return input_dict
 
     def _get_generative_input(self, tensors, inference_outputs):
+        """
+        Prepares the input for the generative model.
+
+        Args:
+            tensors (dict): Dictionary of input tensors.
+            inference_outputs (dict): Dictionary of outputs from the inference model.
+
+        Returns:
+            dict: Dictionary containing the input for the generative model.
+        """
         z = inference_outputs["z"]
         input_dict = {
             "z": z,
@@ -99,9 +103,15 @@ class VIDRModel(BaseModuleClass):
 
     @auto_move_data
     def inference(self, x):
-        """
+       """
         High level inference method.
         Runs the inference (encoder) model.
+
+        Args:
+            x (torch.Tensor): Input tensor.
+
+        Returns:
+            dict: Dictionary containing the outputs of the inference model.
         """
         mean, var, latent_rep = self.encoder(x)
 
@@ -110,7 +120,15 @@ class VIDRModel(BaseModuleClass):
 
     @auto_move_data
     def generative(self, z):
-        """Runs the generative model."""
+        """
+        Runs the generative model.
+
+        Args:
+            z (torch.Tensor): Latent space tensor.
+
+        Returns:
+            dict: Dictionary containing the outputs of the generative model.
+        """
         px = self.decoder(z)
 
         return dict(px=px)
@@ -121,6 +139,17 @@ class VIDRModel(BaseModuleClass):
         inference_outputs,
         generative_outputs,
     ):
+        """
+        Computes the loss for the model.
+
+        Args:
+            tensors (dict): Dictionary of input tensors.
+            inference_outputs (dict): Dictionary of outputs from the inference model.
+            generative_outputs (dict): Dictionary of outputs from the generative model.
+
+        Returns:
+            LossRecorder: Object containing the computed loss.
+        """
         x = tensors[_CONSTANTS.X_KEY]
         mean = inference_outputs["qz_m"]
         var = inference_outputs["qz_v"]
@@ -165,21 +194,16 @@ class VIDRModel(BaseModuleClass):
         tensors,
         n_samples=1,
     ) -> np.ndarray:
-        r"""
+        """
         Generate observation samples from the posterior predictive distribution.
         The posterior predictive distribution is written as :math:`p(\hat{x} \mid x)`.
-        Parameters
-        ----------
-        tensors
-            Tensors dict
-        n_samples
-            Number of required samples for each cell
-        library_size
-            Library size to scale scamples to
-        Returns
-        -------
-        x_new : :py:class:`torch.Tensor`
-            tensor with shape (n_cells, n_genes, n_samples)
+
+        Args:
+            tensors (dict): Dictionary of input tensors.
+            n_samples (int, optional): Number of required samples for each cell. Defaults to 1.
+
+        Returns:
+            np.ndarray: Array with shape (n_cells, n_genes, n_samples) containing the generated samples.
         """
         inference_kwargs = dict(n_samples=n_samples)
         (
@@ -194,10 +218,31 @@ class VIDRModel(BaseModuleClass):
         return px.cpu().numpy()
 
     def get_reconstruction_loss(self, x, x_hat) -> torch.Tensor:
+        """
+        Computes the reconstruction loss.
+
+        Args:
+            x (torch.Tensor): Original input tensor.
+            x_hat (torch.Tensor): Reconstructed input tensor.
+
+        Returns:
+            torch.Tensor: Tensor containing the reconstruction loss.
+        """
         loss = ((x - x_hat) ** 2).sum(dim=1)
         return loss
 
     def get_nca_loss(self, z, disc, cont) -> torch.Tensor:
+        """
+        Computes the NCA loss.
+
+        Args:
+            z (torch.Tensor): Latent space tensor.
+            disc (list): List of discrete labels.
+            cont (list): List of continuous labels.
+
+        Returns:
+            torch.Tensor: Tensor containing the NCA loss.
+        """
         # losses list
         losses = []
 
