@@ -2,7 +2,7 @@
 
 Welcome to the scVIDR documentation site. This site provides comprehensive information about the VIDR package, including installation instructions, API reference, and tutorials.
 
-To get started with **scVIDR**, follow the instructions in the [Getting Started Guide](guide/getting-started.md). It will walk 
+To get started with **scVIDR**, follow the instructions in the [Getting Started Guide](installation/getting-started.md). It will walk 
 you through the installation process and help you set up the project on your local machine.
 
 ## Overview
