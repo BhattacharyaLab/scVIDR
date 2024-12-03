@@ -27,11 +27,8 @@ docker pull panda311/scvidr
 
 To run a Docker container with SCVIDR, you need to set up the ports and bind mount your local directory for easy file access. Here’s how:
 
-1. **Create a data folder** in your local machine to store your files:
-    ```bash
-    mkdir scvidr_data
 
-2. **Run the Docker container**:
+1. **Run the Docker container**:
 
     Use the following command to run the Docker container:
     
@@ -39,7 +36,6 @@ To run a Docker container with SCVIDR, you need to set up the ports and bind mou
     docker run -dit \
       --name scvidr_container \
       -p 8888:8888 \
-      -v $(pwd)/scvidr_data:/scVIDR/ \
       panda311/scvidr
     ```
 
@@ -51,9 +47,7 @@ To run a Docker container with SCVIDR, you need to set up the ports and bind mou
       - `-i` (interactive): Keeps STDIN open, allowing interaction with the container.
       - `-t` (tty): Allocates a pseudo-terminal, allowing you to interact with the container's shell.
     - **`--name scvidr_container`**: Assigns a custom name (`scvidr_container`) to your running container so that it can be easily identified.
-    - **`-p 8888:8888`**: Maps port 8888 on your local machine to port 8888 inside the Docker container. This allows you to access Jupyter Notebook running inside the container at `http://localhost:8888`.
-    - **`-v $(pwd)/scvidr_data:/scVIDR/`**: Binds the `scvidr_data` on your local machine to `/scVIDR` inside the container. This makes the files in `scvidr_data` accessible to the container.
-      - `$(pwd)` refers to the current working directory in your terminal, and this is where `scvidr_data` resides.
+    - **`-p 8888:8888`**: Maps port 8888 on your local machine to port 8888 inside the Docker container. This allows you to access Jupyter Notebook running inside the container at `http://localhost:8888`. If port 8888 is already in use, replace it with a different port (e.g., 8899) in the Docker command and access Jupyter at http://localhost:8899. Alternatively, you can copy the link provided in the terminal output after running the jupyter lab command inside the container, which will include the appropriate token for login.
     - **`panda311/scvidr`**: Specifies the Docker image to use, in this case, the `scvidr` image from Docker Hub.
 
 
@@ -62,7 +56,7 @@ To run a Docker container with SCVIDR, you need to set up the ports and bind mou
 To enter the Docker container, run the following command:
 
 ```
-docker container exec -it scvidr_container
+docker container exec -it scvidr_container /bin/bash
 
 ```
 
@@ -72,12 +66,9 @@ docker container exec -it scvidr_container
 Once inside the Docker container, you can start Jupyter Notebook with the following commands:
 
 ```
-cd jupyter notebook --port=8888 --ip=0.0.0.0 --allow-root --no-browser
+jupyter lab --port=8888 --ip=0.0.0.0 --allow-root --no-browser
 
 ```
-
-
-After starting Jupyter, open your browser and navigate to `http://localhost:8888`. You will need a token, which you can find in the terminal output where Jupyter was started.
 
 ### Adding GPU Support
 
@@ -100,13 +91,13 @@ SCVIDR can be GPU-accelerated for faster training of models. GPU support is avai
   docker run --gpus all -dit \
   --name scvidr_gpu_container \
   -p 8888:8888 \
-  -v $(pwd)/scvidr_data:/scVIDR \
   panda311/scvidr
   ```
 
 4. **Verify GPU access**: You can verify that the GPU is accessible inside the container by running.
 ```bash
-docker exec -it scvidr_gpu_container nvidia-smi
+docker exec -it scvidr_gpu_container /bin/bash
+nvidia-smi
 ```
 
 #### GPU Support Not Available on macOS

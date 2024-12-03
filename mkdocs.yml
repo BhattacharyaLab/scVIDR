@@ -44,8 +44,6 @@ nav:
       - Explanation Introduction: explanation/explanation-introduction.md
   - Tutorial:
       - Tutorial Introduction: tutorials/tutorials-introduction.md
-    
-    
 
 # MkDocStrings Configuration
 # Here you can add specific configurations for mkdocstrings
@@ -70,4 +68,5 @@ markdown_extensions:
   - toc:  # Table of contents generation
       permalink: true
   - pymdownx.superfences  # Enhances code block handling
+
 
