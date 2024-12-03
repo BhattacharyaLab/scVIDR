@@ -259,21 +259,20 @@ def calculate_r2_singledose(
     random_sample_coef=None,
     n_iter: int = 1,
 ):
-    '''_summary_
+    '''    Calculate R^2 values for single dose treatment and prediction.
 
     Args:
-        adata (AnnData): _description_
-        cell (str): _description_
-        model (str): _description_
-        condition_key (str): _description_
-        axis_keys (dict): _description_
-        diff_genes (_type_, optional): _description_. Defaults to None.
-        random_sample_coef (_type_, optional): _description_. Defaults to None.
-        n_iter (int, optional): _description_. Defaults to 1.
+        adata (AnnData): Annotated data matrix.
+        cell (str): Cell type or identifier.
+        model (str): Model name or identifier.
+        condition_key (str): Key in `adata.obs` to distinguish conditions.
+        axis_keys (dict): Dictionary with keys "x" and "y" to specify conditions.
+        diff_genes (list, optional): List of differentially expressed genes. Defaults to None.
+        random_sample_coef (float, optional): Coefficient for random sampling. Defaults to None.
+        n_iter (int, optional): Number of iterations for random sampling. Defaults to 1.
 
     Returns:
-        _type_: _description_
-    '''
+        pd.DataFrame: DataFrame containing R^2 values and corresponding gene sets.'''
 
     # Densify sparse matrix
     if sparse.issparse(adata.X):
@@ -335,21 +334,22 @@ def calculate_r2_multidose(
     random_sample_coef=None,
     n_iter: int = 1,
 ):
-    '''_summary_
+    """
+    Calculate R^2 values for multidose experiments.
 
     Args:
-        adata (_type_): _description_
-        cell (str): _description_
-        model (str): _description_
-        condition_key (str): _description_
-        axis_keys (dict): _description_
-        diff_genes (_type_, optional): _description_. Defaults to None.
-        random_sample_coef (_type_, optional): _description_. Defaults to None.
-        n_iter (int, optional): _description_. Defaults to 1.
+        adata (AnnData): Annotated data matrix.
+        cell (str): Cell type or identifier.
+        model (str): Model name or identifier.
+        condition_key (str): Key in `adata.obs` to distinguish conditions.
+        axis_keys (dict): Dictionary with keys "x" and "y" for conditions.
+        diff_genes (list, optional): List of differentially expressed genes. Defaults to None.
+        random_sample_coef (float, optional): Coefficient for random sampling. Defaults to None.
+        n_iter (int, optional): Number of iterations for random sampling. Defaults to 1.
 
     Returns:
-        _type_: _description_
-    '''
+        pd.DataFrame: DataFrame containing R^2 values and associated metadata.
+    """
 
     # Densify sparse matrix
     if sparse.issparse(adata.X):

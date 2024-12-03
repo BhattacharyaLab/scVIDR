@@ -99,7 +99,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         doses=None,
     ) -> AnnData:
         """
-        Predicts the cell type provided by the user in treatulated condition.
+        Predicts the cell type provided by the user in treated condition.
         Parameters
         ----------
         ctrl_key: basestring
@@ -117,7 +117,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         predicted_cells: numpy nd-array
             `numpy nd-array` of predicted cells in primary space.
         delta: float
-            Difference between treatulated and control cells in latent space
+            Difference between treated and control cells in latent space
         """
         if not self.is_trained_:
             raise Exception(
@@ -330,7 +330,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         >>>     adata=train,
         >>>     adata_to_predict=unperturbed_data,
         >>>     ctrl_key="control",
-        >>>     treat_key="treatulated"
+        >>>     treat_key="treated"
         >>>)
         >>> pred_adata = anndata.AnnData(
         >>>     pred,
@@ -341,7 +341,7 @@ class VIDR(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         >>> all_adata = CD4T.concatenate(pred_adata)
         >>> network.reg_mean_plot(
         >>>     all_adata,
-        >>>     axis_keys={"x": "control", "y": "pred", "y1": "treatulated"},
+        >>>     axis_keys={"x": "control", "y": "pred", "y1": "treated"},
         >>>     gene_list=["ISG15", "CD3D"],
         >>>     path_to_save="tests/reg_mean.pdf",
         >>>     show=False
