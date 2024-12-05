@@ -51,6 +51,8 @@ Finally, differential abundances of cells across groups were handled through a b
 
 
 ## Index
+### Examples of scVIDR Applied to Datasets
+
 
 ### [Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes](Figure2.md)
 1. [UMAP Projection of Latent Space](Figure2.md#figure-2a-umap-projection-of-latent-space)
@@ -86,3 +88,222 @@ Finally, differential abundances of cells across groups were handled through a b
 7. [PCA of Hepatocyte Zones](Figure5.md#figure-5e-pca-of-hepatocyte-zones)
 8. [Pseudo-Dose Distribution Across Hepatocyte Zones](Figure5.md#figure-5f-pseudo-dose-distribution-across-hepatocyte-zones)
 
+## Workflow for Using scVIDR Command-Line Tools
+
+### VAE Model Training (Single- and Multi- Dose Models)
+
+### Overview
+
+To train a single dose VAE model, use the `scvidr_train.py single_dose` command (Figure 2 of the manuscript).
+
+To train a multi dose VAE model, use the `scvidr_train.py multi_dose` command (Figure 3 of the manuscript).
+
+Both types of models require an AnnData file in the `h5ad` format as input. This file should include scRNAseq data along with an observation table (`obs`) containing a dose and a cell type column. The single dose model expects at least two distinct doses, while the multi dose model expects at least three.
+
+### Command Arguments
+
+The arguments for both models are the same and are listed below:
+
+```
+usage: scvidr_train.py {single_dose/multi_dose} [-h] [--dose_column DOSE_COLUMN]
+                                               [--celltype_column CELLTYPE_COLUMN]
+                                               [--test_celltype TEST_CELLTYPE]
+                                               [--control_dose CONTROL_DOSE]
+                                               [--treated_dose TREATED_DOSE]
+                                               [--celltypes_keep CELLTYPES_KEEP] 
+                                               h5ad_data_file model_path
+```
+
+#### Positional Arguments:
+
+- **`h5ad_data_file`**: Path to the data file containing the raw reads in `h5ad` format.
+- **`model_path`**: Path to the directory where the trained model will be saved.
+
+#### Optional Arguments:
+
+- **`-h, --help`**: Show this help message and exit.
+- **`--dose_column DOSE_COLUMN`**: Name of the column in the `obs` dataframe representing the dose (default `"Dose"`).
+- **`--celltype_column CELLTYPE_COLUMN`**: Name of the column in the `obs` dataframe representing the cell type (default `"celltype"`).
+- **`--test_celltype TEST_CELLTYPE`**: Name of the cell type to leave out for testing. Use quotes for names with spaces (default `"Hepatocytes - portal"`).
+- **`--control_dose CONTROL_DOSE`**: Value of the control dose (default `"0"`).
+- **`--treated_dose TREATED_DOSE`**: Value of the treated dose (default `"30"`).
+- **`--celltypes_keep CELLTYPES_KEEP`**: Specify cell types to keep in the dataset for training/testing. Provide either a file with one cell type per line or a semicolon-separated list (default `"ALL"`).
+
+### Example Usage
+
+#### Single Dose Model Training:
+
+To train all single dose models for individual cell types as used in the manuscript:
+
+```bash
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - portal" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - central.pt/"
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - central" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - portal.pt/"
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Cholangiocytes" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Cholangiocytes.pt/"
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Stellate Cells" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Stellate Cells.pt/"
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Portal Fibroblasts" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Portal Fibroblasts.pt/"
+python scvidr_train.py single_dose --celltypes_keep ../metadata/liver_celltypes --test_celltype "Endothelial Cells" ../data/nault2021_singleDose.h5ad "../data/VAE_Binary_Prediction_Dioxin_5000g_Endothelial Cells.pt/"
+```
+
+#### Multi Dose Model Training:
+
+To train all multi dose models for individual cell types as used in the manuscript:
+
+```bash
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - central" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes - central.pt/"
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Hepatocytes - portal" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes - portal.pt/"
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Cholangiocytes" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Cholangiocytes.pt/"
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Stellate Cells" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Stellate Cells.pt/"
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Portal Fibroblasts" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Portal Fibroblasts.pt/"
+python scvidr_train.py multi_dose --control_dose 0.0 --celltypes_keep ../metadata/liver_celltypes --test_celltype "Endothelial Cells" ../data/nault2021_multiDose.h5ad "../data/VAE_Cont_Prediction_Dioxin_5000g_Endothelial Cells.pt/"
+```
+
+**Note:** Pretrained models corresponding to these commands are available under the specified paths.
+
+
+### scVIDR Prediction Workflow
+
+The `scvidr_predict.py` script allows you to use a trained scVIDR model to predict treatment conditions for single-dose or multi-dose datasets. Below are the details for using this script.
+
+#### Single-Dose Model Prediction
+
+#### Usage
+```bash
+scvidr_predict.py single_dose [-h] [--model MODEL]
+                              [--dose_column DOSE_COLUMN]
+                              [--celltype_column CELLTYPE_COLUMN]
+                              [--test_celltype TEST_CELLTYPE]
+                              [--control_dose CONTROL_DOSE]
+                              [--treated_dose TREATED_DOSE]
+                              [--celltypes_keep CELLTYPES_KEEP]
+                              h5ad_data_file model_path output_path
+```
+
+#### Description
+Predict treatment conditions using a pretrained scVIDR or scGEN model.
+
+#### Positional Arguments
+- `h5ad_data_file`: The data file containing the raw reads in h5ad format.
+- `model_path`: Path to the directory where the trained model was saved during the model training step.
+- `output_path`: Path to the directory where the predicted AnnData will be saved in an h5ad format.
+
+#### Optional Arguments
+- `--model MODEL`: Specify whether to use scVIDR or scGEN for prediction (default: `scVIDR`).
+- `--dose_column DOSE_COLUMN`: Name of the column in the `obs` dataframe representing the dose (default: `"Dose"`).
+- `--celltype_column CELLTYPE_COLUMN`: Name of the column in the `obs` dataframe representing the cell type (default: `"celltype"`).
+- `--test_celltype TEST_CELLTYPE`: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: `"Hepatocytes - portal"`).
+- `--control_dose CONTROL_DOSE`: Control dose (default: `"0"`).
+- `--treated_dose TREATED_DOSE`: Treated dose (default: `"30"`).
+- `--celltypes_keep CELLTYPES_KEEP`: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: `"ALL"`).
+
+#### Example
+```bash
+python scvidr_predict.py single_dose \
+  ../data/nault2021_singleDose.h5ad \
+  ../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes-portal.pt/ \
+  ../data/SingleDose_TCDD \
+  --model scVIDR \
+  --dose_column Dose \
+  --celltype_column celltype \
+  --test_celltype "Hepatocytes - portal" \
+  --control_dose 0 \
+  --treated_dose 30 \
+  --celltypes_keep ../metadata/liver_celltypes
+```
+
+---
+
+### Multi-Dose Model Prediction
+
+#### Usage
+```bash
+scvidr_predict.py multi_dose [-h] [--model MODEL]
+                             [--dose_column DOSE_COLUMN]
+                             [--celltype_column CELLTYPE_COLUMN]
+                             [--test_celltype TEST_CELLTYPE]
+                             [--control_dose CONTROL_DOSE]
+                             [--treated_dose TREATED_DOSE]
+                             [--celltypes_keep CELLTYPES_KEEP]
+                             h5ad_data_file model_path output_path
+```
+
+#### Description
+Predict treatment conditions across multiple doses using a pretrained scVIDR or scGEN model.
+
+#### Positional Arguments
+- `h5ad_data_file`: The data file containing the raw reads in h5ad format.
+- `model_path`: Path to the directory where the trained model was saved during the model training step.
+- `output_path`: Path to the directory where the predicted AnnData will be saved in an h5ad format.
+
+#### Optional Arguments
+- `--model MODEL`: Specify whether to use scVIDR or scGEN for prediction (default: `scVIDR`).
+- `--dose_column DOSE_COLUMN`: Name of the column in the `obs` dataframe representing the dose (default: `"Dose"`).
+- `--celltype_column CELLTYPE_COLUMN`: Name of the column in the `obs` dataframe representing the cell type (default: `"celltype"`).
+- `--test_celltype TEST_CELLTYPE`: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: `"Hepatocytes - portal"`).
+- `--control_dose CONTROL_DOSE`: Control dose (default: `"0"`).
+- `--treated_dose TREATED_DOSE`: Treated dose (default: `"30"`).
+- `--celltypes_keep CELLTYPES_KEEP`: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: `"ALL"`).
+
+#### Example
+```bash
+python scvidr_predict.py multi_dose \
+  ../data/nault2021_multiDose.h5ad \
+  ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes-portal.pt/ \
+  ../data/MultiDose_TCDD \
+  --model scVIDR \
+  --dose_column Dose \
+  --celltype_column celltype \
+  --test_celltype "Hepatocytes - portal" \
+  --control_dose 0.0 \
+  --treated_dose 30.0 \
+  --celltypes_keep ../metadata/liver_celltypes
+
+```
+
+---
+
+### Notes
+1. The prediction scripts assume that the trained models are stored in the `model_path` directory.
+2. Ensure the `h5ad_data_file` contains the appropriate `dose` and `celltype` columns in the `obs` table.
+3. The output file will be an AnnData object saved in the specified `output_path`.
+
+### Gene Score Calculation Using scVIDR
+
+### Usage
+
+The `scvidr_genescores.py` script interprets scVIDR predictions using ridge regression and outputs gene scores in a CSV format.
+
+#### Command-Line Arguments
+
+#### Positional Arguments
+- `h5ad_data_file`: The data file containing the raw reads in h5ad format.
+- `model_path`: Path to the directory where the trained model was saved in the model training step.
+- `output_path`: Path to the directory where the gene scores will be saved as a CSV file.
+
+#### Optional Arguments
+- `--dose_column DOSE_COLUMN`: Name of the column in the `obs` dataframe representing the dose (default: `"Dose"`).
+- `--celltype_column CELLTYPE_COLUMN`: Name of the column in the `obs` dataframe representing the cell type (default: `"celltype"`).
+- `--test_celltype TEST_CELLTYPE`: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: `"Hepatocytes - portal"`).
+- `--control_dose CONTROL_DOSE`: Control dose (default: `"0"`).
+- `--treated_dose TREATED_DOSE`: Treated dose (default: `"30"`).
+- `--celltypes_keep CELLTYPES_KEEP`: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: `"ALL"`).
+- `--training_size TRAINING_SIZE`: Number of samples generated from the latent distribution (default: `100000`).
+
+#### Example Command
+
+```bash
+python scvidr_genescores.py \
+  ../data/nault2021_multiDose.h5ad \
+  ../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes-portal.pt \
+  ../data/MultiDose_TCDD \
+  --dose_column Dose \
+  --celltype_column celltype \
+  --test_celltype "Hepatocytes - portal" \
+  --control_dose 0.0 \
+  --treated_dose 30.0 \
+  --celltypes_keep ../metadata/liver_celltypes
+
+```
+
+
+### Notes
+Ensure that the required data is preprocessed, and a pre-trained model is available before running the script.
