@@ -245,7 +245,7 @@ eval_adata.obs
 
 
 
-<div>
+<div style="overflow-x: auto; width: 100%; max-width: 100vw;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
