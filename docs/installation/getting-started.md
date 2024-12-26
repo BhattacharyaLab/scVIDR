@@ -110,19 +110,17 @@ nvidia-smi
 
 For High-Performance Computing (HPC) environments, Docker is generally not supported due to security and permission limitations. Instead, it is recommended to use Singularity (Apptainer) to sandbox the Docker image for proper directory mapping and GPU support.
 
-1. **Step 1: Convert Docker Image to Singularity Image**
+**Step 1: Convert Docker Image to Singularity Image**
 
 ```bash
 singularity pull docker://panda311/scvidr
 ```
-
-2. **Step 2: Create a Writable Sandbox**
+**Step 2: Create a Writable Sandbox**
 
 ```bash
 singularity build --sandbox scvidr_sandbox docker://panda311/scvidr
 ```
-
-3. **Step 3: Enable GPU Support and Start Jupyter Lab**
+**Step 3: Enable GPU Support and Start Jupyter Lab**
 
 ```bash
 singularity exec --nv --writable --pwd /scVIDR scvidr_sandbox jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port=8888
