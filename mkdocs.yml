@@ -2,71 +2,71 @@
 site_name: scVIDR
 site_description: Comprehensive project documentation for scVIDR.
 
-
-
 # Theme Configuration
 theme:
-  name: material  # MkDocs Material theme
+  name: material
   language: en
   features:
-    - navigation.tabs
-    - navigation.sections
-    - search.highlight
-    - search.share
-    - toc.integrate
-    - content.code.annotate
-  palette:
-    primary: green
-    accent: light blue
-  font:
-    text: "Roboto"
-    code: "Roboto Mono"
-  
+    - navigation.tabs                 # Top-level navigation as tabs
+    - navigation.tabs.sticky          # Sticky navigation tabs on scroll
+    - navigation.sections             # Enables collapsible dropdowns
+    - navigation.expand               # Expands dropdowns by default
+    - search.highlight                # Highlights search terms
+    - search.share                    # Allows sharing search results
+    - search.suggest                  # Provides search suggestions
+    - content.code.annotate           # Adds annotations to code blocks
+    - content.code.copy               # Adds a 'copy' button to code blocks
+    
+palette:
+  - scheme: default
+    primary: blue  # Same primary color for both header and tabs
+    accent: light blue  # Accent color for hover effects
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - scheme: slate
+    primary: blue  # Dark mode primary color
+    accent: cyan
+    toggle:
+      icon: material/weather-night
+      name: Switch to light mode
+
 # Plugins Configuration
 plugins:
-  - search  # Enables search functionality
+  - search
   - mkdocstrings:
-      default_handler: python  # For generating Python API documentation
-  - awesome-pages  # Organizes pages automatically
+      default_handler: python
+  - awesome-pages
 
 # Site Navigation
 nav:
   - Home: index.md
-  - Installation:
-      - Getting Started: installation/getting-started.md
-  - API:
-      - API Introduction: API/API-introduction.md
-      - Utils: API/utils.md
-      - Modules: API/modules.md
-      - PCAEval: API/PCAEval.md
-      - VIDR_Model: API/vidr_model.md
-  - Explanation:
-      - Explanation Introduction: explanation/explanation-introduction.md
-  - Tutorial:
-      - Tutorial Introduction: tutorials/tutorials-introduction.md
+  - Installation: installation/getting-started.md
+  - API: API/API-introduction.md
+  - Tutorial: tutorials/tutorials-introduction.md
 
 # MkDocStrings Configuration
-# Here you can add specific configurations for mkdocstrings
 mkdocstrings:
   handlers:
     python:
       selection:
-        docstring_style: google  # or 'numpy', 'sphinx', etc.
+        docstring_style: google
       rendering:
-        show_source: true  # Option to show the source code links in the docs
+        show_source: true
 
 # Extra Configuration for Awesome Pages Plugin
-# This plugin automatically manages navigation using .pages files if required
 awesome_pages:
-  collapse: true  # Collapses nested pages in the navigation sidebar
-  strict: true  # Ensures that everything in the folder structure is included
+  collapse: true
+  strict: true
 
-# Markdown Extensions (optional, if you want to enhance Markdown capabilities)
+# Markdown Extensions
 markdown_extensions:
-  - admonition  # For notes, warnings, and other content boxes
-  - codehilite  # Code highlighting
-  - toc:  # Table of contents generation
+  - admonition
+  - codehilite
+  - toc:
       permalink: true
-  - pymdownx.superfences  # Enhances code block handling
+  - pymdownx.superfences
 
 
+extra_css:
+  - assets/css/custom.css

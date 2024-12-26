@@ -1,11 +1,9 @@
-# Reference - Technical descriptions and factual information about the system, APIs, parameters, etc.
+# API Introduction  
 
-# API Introduction
+This section provides an overview of the **VIDR API**, which contains technical descriptions and factual information about the system, APIs, parameters, and more.  
 
-This section provides an overview of the VIDR API. The API is organized into several modules, each providing specific functionality.
-
-## Modules
+### Modules  
 
 - [Utils](utils.md)
 - [PCAEval](PCAEval.md)
-- [Modules](modules.md)
+- [Modules](modules.md) 

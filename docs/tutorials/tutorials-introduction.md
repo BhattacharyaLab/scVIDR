@@ -54,7 +54,7 @@ Finally, differential abundances of cells across groups were handled through a b
 ### Examples of scVIDR Applied to Datasets
 
 
-### [Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes](Figure2.md)
+#### [Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes](Figure2.md)
 1. [UMAP Projection of Latent Space](Figure2.md#figure-2a-umap-projection-of-latent-space)
 2. [PCA Plots Comparing Prediction Models](Figure2.md#figure-2b-pca-plots-comparing-prediction-models)
 3. [Regression Analysis with Predicted Data](Figure2.md#figure-2c-regression-analysis-with-predicted-data)
@@ -62,7 +62,7 @@ Finally, differential abundances of cells across groups were handled through a b
 5. [Comprehensive Analysis of Gene Expression Predictions Across Cell Types](Figure2.md#figure-2e-comprehensive-analysis-of-gene-expression-predictions-across-cell-types)
 
 
-### [Prediction of In Vivo TCDD Dose-Response Across Cell Types](Figure3.md)
+#### [Prediction of In Vivo TCDD Dose-Response Across Cell Types](Figure3.md)
 1. [Regression and Evaluation Across TCDD Doses](Figure3.md#regression-and-evaluation-across-tcdd-doses)
 2. [UMAP Visualization of Dose-Response](Figure3.md#figure-3a-umap-visualization-of-dose-response)
 3. [Dose-Response Prediction for Portal Hepatocytes](Figure3.md#figure-3c-dose-response-prediction-for-portal-hepatocytes)
@@ -71,14 +71,14 @@ Finally, differential abundances of cells across groups were handled through a b
 6. [Non-Regression Analysis of Predicted Gene Expression Across Doses](Figure3.md#non-regression-analysis-of-predicted-gene-expression-across-doses)
 7. [Dose-Response Prediction for Ahrr Gene](Figure3.md#figure-3b-dose-response-prediction-for-ahrr-gene)
 
-### [Interrogation of VAE Using Ridge Regression in Portal Hepatocyte Response Prediction](Figure4.md)
+#### [Interrogation of VAE Using Ridge Regression in Portal Hepatocyte Response Prediction](Figure4.md)
 1. [Ridge Regression Analysis on Latent Representations](Figure4.md#ridge-regression-analysis-on-latent-representations)
 2. [Visualization of Top Gene Scores](Figure4.md#figure-4b-visualization-of-top-gene-scores)
 3. [Gene Enrichment Analysis and Visualization](Figure4.md#figure-4c-gene-enrichment-analysis-and-visualization)
 4. [Gene Enrichment Analysis and Visualization](Figure4.md#figure-4d-gene-enrichment-analysis-and-visualization)
 5. [Logistic Fit of Median Pathway Scores](Figure4.md#figure-4e-logistic-fit-of-median-pathway-scores)
 
-### [Pseudo-Dose Ordering of Hepatocytes Across TCDD Dose-Response](Figure5.md)
+#### [Pseudo-Dose Ordering of Hepatocytes Across TCDD Dose-Response](Figure5.md)
 1. [Training VIDR Model for Hepatocyte Dose Response Prediction](Figure5.md#training-vidr-model-for-hepatocyte-dose-response-prediction)
 2. [Calculating Pseudodose and Preparing PCA Data](Figure5.md#calculating-pseudodose-and-preparing-pca-data)
 3. [Orthogonal Projection of Hepatocytes onto the Pseudo-Dose Axis](Figure5.md#figure-5a-orthogonal-projection-of-hepatocytes-onto-the-pseudo-dose-axis)
