@@ -25,8 +25,7 @@ docker pull panda311/scvidr
 
 #### Step 2: Create and run a Docker container
 
-To run a Docker container with SCVIDR, you need to set up the ports and bind mount your local directory for easy file access. Here’s how:
-
+To run a Docker container with SCVIDR, you need to set up the ports for easy access. Here's how:
 
 1. **Run the Docker container**:
 
@@ -93,6 +92,8 @@ SCVIDR can be GPU-accelerated for faster training of models. GPU support is avai
   -p 8888:8888 \
   panda311/scvidr
   ```
+**Note:** Ensure that **CUDA drivers** are installed on the host machine if they aren’t already. Refer to the [CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) for detailed instructions.
+
 
 4. **Verify GPU access**: You can verify that the GPU is accessible inside the container by running.
 ```bash
@@ -102,11 +103,35 @@ nvidia-smi
 
 #### GPU Support Not Available on macOS
 
-- **macOS** does not support GPU passthrough for Docker containers, meaning you cannot utilize NVIDIA GPUs for GPU-accelerated workloads on macOS.
+- **macOS** does not support GPU passthrough for Docker containers, meaning you cannot utilize GPUs for GPU-accelerated workloads on macOS.
 - For GPU-accelerated SCVIDR usage, you’ll need to use a **Linux** system or **Windows with WSL 2**.
 
+### Running SCVIDR in an HPC Environment
 
+For High-Performance Computing (HPC) environments, Docker is generally not supported due to security and permission limitations. Instead, it is recommended to use Singularity (Apptainer) to sandbox the Docker image for proper directory mapping and GPU support.
 
+1. **Step 1: Convert Docker Image to Singularity Image**
+
+```bash
+singularity pull docker://panda311/scvidr
+```
+
+2. **Step 2: Create a Writable Sandbox**
+
+```bash
+singularity build --sandbox scvidr_sandbox docker://panda311/scvidr
+```
+
+3. **Step 3: Enable GPU Support and Start Jupyter Lab**
+
+```bash
+singularity exec --nv --writable --pwd /scVIDR scvidr_sandbox jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port=8888
+```
+
+Ensure that the HPC environment allows port forwarding and consult the respective HPC documentation or administrators to configure SSH tunnels or firewall rules properly for accessing the Jupyter Lab environment running inside the container. This may involve requesting specific ports to be opened or setting up SSH port forwarding commands to map the remote Jupyter Lab port to your local machine. Example below:
+```bash
+ssh -L 8888:localhost:8888
+```
 
 
 ### Important Notes
