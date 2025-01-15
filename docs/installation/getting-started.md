@@ -20,7 +20,8 @@ In this section, we provide example commands for our SCVIDR Docker image. We ass
 First, download the SCVIDR Docker image from Docker Hub:
 
 ```
-docker pull panda311/scvidr
+docker pull bhattacharyalab/scvidr
+
 ```
 
 #### Step 2: Create and run a Docker container
@@ -35,7 +36,7 @@ To run a Docker container with SCVIDR, you need to set up the ports for easy acc
     docker run -dit \
       --name scvidr_container \
       -p 8888:8888 \
-      panda311/scvidr
+      bhattacharyalab/scvidr
     ```
 
     Here's what each part of the command does:
@@ -47,7 +48,7 @@ To run a Docker container with SCVIDR, you need to set up the ports for easy acc
       - `-t` (tty): Allocates a pseudo-terminal, allowing you to interact with the container's shell.
     - **`--name scvidr_container`**: Assigns a custom name (`scvidr_container`) to your running container so that it can be easily identified.
     - **`-p 8888:8888`**: Maps port 8888 on your local machine to port 8888 inside the Docker container. This allows you to access Jupyter Notebook running inside the container at `http://localhost:8888`. If port 8888 is already in use, replace it with a different port (e.g., 8899) in the Docker command and access Jupyter at http://localhost:8899. Alternatively, you can copy the link provided in the terminal output after running the jupyter lab command inside the container, which will include the appropriate token for login.
-    - **`panda311/scvidr`**: Specifies the Docker image to use, in this case, the `scvidr` image from Docker Hub.
+    - **`bhattacharyalab/scvidr`**: Specifies the Docker image to use, in this case, the `scvidr` image from Docker Hub.
 
 
 #### Step 3: Access the Docker container
@@ -90,7 +91,7 @@ SCVIDR can be GPU-accelerated for faster training of models. GPU support is avai
   docker run --gpus all -dit \
   --name scvidr_gpu_container \
   -p 8888:8888 \
-  panda311/scvidr
+  bhattacharyalab/scvidr
   ```
 **Note:** Ensure that **CUDA drivers** are installed on the host machine if they aren’t already. Refer to the [CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) for detailed instructions.
 
@@ -113,12 +114,12 @@ For High-Performance Computing (HPC) environments, Docker is generally not suppo
 **Step 1: Convert Docker Image to Singularity Image**
 
 ```bash
-singularity pull docker://panda311/scvidr
+singularity pull docker://bhattacharyalab/scvidr
 ```
 **Step 2: Create a Writable Sandbox**
 
 ```bash
-singularity build --sandbox scvidr_sandbox docker://panda311/scvidr
+singularity build --sandbox scvidr_sandbox docker://bhattacharyalab/scvidr
 ```
 **Step 3: Enable GPU Support and Start Jupyter Lab**
 
