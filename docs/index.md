@@ -10,5 +10,4 @@ To get started with **scVIDR**, follow the instructions in the [Getting Started 
 
 - [Installation](installation/getting-started.md)  
 - [API Reference](API/API-introduction.md)  
-- [Explanation](explanation/explanation-introduction.md)  
 - [Tutorials](tutorials/tutorials-introduction.md)  
