@@ -263,7 +263,7 @@ for (mn,mx) in zip(mins, maxes):
     test_samp += [np.random.uniform(mn,mx,  size = (20000))]
 test_samp = np.array(test_samp).T
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("mps" if torch.backends.mps.is_available() elif "cuda:0" if torch.cuda.is_available() else "cpu")
 test_gen_samp = model.module.generative(torch.from_numpy(test_samp).float())["px"].cpu().detach().numpy()
 
 #Ridge Regression Score

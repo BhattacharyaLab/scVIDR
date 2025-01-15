@@ -1,0 +1,72 @@
+# Project Information
+site_name: scVIDR
+site_description: Comprehensive project documentation for scVIDR.
+
+# Theme Configuration
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs                 # Top-level navigation as tabs
+    - navigation.tabs.sticky          # Sticky navigation tabs on scroll
+    - navigation.sections             # Enables collapsible dropdowns
+    - navigation.expand               # Expands dropdowns by default
+    - search.highlight                # Highlights search terms
+    - search.share                    # Allows sharing search results
+    - search.suggest                  # Provides search suggestions
+    - content.code.annotate           # Adds annotations to code blocks
+    - content.code.copy               # Adds a 'copy' button to code blocks
+    
+palette:
+  - scheme: default
+    primary: blue  # Same primary color for both header and tabs
+    accent: light blue  # Accent color for hover effects
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to dark mode
+  - scheme: slate
+    primary: blue  # Dark mode primary color
+    accent: cyan
+    toggle:
+      icon: material/weather-night
+      name: Switch to light mode
+
+# Plugins Configuration
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+  - awesome-pages
+
+# Site Navigation
+nav:
+  - Home: index.md
+  - Installation: installation/getting-started.md
+  - API: API/API-introduction.md
+  - Tutorial: tutorials/tutorials-introduction.md
+
+# MkDocStrings Configuration
+mkdocstrings:
+  handlers:
+    python:
+      selection:
+        docstring_style: google
+      rendering:
+        show_source: true
+
+# Extra Configuration for Awesome Pages Plugin
+awesome_pages:
+  collapse: true
+  strict: true
+
+# Markdown Extensions
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+
+
+extra_css:
+  - assets/css/custom.css
