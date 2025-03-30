@@ -20,9 +20,18 @@ In this section, we provide example commands for our SCVIDR Docker image. We ass
 First, download the SCVIDR Docker image from Docker Hub:
 
 ```
-docker pull bhattacharyalab/scvidr
+docker pull bhattacharyalab/scvidr:with-data
 
 ```
+
+This version includes the full SCVIDR setup along with the data/ folder.
+
+If you prefer a lighter version without the data/ folder, use:
+
+```
+docker pull bhattacharyalab/scvidr:no-data
+```
+This version is smaller and suitable if you want to supply your own data separately.
 
 #### Step 2: Create and run a Docker container
 
@@ -35,8 +44,8 @@ To run a Docker container with SCVIDR, you need to set up the ports for easy acc
     ```bash
     docker run -dit \
       --name scvidr_container \
-      -p 8888:8888 \
-      bhattacharyalab/scvidr
+      -p 8888:8988 \
+      bhattacharyalab/scvidr:with-data
     ```
 
     Here's what each part of the command does:
@@ -47,8 +56,12 @@ To run a Docker container with SCVIDR, you need to set up the ports for easy acc
       - `-i` (interactive): Keeps STDIN open, allowing interaction with the container.
       - `-t` (tty): Allocates a pseudo-terminal, allowing you to interact with the container's shell.
     - **`--name scvidr_container`**: Assigns a custom name (`scvidr_container`) to your running container so that it can be easily identified.
-    - **`-p 8888:8888`**: Maps port 8888 on your local machine to port 8888 inside the Docker container. This allows you to access Jupyter Notebook running inside the container at `http://localhost:8888`. If port 8888 is already in use, replace it with a different port (e.g., 8899) in the Docker command and access Jupyter at http://localhost:8899. Alternatively, you can copy the link provided in the terminal output after running the jupyter lab command inside the container, which will include the appropriate token for login.
-    - **`bhattacharyalab/scvidr`**: Specifies the Docker image to use, in this case, the `scvidr` image from Docker Hub.
+    - **`-p 8988:8988`**: Maps port 8988 on your local machine to port 8988 inside the Docker container. This allows you to access Jupyter Notebook running inside the container at `http://localhost:8988`. If port 8988 is already in use, replace the **left side** of the port mapping (e.g., `-p 8899:8988`) and access Jupyter at `http://localhost:8899`. Alternatively, you can copy the link provided in the terminal output after running the Jupyter Lab command inside the container, which includes the token for login.
+    - **`bhattacharyalab/scvidr:with-data`**: Specifies the Docker image to use, in this case, the `scvidr` image from Docker Hub.
+  
+
+   > If you're using the `no-data` container, you can bind your local `data` folder to the container using `-v /full_data_path/data:/scVIDR/data`.
+
 
 
 #### Step 3: Access the Docker container
@@ -66,7 +79,7 @@ docker container exec -it scvidr_container /bin/bash
 Once inside the Docker container, you can start Jupyter Notebook with the following commands:
 
 ```
-jupyter lab --port=8888 --ip=0.0.0.0 --allow-root --no-browser
+jupyter lab --port=8988 --ip=0.0.0.0 --allow-root --no-browser
 
 ```
 
@@ -90,8 +103,8 @@ SCVIDR can be GPU-accelerated for faster training of models. GPU support is avai
   ```bash
   docker run --gpus all -dit \
   --name scvidr_gpu_container \
-  -p 8888:8888 \
-  bhattacharyalab/scvidr
+  -p 8888:8988 \
+  bhattacharyalab/scvidr:with-data
   ```
 **Note:** Ensure that **CUDA drivers** are installed on the host machine if they aren’t already. Refer to the [CUDA Installation Guide](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) for detailed instructions.
 
@@ -114,22 +127,22 @@ For High-Performance Computing (HPC) environments, Docker is generally not suppo
 **Step 1: Convert Docker Image to Singularity Image**
 
 ```bash
-singularity pull docker://bhattacharyalab/scvidr
+singularity pull docker://bhattacharyalab/scvidr:with-data
 ```
 **Step 2: Create a Writable Sandbox**
 
 ```bash
-singularity build --sandbox scvidr_sandbox docker://bhattacharyalab/scvidr
+singularity build --sandbox scvidr_sandbox docker://bhattacharyalab/scvidr:with-data
 ```
 **Step 3: Enable GPU Support and Start Jupyter Lab**
 
 ```bash
-singularity exec --nv --writable --pwd /scVIDR scvidr_sandbox jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port=8888
+singularity exec --nv --writable --pwd /scVIDR scvidr_sandbox jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port=8988
 ```
 
 Ensure that the HPC environment allows port forwarding and consult the respective HPC documentation or administrators to configure SSH tunnels or firewall rules properly for accessing the Jupyter Lab environment running inside the container. This may involve requesting specific ports to be opened or setting up SSH port forwarding commands to map the remote Jupyter Lab port to your local machine. Example below:
 ```bash
-ssh -L 8888:localhost:8888
+ssh -L 8888:localhost:8988
 ```
 
 
