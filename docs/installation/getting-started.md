@@ -145,6 +145,9 @@ Ensure that the HPC environment allows port forwarding and consult the respectiv
 ssh -L 8888:localhost:8988
 ```
 
+> If you're using the `no-data` container in Singularity, you can bind your local `data` directory by adding the `--bind /full_data_path/data:/scVIDR/data` option to your `singularity exec` command.
+
+
 
 ### Important Notes
 
