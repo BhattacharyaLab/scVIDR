@@ -1,0 +1,236 @@
+/* ===========================
+   General Layout and Typography
+=========================== */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px; 
+  line-height: 1;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #1565C0;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: #1976D2;
+}
+
+h3 {
+  font-size: 1.4rem;
+  color: #1E88E5;
+}
+
+p {
+  font-size: 0.8rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Links */
+a {
+  color: #1976D2;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #1565C0;
+  text-decoration: underline;
+}
+
+/* ===========================
+   Navigation and Sidebar
+=========================== */
+.md-nav__link {
+  font-size: 0.8rem;
+  padding: 1px 2px;
+  color: #4A4A4A;
+  border-radius: 4px;
+}
+
+.md-nav__link:hover {
+  background-color: #E3F2FD; 
+  color: #1976D2;
+}
+
+.md-nav__link--active {
+  background-color: transparent !important;
+  color: #1976D2 !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #1976D2; 
+}
+
+/* Collapsible Sections */
+.md-nav__item--nested {
+  padding-left: 1px;
+}
+
+/* Table of Contents Adjustments */
+.md-sidebar--secondary {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}
+
+.md-sidebar__inner {
+  padding: 0.2rem;
+}
+
+.md-nav__item {
+  margin: 0px 0;
+  padding: 0px 0px;
+}
+
+/* Tabs */
+.md-tabs {
+  background-color: #1565C0; 
+}
+
+.md-tabs__link {
+  color: white;
+}
+
+.md-tabs__link:hover,
+.md-tabs__link--active {
+  background-color: #1976D2;
+}
+
+/* ===========================
+   Code Blocks and Syntax Highlighting
+=========================== */
+pre code {
+  font-size: 0.8rem;
+  padding: 8px;
+  border-radius: 5px;
+  background: #272822;
+  color: #f8f8f2;
+}
+
+code {
+  font-size: 0.8rem;
+  padding: 3px 6px;
+  background: #f5f5f5;
+  border-radius: 3px;
+  color: #D81B60;
+}
+
+/* Copy Button */
+.md-clipboard {
+  background-color: #bac3cd !important;
+  color: white !important;
+  border-radius: 4px;
+}
+
+.md-clipboard:hover {
+  background-color: #1565C0 !important;
+}
+
+/* ===========================
+   Tables
+=========================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+table th, table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #1976D2;
+  color: white;
+}
+
+table tr:hover {
+  background-color: #E3F2FD;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+.md-button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #1976D2;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.md-button:hover {
+  background-color: #1565C0;
+}
+
+/* ===========================
+   Alerts and Admonitions
+=========================== */
+.admonition {
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admonition.note {
+  background-color: #E3F2FD;
+  border-left: 5px solid #1976D2;
+}
+
+.admonition.warning {
+  background-color: #FFF3E0;
+  border-left: 5px solid #FB8C00;
+}
+
+.admonition.tip {
+  background-color: #E8F5E9;
+  border-left: 5px solid #4CAF50;
+}
+
+/* ===========================
+   Footer
+=========================== */
+.md-footer {
+  background-color: transparent !important;
+  color: #333 !important;
+  padding: 5px;
+  text-align: center;
+  font-size: 0.8rem;
+  box-shadow: none;
+}
+
+.md-footer-meta {
+  display: none !important;
+}
+
+/* ===========================
+   Header and Tabs
+=========================== */
+.md-header, .md-tabs {
+  background-color: #1565C0 !important;
+  color: white !important;
+}
+
+.md-tabs__link:hover {
+  background-color: #1976D2 !important;
+}
+
+.md-tabs__link--active {
+  color: white !important;
+  font-weight: 600;
+  border-bottom: 2px solid #64B5F6 !important;
+}
+
