@@ -33,7 +33,13 @@ Several datasets were used in the analysis, but we highlight the key datasets be
 - **LPS6 Species Dataset**:
     - **Source**: Hagai et al.
     - **Accession Number**: [E-MTAB-5919](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-5919/) (BioSciences).
-    - **Description**: Dataset used for cross-species perturbation predictions (e.g., using data from pigs, rabbits, and mice).
+    - **Description**: Dataset used for cross-species perturbation predictions.
+ 
+- **Sci-Plex Chemical Transcriptomics Dataset**:
+    - **Source**: Srivatsan et al.
+    - **Accession Number**: [DOI 10.1126/science.aax6234](https://www.science.org/doi/10.1126/science.aax6234) (BioSciences).
+    - **Description**: scRNA-seq of A549, K562, and MCF7 cells treated with 188 compounds at four doses (24 h).
+  
 
 ## Preprocessing
 
