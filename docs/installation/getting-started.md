@@ -157,4 +157,4 @@ ssh -L 8888:localhost:8988
 
 ## Docker Image Build Information
 
-We built our Docker image using Docker's automatic build function. The Dockerfile is available [here](https://github.com/DrNamwob/scVIDR_VP_DB.git), allowing you to create a custom image if needed.
+We built our Docker image using Docker's automatic build function. The Dockerfile is available [here](https://github.com/BhattacharyaLab/scVIDR.git), allowing you to create a custom image if needed.
