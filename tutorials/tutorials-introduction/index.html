@@ -1,0 +1,1589 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive project documentation for scVIDR.">
+      
+      
+      
+      
+        <link rel="prev" href="../../API/API-introduction/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Tutorial - scVIDR</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tutorial-getting-started-with-scvidr" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="scVIDR" class="md-header__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            scVIDR
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Tutorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../API/API-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorial
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="scVIDR" class="md-nav__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    scVIDR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API/API-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples-of-scvidr-applied-to-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples of scVIDR Applied to Datasets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of scVIDR Applied to Datasets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction-of-in-vivo-tcdd-dose-response-across-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction of In Vivo TCDD Dose-Response Across Cell Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrogation-of-vae-using-ridge-regression-in-portal-hepatocyte-response-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interrogation of VAE Using Ridge Regression in Portal Hepatocyte Response Prediction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudo-dose-ordering-of-hepatocytes-across-tcdd-dose-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pseudo-Dose Ordering of Hepatocytes Across TCDD Dose-Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-for-using-scvidr-command-line-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow for Using scVIDR Command-Line Tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow for Using scVIDR Command-Line Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vae-model-training-single-and-multi-dose-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      VAE Model Training (Single- and Multi- Dose Models)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Arguments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Command Arguments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-dose-model-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Dose Model Training:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-dose-model-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi Dose Model Training:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scvidr-prediction-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      scVIDR Prediction Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="scVIDR Prediction Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-dose-model-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-Dose Model Prediction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-dose-model-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Dose Model Prediction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-Dose Model Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-score-calculation-using-scvidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gene Score Calculation Using scVIDR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command-Line Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Command
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#input-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preprocessing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Index">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples-of-scvidr-applied-to-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples of scVIDR Applied to Datasets
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of scVIDR Applied to Datasets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prediction-of-in-vivo-tcdd-dose-response-across-cell-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prediction of In Vivo TCDD Dose-Response Across Cell Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrogation-of-vae-using-ridge-regression-in-portal-hepatocyte-response-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interrogation of VAE Using Ridge Regression in Portal Hepatocyte Response Prediction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pseudo-dose-ordering-of-hepatocytes-across-tcdd-dose-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pseudo-Dose Ordering of Hepatocytes Across TCDD Dose-Response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-for-using-scvidr-command-line-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow for Using scVIDR Command-Line Tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow for Using scVIDR Command-Line Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vae-model-training-single-and-multi-dose-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      VAE Model Training (Single- and Multi- Dose Models)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Arguments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Command Arguments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-dose-model-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Dose Model Training:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-dose-model-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi Dose Model Training:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scvidr-prediction-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      scVIDR Prediction Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="scVIDR Prediction Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-dose-model-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single-Dose Model Prediction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-dose-model-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Dose Model Prediction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-Dose Model Prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gene-score-calculation-using-scvidr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gene Score Calculation Using scVIDR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-line-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command-Line Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positional-arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Positional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optional Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Command
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="tutorial-getting-started-with-scvidr">Tutorial: Getting Started with scVIDR<a class="headerlink" href="#tutorial-getting-started-with-scvidr" title="Permanent link">&para;</a></h1>
+<p><strong>scVIDR</strong> (Single Cell Variational Inference of Dose Response) is a computational framework designed to predict gene expression changes in single cells following chemical perturbations. By leveraging variational autoencoders, scVIDR captures dose-dependent responses across diverse cell types. This innovative approach empowers researchers to anticipate how individual cells react to different chemical exposures, making it a valuable tool in fields like pharmacology and toxicology.</p>
+<p>These tutorials will guide you through scVIDR's features, from dataset preparation to advanced dose-response modeling, enabling you to harness its capabilities for your research.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>To ensure a smooth experience with SCVIDR, we have built a pre-configured Docker container that includes SCVIDR and all its dependencies. This eliminates compatibility issues and provides a stable environment for analysis.</p>
+<p>If you haven't set up SCVIDR yet, please follow the steps outlined in the <a href="../../installation/getting-started/">Installation Guide</a>. The guide includes detailed instructions on downloading and running the Docker container, so you can get started quickly.</p>
+<h2 id="input-data">Input Data<a class="headerlink" href="#input-data" title="Permanent link">&para;</a></h2>
+<p>Several datasets were used in the analysis, but we highlight the key datasets below:</p>
+<ul>
+<li>
+<p><strong>TCDD Liver Dose-Response Dataset</strong>:</p>
+<ul>
+<li><strong>Source</strong>: Nault et al.</li>
+<li><strong>Accession Number</strong>: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE184506">GSE184506</a> (Gene Expression Omnibus).</li>
+<li><strong>Description</strong>: Single-nucleus RNA-seq (snRNA-seq) of flash-frozen mouse livers treated subchronically with TCDD every 4 days for 28 days, Immune cells were excluded due to known migration to the liver during TCDD administration.</li>
+</ul>
+</li>
+<li>
+<p><strong>IFN-γ PBMC Dataset</strong>:</p>
+<ul>
+<li><strong>Source</strong>: Kang et al.</li>
+<li><strong>Accession Number</strong>: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE96583">GSE96583</a> (Gene Expression Omnibus).</li>
+<li><strong>Description</strong>: Single-cell PBMC dataset examining interferon-gamma (IFN-γ) perturbations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Study B Data</strong>:</p>
+<ul>
+<li><strong>Source</strong>: Zheng et al.</li>
+<li><strong>Accession Number</strong>: <a href="https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP073767">SRP073767</a> (Sequence Read Archive).</li>
+<li><strong>Description</strong>: Dataset used for cross-experiment predictions of single-cell RNA-seq data.</li>
+</ul>
+</li>
+<li>
+<p><strong>LPS6 Species Dataset</strong>:</p>
+<ul>
+<li><strong>Source</strong>: Hagai et al.</li>
+<li><strong>Accession Number</strong>: <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-5919/">E-MTAB-5919</a> (BioSciences).</li>
+<li><strong>Description</strong>: Dataset used for cross-species perturbation predictions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sci-Plex Chemical Transcriptomics Dataset</strong>:</p>
+<ul>
+<li><strong>Source</strong>: Srivatsan et al.</li>
+<li><strong>Accession Number</strong>: <a href="https://www.science.org/doi/10.1126/science.aax6234">DOI 10.1126/science.aax6234</a> (BioSciences).</li>
+<li><strong>Description</strong>: scRNA-seq of A549, K562, and MCF7 cells treated with 188 compounds at four doses (24 h).</li>
+</ul>
+</li>
+</ul>
+<h2 id="preprocessing">Preprocessing<a class="headerlink" href="#preprocessing" title="Permanent link">&para;</a></h2>
+<p>The cell expression vectors were normalized to the median total expression counts for each cell to ensure consistency across cells. This normalization step was carried out using the <code>scanpy.pp.normalize_total</code> function.</p>
+<p>Following normalization, cell counts were log-transformed with a pseudo-count of 1. This transformation reduces skewness and normalizes the data distribution. The transformation was implemented using the <code>scanpy.pp.log1p</code> function.</p>
+<p>To focus the analysis on the most informative features, the top 5,000 highly variable genes (HVGs) were selected. This step was performed using the <code>scanpy.pp.highly_variable</code> function, ensuring that the analysis prioritizes biologically relevant variations.</p>
+<p>Batch effects across different experiments and datasets were accounted for using the <code>scvi.data.setup_anndata</code> function. This adjustment ensures that technical variability does not obscure meaningful biological signals.</p>
+<p>Finally, differential abundances of cells across groups were handled through a balancing process. Random sampling with replacement was applied for dose groups to equalize representation, while random sampling without replacement was used to balance cell types.</p>
+<h2 id="index">Index<a class="headerlink" href="#index" title="Permanent link">&para;</a></h2>
+<h3 id="examples-of-scvidr-applied-to-datasets">Examples of scVIDR Applied to Datasets<a class="headerlink" href="#examples-of-scvidr-applied-to-datasets" title="Permanent link">&para;</a></h3>
+<h4 id="prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes"><a href="../Figure2/">Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes</a><a class="headerlink" href="#prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes" title="Permanent link">&para;</a></h4>
+<ol>
+<li><a href="../Figure2/#figure-2a-umap-projection-of-latent-space">UMAP Projection of Latent Space</a></li>
+<li><a href="../Figure2/#figure-2b-pca-plots-comparing-prediction-models">PCA Plots Comparing Prediction Models</a></li>
+<li><a href="../Figure2/#figure-2c-regression-analysis-with-predicted-data">Regression Analysis with Predicted Data</a></li>
+<li><a href="../Figure2/#figure-2d-comparison-of-gene-expression-across-treatments">Comparison of Gene Expression Across Treatments</a></li>
+<li><a href="../Figure2/#figure-2e-comprehensive-analysis-of-gene-expression-predictions-across-cell-types">Comprehensive Analysis of Gene Expression Predictions Across Cell Types</a></li>
+</ol>
+<h4 id="prediction-of-in-vivo-tcdd-dose-response-across-cell-types"><a href="../Figure3/">Prediction of In Vivo TCDD Dose-Response Across Cell Types</a><a class="headerlink" href="#prediction-of-in-vivo-tcdd-dose-response-across-cell-types" title="Permanent link">&para;</a></h4>
+<ol>
+<li><a href="../Figure3/#regression-and-evaluation-across-tcdd-doses">Regression and Evaluation Across TCDD Doses</a></li>
+<li><a href="../Figure3/#figure-3a-umap-visualization-of-dose-response">UMAP Visualization of Dose-Response</a></li>
+<li><a href="../Figure3/#figure-3c-dose-response-prediction-for-portal-hepatocytes">Dose-Response Prediction for Portal Hepatocytes</a></li>
+<li><a href="../Figure3/#figure-3d-comparison-of-prediction-accuracy-across-all-cell-types">Comparison of Prediction Accuracy Across All Cell Types</a></li>
+<li><a href="../Figure3/#regression-analysis-of-predicted-gene-expression">Regression Analysis of Predicted Gene Expression</a></li>
+<li><a href="../Figure3/#non-regression-analysis-of-predicted-gene-expression-across-doses">Non-Regression Analysis of Predicted Gene Expression Across Doses</a></li>
+<li><a href="../Figure3/#figure-3b-dose-response-prediction-for-ahrr-gene">Dose-Response Prediction for Ahrr Gene</a></li>
+</ol>
+<h4 id="interrogation-of-vae-using-ridge-regression-in-portal-hepatocyte-response-prediction"><a href="../Figure4/">Interrogation of VAE Using Ridge Regression in Portal Hepatocyte Response Prediction</a><a class="headerlink" href="#interrogation-of-vae-using-ridge-regression-in-portal-hepatocyte-response-prediction" title="Permanent link">&para;</a></h4>
+<ol>
+<li><a href="../Figure4/#ridge-regression-analysis-on-latent-representations">Ridge Regression Analysis on Latent Representations</a></li>
+<li><a href="../Figure4/#figure-4b-visualization-of-top-gene-scores">Visualization of Top Gene Scores</a></li>
+<li><a href="../Figure4/#figure-4c-gene-enrichment-analysis-and-visualization">Gene Enrichment Analysis and Visualization</a></li>
+<li><a href="../Figure4/#figure-4d-gene-enrichment-analysis-and-visualization">Gene Enrichment Analysis and Visualization</a></li>
+<li><a href="../Figure4/#figure-4e-logistic-fit-of-median-pathway-scores">Logistic Fit of Median Pathway Scores</a></li>
+</ol>
+<h4 id="pseudo-dose-ordering-of-hepatocytes-across-tcdd-dose-response"><a href="../Figure5/">Pseudo-Dose Ordering of Hepatocytes Across TCDD Dose-Response</a><a class="headerlink" href="#pseudo-dose-ordering-of-hepatocytes-across-tcdd-dose-response" title="Permanent link">&para;</a></h4>
+<ol>
+<li><a href="../Figure5/#training-vidr-model-for-hepatocyte-dose-response-prediction">Training VIDR Model for Hepatocyte Dose Response Prediction</a></li>
+<li><a href="../Figure5/#calculating-pseudodose-and-preparing-pca-data">Calculating Pseudodose and Preparing PCA Data</a></li>
+<li><a href="../Figure5/#figure-5a-orthogonal-projection-of-hepatocytes-onto-the-pseudo-dose-axis">Orthogonal Projection of Hepatocytes onto the Pseudo-Dose Axis</a></li>
+<li><a href="../Figure5/#figure-5b-pseudo-dose-visualization-in-pca-space">Pseudo-Dose Visualization in PCA Space</a></li>
+<li><a href="../Figure5/#figure-5d-pseudo-dose-vs-fmo3-expression">Pseudo-Dose vs. Fmo3 Expression</a></li>
+<li><a href="../Figure5/#figure-5c-pseudo-dose-vs-log-dose">Pseudo-Dose vs. Log Dose</a></li>
+<li><a href="../Figure5/#figure-5e-pca-of-hepatocyte-zones">PCA of Hepatocyte Zones</a></li>
+<li><a href="../Figure5/#figure-5f-pseudo-dose-distribution-across-hepatocyte-zones">Pseudo-Dose Distribution Across Hepatocyte Zones</a></li>
+</ol>
+<h2 id="workflow-for-using-scvidr-command-line-tools">Workflow for Using scVIDR Command-Line Tools<a class="headerlink" href="#workflow-for-using-scvidr-command-line-tools" title="Permanent link">&para;</a></h2>
+<h3 id="vae-model-training-single-and-multi-dose-models">VAE Model Training (Single- and Multi- Dose Models)<a class="headerlink" href="#vae-model-training-single-and-multi-dose-models" title="Permanent link">&para;</a></h3>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<p>To train a single dose VAE model, use the <code>scvidr_train.py single_dose</code> command (Figure 2 of the manuscript).</p>
+<p>To train a multi dose VAE model, use the <code>scvidr_train.py multi_dose</code> command (Figure 3 of the manuscript).</p>
+<p>Both types of models require an AnnData file in the <code>h5ad</code> format as input. This file should include scRNAseq data along with an observation table (<code>obs</code>) containing a dose and a cell type column. The single dose model expects at least two distinct doses, while the multi dose model expects at least three.</p>
+<h3 id="command-arguments">Command Arguments<a class="headerlink" href="#command-arguments" title="Permanent link">&para;</a></h3>
+<p>The arguments for both models are the same and are listed below:</p>
+<div class="highlight"><pre><span></span><code>usage: scvidr_train.py {single_dose/multi_dose} [-h] [--dose_column DOSE_COLUMN]
+                                               [--celltype_column CELLTYPE_COLUMN]
+                                               [--test_celltype TEST_CELLTYPE]
+                                               [--control_dose CONTROL_DOSE]
+                                               [--treated_dose TREATED_DOSE]
+                                               [--celltypes_keep CELLTYPES_KEEP] 
+                                               h5ad_data_file model_path
+</code></pre></div>
+<h4 id="positional-arguments">Positional Arguments:<a class="headerlink" href="#positional-arguments" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><code>h5ad_data_file</code></strong>: Path to the data file containing the raw reads in <code>h5ad</code> format.</li>
+<li><strong><code>model_path</code></strong>: Path to the directory where the trained model will be saved.</li>
+</ul>
+<h4 id="optional-arguments">Optional Arguments:<a class="headerlink" href="#optional-arguments" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong><code>-h, --help</code></strong>: Show this help message and exit.</li>
+<li><strong><code>--dose_column DOSE_COLUMN</code></strong>: Name of the column in the <code>obs</code> dataframe representing the dose (default <code>"Dose"</code>).</li>
+<li><strong><code>--celltype_column CELLTYPE_COLUMN</code></strong>: Name of the column in the <code>obs</code> dataframe representing the cell type (default <code>"celltype"</code>).</li>
+<li><strong><code>--test_celltype TEST_CELLTYPE</code></strong>: Name of the cell type to leave out for testing. Use quotes for names with spaces (default <code>"Hepatocytes - portal"</code>).</li>
+<li><strong><code>--control_dose CONTROL_DOSE</code></strong>: Value of the control dose (default <code>"0"</code>).</li>
+<li><strong><code>--treated_dose TREATED_DOSE</code></strong>: Value of the treated dose (default <code>"30"</code>).</li>
+<li><strong><code>--celltypes_keep CELLTYPES_KEEP</code></strong>: Specify cell types to keep in the dataset for training/testing. Provide either a file with one cell type per line or a semicolon-separated list (default <code>"ALL"</code>).</li>
+</ul>
+<h3 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h3>
+<h4 id="single-dose-model-training">Single Dose Model Training:<a class="headerlink" href="#single-dose-model-training" title="Permanent link">&para;</a></h4>
+<p>To train all single dose models for individual cell types as used in the manuscript:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - portal.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - central&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes - central.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Cholangiocytes&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Cholangiocytes.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Stellate Cells&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Stellate Cells.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Portal Fibroblasts&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Portal Fibroblasts.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>single_dose<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Endothelial Cells&quot;</span><span class="w"> </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_Endothelial Cells.pt/&quot;</span>
+</code></pre></div>
+<h4 id="multi-dose-model-training">Multi Dose Model Training:<a class="headerlink" href="#multi-dose-model-training" title="Permanent link">&para;</a></h4>
+<p>To train all multi dose models for individual cell types as used in the manuscript:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - central&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes - central.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes - portal.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Cholangiocytes&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Cholangiocytes.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Stellate Cells&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Stellate Cells.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Portal Fibroblasts&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Portal Fibroblasts.pt/&quot;</span>
+python<span class="w"> </span>scvidr_train.py<span class="w"> </span>multi_dose<span class="w"> </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes<span class="w"> </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Endothelial Cells&quot;</span><span class="w"> </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="s2">&quot;../data/VAE_Cont_Prediction_Dioxin_5000g_Endothelial Cells.pt/&quot;</span>
+</code></pre></div>
+<p><strong>Note:</strong> Pretrained models corresponding to these commands are available under the specified paths.</p>
+<h3 id="scvidr-prediction-workflow">scVIDR Prediction Workflow<a class="headerlink" href="#scvidr-prediction-workflow" title="Permanent link">&para;</a></h3>
+<p>The <code>scvidr_predict.py</code> script allows you to use a trained scVIDR model to predict treatment conditions for single-dose or multi-dose datasets. Below are the details for using this script.</p>
+<h4 id="single-dose-model-prediction">Single-Dose Model Prediction<a class="headerlink" href="#single-dose-model-prediction" title="Permanent link">&para;</a></h4>
+<h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>scvidr_predict.py<span class="w"> </span>single_dose<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--model<span class="w"> </span>MODEL<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--dose_column<span class="w"> </span>DOSE_COLUMN<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--celltype_column<span class="w"> </span>CELLTYPE_COLUMN<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--test_celltype<span class="w"> </span>TEST_CELLTYPE<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--control_dose<span class="w"> </span>CONTROL_DOSE<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--treated_dose<span class="w"> </span>TREATED_DOSE<span class="o">]</span>
+<span class="w">                              </span><span class="o">[</span>--celltypes_keep<span class="w"> </span>CELLTYPES_KEEP<span class="o">]</span>
+<span class="w">                              </span>h5ad_data_file<span class="w"> </span>model_path<span class="w"> </span>output_path
+</code></pre></div>
+<h4 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h4>
+<p>Predict treatment conditions using a pretrained scVIDR or scGEN model.</p>
+<h4 id="positional-arguments_1">Positional Arguments<a class="headerlink" href="#positional-arguments_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>h5ad_data_file</code>: The data file containing the raw reads in h5ad format.</li>
+<li><code>model_path</code>: Path to the directory where the trained model was saved during the model training step.</li>
+<li><code>output_path</code>: Path to the directory where the predicted AnnData will be saved in an h5ad format.</li>
+</ul>
+<h4 id="optional-arguments_1">Optional Arguments<a class="headerlink" href="#optional-arguments_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>--model MODEL</code>: Specify whether to use scVIDR or scGEN for prediction (default: <code>scVIDR</code>).</li>
+<li><code>--dose_column DOSE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the dose (default: <code>"Dose"</code>).</li>
+<li><code>--celltype_column CELLTYPE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the cell type (default: <code>"celltype"</code>).</li>
+<li><code>--test_celltype TEST_CELLTYPE</code>: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: <code>"Hepatocytes - portal"</code>).</li>
+<li><code>--control_dose CONTROL_DOSE</code>: Control dose (default: <code>"0"</code>).</li>
+<li><code>--treated_dose TREATED_DOSE</code>: Treated dose (default: <code>"30"</code>).</li>
+<li><code>--celltypes_keep CELLTYPES_KEEP</code>: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: <code>"ALL"</code>).</li>
+</ul>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scvidr_predict.py<span class="w"> </span>single_dose<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/nault2021_singleDose.h5ad<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/VAE_Binary_Prediction_Dioxin_5000g_Hepatocytes-portal.pt/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/SingleDose_TCDD<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--model<span class="w"> </span>scVIDR<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dose_column<span class="w"> </span>Dose<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltype_column<span class="w"> </span>celltype<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--control_dose<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--treated_dose<span class="w"> </span><span class="m">30</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes
+</code></pre></div>
+<hr />
+<h3 id="multi-dose-model-prediction">Multi-Dose Model Prediction<a class="headerlink" href="#multi-dose-model-prediction" title="Permanent link">&para;</a></h3>
+<h4 id="usage_1">Usage<a class="headerlink" href="#usage_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>scvidr_predict.py<span class="w"> </span>multi_dose<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span><span class="w"> </span><span class="o">[</span>--model<span class="w"> </span>MODEL<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--dose_column<span class="w"> </span>DOSE_COLUMN<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--celltype_column<span class="w"> </span>CELLTYPE_COLUMN<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--test_celltype<span class="w"> </span>TEST_CELLTYPE<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--control_dose<span class="w"> </span>CONTROL_DOSE<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--treated_dose<span class="w"> </span>TREATED_DOSE<span class="o">]</span>
+<span class="w">                             </span><span class="o">[</span>--celltypes_keep<span class="w"> </span>CELLTYPES_KEEP<span class="o">]</span>
+<span class="w">                             </span>h5ad_data_file<span class="w"> </span>model_path<span class="w"> </span>output_path
+</code></pre></div>
+<h4 id="description_1">Description<a class="headerlink" href="#description_1" title="Permanent link">&para;</a></h4>
+<p>Predict treatment conditions across multiple doses using a pretrained scVIDR or scGEN model.</p>
+<h4 id="positional-arguments_2">Positional Arguments<a class="headerlink" href="#positional-arguments_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>h5ad_data_file</code>: The data file containing the raw reads in h5ad format.</li>
+<li><code>model_path</code>: Path to the directory where the trained model was saved during the model training step.</li>
+<li><code>output_path</code>: Path to the directory where the predicted AnnData will be saved in an h5ad format.</li>
+</ul>
+<h4 id="optional-arguments_2">Optional Arguments<a class="headerlink" href="#optional-arguments_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>--model MODEL</code>: Specify whether to use scVIDR or scGEN for prediction (default: <code>scVIDR</code>).</li>
+<li><code>--dose_column DOSE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the dose (default: <code>"Dose"</code>).</li>
+<li><code>--celltype_column CELLTYPE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the cell type (default: <code>"celltype"</code>).</li>
+<li><code>--test_celltype TEST_CELLTYPE</code>: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: <code>"Hepatocytes - portal"</code>).</li>
+<li><code>--control_dose CONTROL_DOSE</code>: Control dose (default: <code>"0"</code>).</li>
+<li><code>--treated_dose TREATED_DOSE</code>: Treated dose (default: <code>"30"</code>).</li>
+<li><code>--celltypes_keep CELLTYPES_KEEP</code>: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: <code>"ALL"</code>).</li>
+</ul>
+<h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scvidr_predict.py<span class="w"> </span>multi_dose<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes-portal.pt/<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/MultiDose_TCDD<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--model<span class="w"> </span>scVIDR<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dose_column<span class="w"> </span>Dose<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltype_column<span class="w"> </span>celltype<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--treated_dose<span class="w"> </span><span class="m">30</span>.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes
+</code></pre></div>
+<hr />
+<h3 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The prediction scripts assume that the trained models are stored in the <code>model_path</code> directory.</li>
+<li>Ensure the <code>h5ad_data_file</code> contains the appropriate <code>dose</code> and <code>celltype</code> columns in the <code>obs</code> table.</li>
+<li>The output file will be an AnnData object saved in the specified <code>output_path</code>.</li>
+</ol>
+<h3 id="gene-score-calculation-using-scvidr">Gene Score Calculation Using scVIDR<a class="headerlink" href="#gene-score-calculation-using-scvidr" title="Permanent link">&para;</a></h3>
+<h3 id="usage_2">Usage<a class="headerlink" href="#usage_2" title="Permanent link">&para;</a></h3>
+<p>The <code>scvidr_genescores.py</code> script interprets scVIDR predictions using ridge regression and outputs gene scores in a CSV format.</p>
+<h4 id="command-line-arguments">Command-Line Arguments<a class="headerlink" href="#command-line-arguments" title="Permanent link">&para;</a></h4>
+<h4 id="positional-arguments_3">Positional Arguments<a class="headerlink" href="#positional-arguments_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>h5ad_data_file</code>: The data file containing the raw reads in h5ad format.</li>
+<li><code>model_path</code>: Path to the directory where the trained model was saved in the model training step.</li>
+<li><code>output_path</code>: Path to the directory where the gene scores will be saved as a CSV file.</li>
+</ul>
+<h4 id="optional-arguments_3">Optional Arguments<a class="headerlink" href="#optional-arguments_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>--dose_column DOSE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the dose (default: <code>"Dose"</code>).</li>
+<li><code>--celltype_column CELLTYPE_COLUMN</code>: Name of the column in the <code>obs</code> dataframe representing the cell type (default: <code>"celltype"</code>).</li>
+<li><code>--test_celltype TEST_CELLTYPE</code>: Name of the cell type to be left out for testing. Use quotes for names with spaces (default: <code>"Hepatocytes - portal"</code>).</li>
+<li><code>--control_dose CONTROL_DOSE</code>: Control dose (default: <code>"0"</code>).</li>
+<li><code>--treated_dose TREATED_DOSE</code>: Treated dose (default: <code>"30"</code>).</li>
+<li><code>--celltypes_keep CELLTYPES_KEEP</code>: Specify the cell types to keep during training/testing. Provide either a file containing the list of cell types (one per line) or a semicolon-separated list (default: <code>"ALL"</code>).</li>
+<li><code>--training_size TRAINING_SIZE</code>: Number of samples generated from the latent distribution (default: <code>100000</code>).</li>
+</ul>
+<h4 id="example-command">Example Command<a class="headerlink" href="#example-command" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scvidr_genescores.py<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/nault2021_multiDose.h5ad<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/VAE_Cont_Prediction_Dioxin_5000g_Hepatocytes-portal.pt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>../data/MultiDose_TCDD<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dose_column<span class="w"> </span>Dose<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltype_column<span class="w"> </span>celltype<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--test_celltype<span class="w"> </span><span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--control_dose<span class="w"> </span><span class="m">0</span>.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--treated_dose<span class="w"> </span><span class="m">30</span>.0<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--celltypes_keep<span class="w"> </span>../metadata/liver_celltypes
+</code></pre></div>
+<h3 id="notes_1">Notes<a class="headerlink" href="#notes_1" title="Permanent link">&para;</a></h3>
+<p>Ensure that the required data is preprocessed, and a pre-trained model is available before running the script.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "search.highlight", "search.share", "search.suggest", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

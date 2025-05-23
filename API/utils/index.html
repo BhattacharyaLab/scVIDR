@@ -1,0 +1,2778 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive project documentation for scVIDR.">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Utility functions in utils.py - scVIDR</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#utility-functions-in-utilspy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="scVIDR" class="md-header__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            scVIDR
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Utility functions in utils.py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../API-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tutorials/tutorials-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorial
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="scVIDR" class="md-nav__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    scVIDR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/tutorials-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create_cell_dose_column" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_cell_dose_column
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="create_cell_dose_column">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create_cell_dose_column_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_cell_dose_column
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.create_cell_dose_column" class="md-nav__link">
+    <span class="md-ellipsis">
+      create_cell_dose_column
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normalize_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      normalize_data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="normalize_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#normalize_data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      normalize_data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.normalize_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      normalize_data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="prepare_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare_data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.prepare_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare_cont_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_cont_data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="prepare_cont_data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare_cont_data_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_cont_data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.prepare_cont_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      prepare_cont_data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculate_r2_singledose" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_singledose
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="calculate_r2_singledose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculate_r2_singledose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_singledose
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.calculate_r2_singledose" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_singledose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calculate_r2_multidose" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_multidose
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="calculate_r2_multidose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculate_r2_multidose_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_multidose
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.calculate_r2_multidose" class="md-nav__link">
+    <span class="md-ellipsis">
+      calculate_r2_multidose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#random_sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_sample
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="random_sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random_sample_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_sample
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.utils.random_sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      random_sample
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="utility-functions-in-utilspy">Utility functions in utils.py<a class="headerlink" href="#utility-functions-in-utilspy" title="Permanent link">&para;</a></h1>
+<h2 id="create_cell_dose_column">create_cell_dose_column<a class="headerlink" href="#create_cell_dose_column" title="Permanent link">&para;</a></h2>
+<h3 id="create_cell_dose_column_1">create_cell_dose_column<a class="headerlink" href="#create_cell_dose_column_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.create_cell_dose_column"></a>
+    <div class="doc doc-contents first">
+
+        <p>Adds a column to 'adata.obs' named by celltype and dose</p>
+<p>This function combines the values from <code>celltype_column</code> and <code>dose_column</code> 
+in each row of <code>adata.obs</code>, separated by an underscore (<code>_</code>), and returns 
+the resulting concatenated values as a new column. This can be useful for 
+creating unique identifiers for each combination of cell type and dose.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AnnData object containing single-cell or similar 
+biological data, where metadata is stored in <code>adata.obs</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>celltype_column</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name of the column in <code>adata.obs</code> that 
+contains cell type information (e.g., 'celltype').</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>dose_column</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name of the column in <code>adata.obs</code> that 
+contains dose information (e.g., 'dose').</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>pandas.Series: A series containing the concatenated values of </p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><code>celltype_column</code> and <code>dose_column</code>, which can be added as a new </p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>column to <code>adata.obs</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Suppose <code>adata.obs</code> contains the following columns:</p>
+<table>
+<thead>
+<tr>
+<th>celltype</th>
+<th>dose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-cell</td>
+<td>low</td>
+</tr>
+<tr>
+<td>B-cell</td>
+<td>high</td>
+</tr>
+<tr>
+<td>T-cell</td>
+<td>medium</td>
+</tr>
+</tbody>
+</table>
+<p>You can create a new column combining <code>celltype</code> and <code>dose</code> as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;cell_dose&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_cell_dose_column</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s1">&#39;celltype&#39;</span><span class="p">,</span> <span class="s1">&#39;dose&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>The resulting <code>adata.obs</code> will look like:</p>
+<table>
+<thead>
+<tr>
+<th>celltype</th>
+<th>dose</th>
+<th>cell_dose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-cell</td>
+<td>low</td>
+<td>T-cell_low</td>
+</tr>
+<tr>
+<td>B-cell</td>
+<td>high</td>
+<td>B-cell_high</td>
+</tr>
+<tr>
+<td>T-cell</td>
+<td>medium</td>
+<td>T-cell_medium</td>
+</tr>
+</tbody>
+</table>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">create_cell_dose_column</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">celltype_column</span><span class="p">,</span> <span class="n">dose_column</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Adds a column to &#39;adata.obs&#39; named by celltype and dose</span>
+
+<span class="sd">    This function combines the values from `celltype_column` and `dose_column` </span>
+<span class="sd">    in each row of `adata.obs`, separated by an underscore (`_`), and returns </span>
+<span class="sd">    the resulting concatenated values as a new column. This can be useful for </span>
+<span class="sd">    creating unique identifiers for each combination of cell type and dose.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): The AnnData object containing single-cell or similar </span>
+<span class="sd">            biological data, where metadata is stored in `adata.obs`.</span>
+<span class="sd">        celltype_column (str): The name of the column in `adata.obs` that </span>
+<span class="sd">            contains cell type information (e.g., &#39;celltype&#39;).</span>
+<span class="sd">        dose_column (str): The name of the column in `adata.obs` that </span>
+<span class="sd">            contains dose information (e.g., &#39;dose&#39;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.Series: A series containing the concatenated values of </span>
+<span class="sd">        `celltype_column` and `dose_column`, which can be added as a new </span>
+<span class="sd">        column to `adata.obs`.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Suppose `adata.obs` contains the following columns:</span>
+
+<span class="sd">        | celltype | dose  |</span>
+<span class="sd">        |----------|-------|</span>
+<span class="sd">        | T-cell   | low   |</span>
+<span class="sd">        | B-cell   | high  |</span>
+<span class="sd">        | T-cell   | medium|</span>
+
+<span class="sd">        You can create a new column combining `celltype` and `dose` as follows:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        adata.obs[&#39;cell_dose&#39;] = create_cell_dose_column(adata, &#39;celltype&#39;, &#39;dose&#39;)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        The resulting `adata.obs` will look like:</span>
+
+<span class="sd">        | celltype | dose  | cell_dose     |</span>
+<span class="sd">        |----------|-------|---------------|</span>
+<span class="sd">        | T-cell   | low   | T-cell_low    |</span>
+<span class="sd">        | B-cell   | high  | B-cell_high   |</span>
+<span class="sd">        | T-cell   | medium| T-cell_medium |</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">celltype_column</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">dose_column</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="normalize_data">normalize_data<a class="headerlink" href="#normalize_data" title="Permanent link">&para;</a></h2>
+<h3 id="normalize_data_1">normalize_data<a class="headerlink" href="#normalize_data_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.normalize_data"></a>
+    <div class="doc doc-contents first">
+
+        <p>Normalizes, logarithmizes, and selects 5000 highly variable genes.</p>
+<p>Combines Scanpy preprocessing functions normalize_total, log1p, and
+highly_variable_genes to streamline the preprocessing workflow. </p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AnnData object containing single-cell or similar
+biological data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>AnnData</code></td>            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A new AnnData object that includes only the top</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>5000 highly variable genes.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>If you have an AnnData object <code>adata</code> with raw single-cell RNA-seq data
+you can preprocess it by calling:</p>
+<div class="highlight"><pre><span></span><code><span class="n">adata_filtered</span> <span class="o">=</span> <span class="n">normalize_data</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</code></pre></div>
+<p>After running this, <code>adata_filtered</code> will contain only the top 
+5000 highly variable genes, normalized and logarithmically transformed.</p>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normalize_data</span><span class="p">(</span><span class="n">adata</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Normalizes, logarithmizes, and selects 5000 highly variable genes.</span>
+
+<span class="sd">    Combines Scanpy preprocessing functions normalize_total, log1p, and</span>
+<span class="sd">    highly_variable_genes to streamline the preprocessing workflow. </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">       adata (AnnData): The AnnData object containing single-cell or similar</span>
+<span class="sd">        biological data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        AnnData: A new AnnData object that includes only the top</span>
+<span class="sd">        5000 highly variable genes.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        If you have an AnnData object `adata` with raw single-cell RNA-seq data</span>
+<span class="sd">        you can preprocess it by calling:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        adata_filtered = normalize_data(adata)</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        After running this, `adata_filtered` will contain only the top </span>
+<span class="sd">        5000 highly variable genes, normalized and logarithmically transformed.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_top_genes</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">highly_variable</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="prepare_data">prepare_data<a class="headerlink" href="#prepare_data" title="Permanent link">&para;</a></h2>
+<h3 id="prepare_data_1">prepare_data<a class="headerlink" href="#prepare_data_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.prepare_data"></a>
+    <div class="doc doc-contents first">
+
+        <p>Prepares training and testing data for analysis based on cell type and treatment conditions.</p>
+<p>This function filters an <code>AnnData</code> object into train and test datasets. 
+The test set includes the specified cell type to predict and the treatment to predict.
+The training set includes all other data.</p>
+<p>cells of a specified type and treatment condition for prediction purposes. It also normalizes 
+the data if it's not already normalized, using the <code>normalize_data</code> function.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AnnData object containing single-cell or similar biological data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column name in <code>adata.obs</code> that contains cell type information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>treatment_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column name in <code>adata.obs</code> that contains treatment or condition information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_to_predict</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The cell type to be separated out for testing/prediction.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>treatment_to_predict</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The treatment or condition to be separated out for testing/prediction.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>normalized</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether the data is already normalized. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>train_adata</code></td>            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The training dataset, containing all cells except those specified by 
+<code>cell_type_to_predict</code> and <code>treatment_to_predict</code>.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>test_adata</code></td>            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The test dataset, containing only the cells with the specified 
+<code>cell_type_to_predict</code> and <code>treatment_to_predict</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Create training and testing datasets from an AnnData object with cell type information in the 
+'celltype' column of adata.obs and dosing information in the 'dose' column of adata.obs.
+To select T-cells under a low-dose treatment as your testing set: </p>
+<div class="highlight"><pre><span></span><code><span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span> <span class="o">=</span> <span class="n">prepare_data</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> 
+    <span class="n">cell_type_key</span><span class="o">=</span><span class="s1">&#39;celltype&#39;</span><span class="p">,</span> 
+    <span class="n">treatment_key</span><span class="o">=</span><span class="s1">&#39;dose&#39;</span><span class="p">,</span> 
+    <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="s1">&#39;T-cell&#39;</span><span class="p">,</span> 
+    <span class="n">treatment_to_predict</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> 
+    <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>This will return two <code>AnnData</code> objects:  <code>test_adata</code> containing only T-cells under low-dose treatment, 
+and train_adata` containing all cells except T-cells under low-dose treatment,</p>
+</details>
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p><strong>This preprocessing step assumes the data is in the format output by Cell Ranger and is not 
+logarithmized by default unless specified.</strong></p>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_data</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">cell_type_key</span><span class="p">,</span>
+    <span class="n">treatment_key</span><span class="p">,</span>
+    <span class="n">cell_type_to_predict</span><span class="p">,</span>
+    <span class="n">treatment_to_predict</span><span class="p">,</span>
+    <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Prepares training and testing data for analysis based on cell type and treatment conditions.</span>
+
+<span class="sd">    This function filters an `AnnData` object into train and test datasets. </span>
+<span class="sd">    The test set includes the specified cell type to predict and the treatment to predict.</span>
+<span class="sd">    The training set includes all other data.</span>
+
+<span class="sd">    cells of a specified type and treatment condition for prediction purposes. It also normalizes </span>
+<span class="sd">    the data if it&#39;s not already normalized, using the `normalize_data` function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): The AnnData object containing single-cell or similar biological data.</span>
+<span class="sd">        cell_type_key (str): The column name in `adata.obs` that contains cell type information.</span>
+<span class="sd">        treatment_key (str): The column name in `adata.obs` that contains treatment or condition information.</span>
+<span class="sd">        cell_type_to_predict (str): The cell type to be separated out for testing/prediction.</span>
+<span class="sd">        treatment_to_predict (str): The treatment or condition to be separated out for testing/prediction.</span>
+<span class="sd">        normalized (bool, optional): Whether the data is already normalized. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        train_adata (AnnData): The training dataset, containing all cells except those specified by </span>
+<span class="sd">            `cell_type_to_predict` and `treatment_to_predict`.</span>
+<span class="sd">        test_adata (AnnData): The test dataset, containing only the cells with the specified </span>
+<span class="sd">            `cell_type_to_predict` and `treatment_to_predict`.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Create training and testing datasets from an AnnData object with cell type information in the </span>
+<span class="sd">        &#39;celltype&#39; column of adata.obs and dosing information in the &#39;dose&#39; column of adata.obs.</span>
+<span class="sd">        To select T-cells under a low-dose treatment as your testing set: </span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        train_adata, test_adata = prepare_data(</span>
+<span class="sd">            adata, </span>
+<span class="sd">            cell_type_key=&#39;celltype&#39;, </span>
+<span class="sd">            treatment_key=&#39;dose&#39;, </span>
+<span class="sd">            cell_type_to_predict=&#39;T-cell&#39;, </span>
+<span class="sd">            treatment_to_predict=&#39;low&#39;, </span>
+<span class="sd">            normalized=False</span>
+<span class="sd">        )</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        This will return two `AnnData` objects:  `test_adata` containing only T-cells under low-dose treatment, </span>
+<span class="sd">        and train_adata` containing all cells except T-cells under low-dose treatment,</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        **This preprocessing step assumes the data is in the format output by Cell Ranger and is not </span>
+<span class="sd">        logarithmized by default unless specified.**</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="n">adata</span> <span class="o">=</span> <span class="n">normalize_data</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+    <span class="n">train_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span>
+        <span class="o">~</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treatment_to_predict</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">test_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treatment_to_predict</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">train_adata</span> <span class="o">=</span> <span class="n">setup_anndata</span><span class="p">(</span>
+        <span class="n">train_adata</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_key</span><span class="o">=</span><span class="n">treatment_key</span><span class="p">,</span> <span class="n">labels_key</span><span class="o">=</span><span class="n">cell_type_key</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="prepare_cont_data">prepare_cont_data<a class="headerlink" href="#prepare_cont_data" title="Permanent link">&para;</a></h2>
+<h3 id="prepare_cont_data_1">prepare_cont_data<a class="headerlink" href="#prepare_cont_data_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.prepare_cont_data"></a>
+    <div class="doc doc-contents first">
+
+        <p>Prepares training and testing data for analysis based on cell type and dose conditions.</p>
+<p>This function filters an <code>AnnData</code> object into train and test datasets. 
+The test set includes the specified cell type to predict and doses greater than the control dose.
+The training set includes all other data.</p>
+<p>The function also normalizes the data if it's not already normalized, using Scanpy's normalization functions.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AnnData object containing single-cell or similar biological data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column name in <code>adata.obs</code> that contains cell type information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>treatment_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column name in <code>adata.obs</code> that contains treatment or condition information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>dose_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column name in <code>adata.obs</code> that contains dose information.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_to_predict</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The cell type to be separated out for testing/prediction.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>control_dose</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The dose level used as a threshold for separating training and test data.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>normalized</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether the data is already normalized. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>train_adata</code></td>            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The training dataset, containing all cells except those with the specified
+<code>cell_type_to_predict</code> and doses greater than the <code>control_dose</code>.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td><code>test_adata</code></td>            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The test dataset, containing only the cells with the specified 
+<code>cell_type_to_predict</code> and doses greater than the <code>control_dose</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Create training and testing datasets from an AnnData object with cell type information in the 
+'cell_type' column of adata.obs and dose information in the 'dose' column of adata.obs.
+To select T-cells treated with doses greater than 100 as your testing set:</p>
+<div class="highlight"><pre><span></span><code><span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span> <span class="o">=</span> <span class="n">prepare_cont_data</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> 
+    <span class="n">cell_type_key</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> 
+    <span class="n">treatment_key</span><span class="o">=</span><span class="s1">&#39;treatment&#39;</span><span class="p">,</span> 
+    <span class="n">dose_key</span><span class="o">=</span><span class="s1">&#39;dose&#39;</span><span class="p">,</span> 
+    <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="s1">&#39;T-cell&#39;</span><span class="p">,</span> 
+    <span class="n">control_dose</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+    <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>This will return two <code>AnnData</code> objects: <code>test_adata</code> containing only T-cells with doses greater than 100,
+and <code>train_adata</code> containing all other cells.</p>
+</details>
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p><strong>This preprocessing step assumes the data is in the format output by Cell Ranger and is not 
+logarithmized by default unless specified.</strong></p>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_cont_data</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">cell_type_key</span><span class="p">,</span>
+    <span class="n">treatment_key</span><span class="p">,</span>
+    <span class="n">dose_key</span><span class="p">,</span>
+    <span class="n">cell_type_to_predict</span><span class="p">,</span>
+    <span class="n">control_dose</span><span class="p">,</span>
+    <span class="n">normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Prepares training and testing data for analysis based on cell type and dose conditions.</span>
+
+<span class="sd">    This function filters an `AnnData` object into train and test datasets. </span>
+<span class="sd">    The test set includes the specified cell type to predict and doses greater than the control dose.</span>
+<span class="sd">    The training set includes all other data.</span>
+
+<span class="sd">    The function also normalizes the data if it&#39;s not already normalized, using Scanpy&#39;s normalization functions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): The AnnData object containing single-cell or similar biological data.</span>
+<span class="sd">        cell_type_key (str): The column name in `adata.obs` that contains cell type information.</span>
+<span class="sd">        treatment_key (str): The column name in `adata.obs` that contains treatment or condition information.</span>
+<span class="sd">        dose_key (str): The column name in `adata.obs` that contains dose information.</span>
+<span class="sd">        cell_type_to_predict (str): The cell type to be separated out for testing/prediction.</span>
+<span class="sd">        control_dose (float): The dose level used as a threshold for separating training and test data.</span>
+<span class="sd">        normalized (bool, optional): Whether the data is already normalized. Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        train_adata (AnnData): The training dataset, containing all cells except those with the specified</span>
+<span class="sd">            `cell_type_to_predict` and doses greater than the `control_dose`.</span>
+<span class="sd">        test_adata (AnnData): The test dataset, containing only the cells with the specified </span>
+<span class="sd">            `cell_type_to_predict` and doses greater than the `control_dose`.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Create training and testing datasets from an AnnData object with cell type information in the </span>
+<span class="sd">        &#39;cell_type&#39; column of adata.obs and dose information in the &#39;dose&#39; column of adata.obs.</span>
+<span class="sd">        To select T-cells treated with doses greater than 100 as your testing set:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        train_adata, test_adata = prepare_cont_data(</span>
+<span class="sd">            adata, </span>
+<span class="sd">            cell_type_key=&#39;cell_type&#39;, </span>
+<span class="sd">            treatment_key=&#39;treatment&#39;, </span>
+<span class="sd">            dose_key=&#39;dose&#39;, </span>
+<span class="sd">            cell_type_to_predict=&#39;T-cell&#39;, </span>
+<span class="sd">            control_dose=100, </span>
+<span class="sd">            normalized=False</span>
+<span class="sd">        )</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        This will return two `AnnData` objects: `test_adata` containing only T-cells with doses greater than 100,</span>
+<span class="sd">        and `train_adata` containing all other cells.</span>
+
+
+<span class="sd">    Note:</span>
+<span class="sd">        **This preprocessing step assumes the data is in the format output by Cell Ranger and is not </span>
+<span class="sd">        logarithmized by default unless specified.**</span>
+<span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_top_genes</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+        <span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">highly_variable</span><span class="p">]</span>
+    <span class="n">train_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span>
+        <span class="o">~</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">dose_key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">control_dose</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">test_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">dose_key</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">control_dose</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">train_adata</span> <span class="o">=</span> <span class="n">setup_anndata</span><span class="p">(</span>
+        <span class="n">train_adata</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">batch_key</span><span class="o">=</span><span class="n">treatment_key</span><span class="p">,</span> <span class="n">labels_key</span><span class="o">=</span><span class="n">cell_type_key</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="calculate_r2_singledose">calculate_r2_singledose<a class="headerlink" href="#calculate_r2_singledose" title="Permanent link">&para;</a></h2>
+<h3 id="calculate_r2_singledose_1">calculate_r2_singledose<a class="headerlink" href="#calculate_r2_singledose_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.calculate_r2_singledose"></a>
+    <div class="doc doc-contents first">
+
+        <p>Calculate R^2 values for single dose treatment and prediction.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Annotated data matrix.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cell type or identifier.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Model name or identifier.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>condition_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key in <code>adata.obs</code> to distinguish conditions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>axis_keys</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary with keys "x" and "y" to specify conditions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>diff_genes</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of differentially expressed genes. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>random_sample_coef</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Coefficient for random sampling. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_iter</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of iterations for random sampling. Defaults to 1.</p>
+              </div>
+            </td>
+            <td>
+                  <code>1</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>pd.DataFrame: DataFrame containing R^2 values and corresponding gene sets.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_r2_singledose</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">cell</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">condition_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">axis_keys</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">diff_genes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_sample_coef</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;    Calculate R^2 values for single dose treatment and prediction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): Annotated data matrix.</span>
+<span class="sd">        cell (str): Cell type or identifier.</span>
+<span class="sd">        model (str): Model name or identifier.</span>
+<span class="sd">        condition_key (str): Key in `adata.obs` to distinguish conditions.</span>
+<span class="sd">        axis_keys (dict): Dictionary with keys &quot;x&quot; and &quot;y&quot; to specify conditions.</span>
+<span class="sd">        diff_genes (list, optional): List of differentially expressed genes. Defaults to None.</span>
+<span class="sd">        random_sample_coef (float, optional): Coefficient for random sampling. Defaults to None.</span>
+<span class="sd">        n_iter (int, optional): Number of iterations for random sampling. Defaults to 1.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing R^2 values and corresponding gene sets.&#39;&#39;&#39;</span>
+
+    <span class="c1"># Densify sparse matrix</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+    <span class="c1"># Treatment and Prediction</span>
+    <span class="n">treat</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+
+    <span class="n">r2_values_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;R^2&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Gene Set&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random_sample_coef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">treat_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">treat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">random_sample_coef</span> <span class="o">*</span> <span class="n">treat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">pred_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">random_sample_coef</span> <span class="o">*</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">treat_samp</span> <span class="o">=</span> <span class="n">treat</span><span class="p">[</span><span class="n">treat_idx</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">pred_samp</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">pred_idx</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">treat_samp</span> <span class="o">=</span> <span class="n">treat</span>
+            <span class="n">pred_samp</span> <span class="o">=</span> <span class="n">samp</span>
+
+        <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">treat_diff</span> <span class="o">=</span> <span class="n">treat_samp</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+            <span class="n">pred_diff</span> <span class="o">=</span> <span class="n">pred_samp</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+
+            <span class="n">x_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pred_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">y_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="p">,</span> <span class="n">p_value_diff</span><span class="p">,</span> <span class="n">std_err_diff</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span>
+                <span class="n">x_diff</span><span class="p">,</span> <span class="n">y_diff</span>
+            <span class="p">)</span>
+            <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;R^2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;Gene Set&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;DEGs&quot;</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_samp</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pred_samp</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;R^2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;Gene Set&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;All HVGs&quot;</span><span class="p">)</span>
+
+    <span class="n">r2_values_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">r2_values_dict</span><span class="p">)</span>
+    <span class="n">r2_values_df</span><span class="p">[</span><span class="s2">&quot;Cell&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cell</span>
+    <span class="n">r2_values_df</span><span class="p">[</span><span class="s2">&quot;Model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="k">return</span> <span class="n">r2_values_df</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="calculate_r2_multidose">calculate_r2_multidose<a class="headerlink" href="#calculate_r2_multidose" title="Permanent link">&para;</a></h2>
+<h3 id="calculate_r2_multidose_1">calculate_r2_multidose<a class="headerlink" href="#calculate_r2_multidose_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.calculate_r2_multidose"></a>
+    <div class="doc doc-contents first">
+
+        <p>Calculate R^2 values for multidose experiments.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Annotated data matrix.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Cell type or identifier.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>model</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Model name or identifier.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>condition_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key in <code>adata.obs</code> to distinguish conditions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>axis_keys</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary with keys "x" and "y" for conditions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>diff_genes</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of differentially expressed genes. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>random_sample_coef</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Coefficient for random sampling. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_iter</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of iterations for random sampling. Defaults to 1.</p>
+              </div>
+            </td>
+            <td>
+                  <code>1</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>pd.DataFrame: DataFrame containing R^2 values and associated metadata.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_r2_multidose</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">cell</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">condition_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">axis_keys</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">diff_genes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_sample_coef</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate R^2 values for multidose experiments.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): Annotated data matrix.</span>
+<span class="sd">        cell (str): Cell type or identifier.</span>
+<span class="sd">        model (str): Model name or identifier.</span>
+<span class="sd">        condition_key (str): Key in `adata.obs` to distinguish conditions.</span>
+<span class="sd">        axis_keys (dict): Dictionary with keys &quot;x&quot; and &quot;y&quot; for conditions.</span>
+<span class="sd">        diff_genes (list, optional): List of differentially expressed genes. Defaults to None.</span>
+<span class="sd">        random_sample_coef (float, optional): Coefficient for random sampling. Defaults to None.</span>
+<span class="sd">        n_iter (int, optional): Number of iterations for random sampling. Defaults to 1.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame containing R^2 values and associated metadata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Densify sparse matrix</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+    <span class="c1"># Treatment and Prediction</span>
+    <span class="n">treat</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+
+    <span class="n">r2_values_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;R^2&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;Gene Set&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iter</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">random_sample_coef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">treat_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">treat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">random_sample_coef</span> <span class="o">*</span> <span class="n">treat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">pred_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">random_sample_coef</span> <span class="o">*</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">treat_samp</span> <span class="o">=</span> <span class="n">treat</span><span class="p">[</span><span class="n">treat_idx</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">pred_samp</span> <span class="o">=</span> <span class="n">pred</span><span class="p">[</span><span class="n">pred_idx</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">treat_samp</span> <span class="o">=</span> <span class="n">treat</span>
+            <span class="n">pred_samp</span> <span class="o">=</span> <span class="n">samp</span>
+
+        <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">treat_diff</span> <span class="o">=</span> <span class="n">treat_samp</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+            <span class="n">pred_diff</span> <span class="o">=</span> <span class="n">pred_samp</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+
+            <span class="n">x_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pred_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">y_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="p">,</span> <span class="n">p_value_diff</span><span class="p">,</span> <span class="n">std_err_diff</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span>
+                <span class="n">x_diff</span><span class="p">,</span> <span class="n">y_diff</span>
+            <span class="p">)</span>
+            <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;R^2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;Gene Set&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;DEGs&quot;</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_samp</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">pred_samp</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;R^2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">r2_values_dict</span><span class="p">[</span><span class="s2">&quot;Gene Set&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;All HVGs&quot;</span><span class="p">)</span>
+
+    <span class="n">r2_values_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">r2_values_dict</span><span class="p">)</span>
+    <span class="n">r2_values_df</span><span class="p">[</span><span class="s2">&quot;Cell&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cell</span>
+    <span class="n">r2_values_df</span><span class="p">[</span><span class="s2">&quot;Model&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="n">r2_values_df</span><span class="p">[</span><span class="s2">&quot;Dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">r2_values_df</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div><h2 id="random_sample">random_sample<a class="headerlink" href="#random_sample" title="Permanent link">&para;</a></h2>
+<h3 id="random_sample_1">random_sample<a class="headerlink" href="#random_sample_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<a id="vidr.utils.random_sample"></a>
+    <div class="doc doc-contents first">
+
+        <p>Randomly samples and balances the populations of each cell group 
+based on the property of interest.</p>
+<p>This function randomly samples cells from groups defined by a specified key so that each group 
+has an equal number of cells. It can sample to match either the largest group size or the smallest 
+group size, with or without replacement.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The AnnData object containing the data to balance.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The column in <code>adata.obs</code> representing the property used to group cells.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_or_min</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to equalize the populations based on the maximum or minimum 
+group size. Defaults to "max".</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;max&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>replacement</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to sample with replacement. If <code>max_or_min</code> is "max", 
+sampling will always be done with replacement. Defaults to True.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>AnnData</code></td>            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An AnnData object containing equal-sized populations for each group within the </p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>specified property.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>Create an AnnData object <code>adata</code> with cell type information in the 'cell_type' column 
+and sample the data so that all cell types are balanced to the size of the smallest group:</p>
+<div class="highlight"><pre><span></span><code><span class="n">resampled_adata</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> 
+    <span class="n">key</span><span class="o">=</span><span class="s1">&#39;cell_type&#39;</span><span class="p">,</span> 
+    <span class="n">max_or_min</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> 
+    <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>In this example, <code>resampled_adata</code> will contain equal numbers of cells for each cell type, 
+with the smallest group size used for sampling. Sampling will be done without replacement.</p>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/utils.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">random_sample</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">max_or_min</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Randomly samples and balances the populations of each cell group </span>
+<span class="sd">    based on the property of interest.</span>
+
+
+
+<span class="sd">    This function randomly samples cells from groups defined by a specified key so that each group </span>
+<span class="sd">    has an equal number of cells. It can sample to match either the largest group size or the smallest </span>
+<span class="sd">    group size, with or without replacement.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): The AnnData object containing the data to balance.</span>
+<span class="sd">        key (str): The column in `adata.obs` representing the property used to group cells.</span>
+<span class="sd">        max_or_min (str, optional): Whether to equalize the populations based on the maximum or minimum </span>
+<span class="sd">            group size. Defaults to &quot;max&quot;.</span>
+<span class="sd">        replacement (bool, optional): Whether to sample with replacement. If `max_or_min` is &quot;max&quot;, </span>
+<span class="sd">            sampling will always be done with replacement. Defaults to True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        AnnData: An AnnData object containing equal-sized populations for each group within the </span>
+<span class="sd">        specified property.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        Create an AnnData object `adata` with cell type information in the &#39;cell_type&#39; column </span>
+<span class="sd">        and sample the data so that all cell types are balanced to the size of the smallest group:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        resampled_adata = random_sample(</span>
+<span class="sd">            adata, </span>
+<span class="sd">            key=&#39;cell_type&#39;, </span>
+<span class="sd">            max_or_min=&#39;min&#39;, </span>
+<span class="sd">            replacement=False</span>
+<span class="sd">        )</span>
+<span class="sd">        ```</span>
+
+<span class="sd">        In this example, `resampled_adata` will contain equal numbers of cells for each cell type, </span>
+<span class="sd">        with the smallest group size used for sampling. Sampling will be done without replacement.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># list of groups within property of interest and find their cell population sizes</span>
+    <span class="n">pop_dict</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+    <span class="c1"># Find whether we want to take the maximum or the minimum size of the population</span>
+    <span class="n">eq</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">pop_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="n">max_or_min</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span>
+        <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">pop_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="p">)</span>
+    <span class="c1"># replacement?</span>
+    <span class="n">replacement</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">max_or_min</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span> <span class="k">else</span> <span class="n">replacement</span>
+    <span class="c1"># Find the indexes for sampling</span>
+    <span class="n">idxs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">pop_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">group_bool</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">==</span> <span class="n">group</span><span class="p">)</span>
+        <span class="n">group_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">group_bool</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">group_idx_resampled</span> <span class="o">=</span> <span class="n">group_idx</span><span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">group_idx</span><span class="p">),</span> <span class="n">eq</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replacement</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">idxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group_idx_resampled</span><span class="p">)</span>
+
+    <span class="n">resampled_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">idxs</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">resampled_adata</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "search.highlight", "search.share", "search.suggest", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

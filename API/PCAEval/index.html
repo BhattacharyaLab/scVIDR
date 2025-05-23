@@ -1,0 +1,2861 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive project documentation for scVIDR.">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>PCAEval Class and Associated Methods in PCAEval.py - scVIDR</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pcaeval-class-and-associated-methods-in-pcaevalpy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="scVIDR" class="md-header__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            scVIDR
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PCAEval Class and Associated Methods in PCAEval.py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../API-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tutorials/tutorials-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorial
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="scVIDR" class="md-nav__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    scVIDR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/tutorials-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#pcaeval" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCAEval
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="PCAEval">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pcaeval_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCAEval
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.PCAEval.PCAEval" class="md-nav__link">
+    <span class="md-ellipsis">
+      PCAEval
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.PCAEval.PCAEval.get_gene_perturb_coef" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_gene_perturb_coef
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.PCAEval.PCAEval.get_pseudo_dose" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_pseudo_dose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.PCAEval.PCAEval.predict" class="md-nav__link">
+    <span class="md-ellipsis">
+      predict
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vidr.PCAEval.PCAEval.reg_mean_plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      reg_mean_plot
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="pcaeval-class-and-associated-methods-in-pcaevalpy">PCAEval Class and Associated Methods in PCAEval.py<a class="headerlink" href="#pcaeval-class-and-associated-methods-in-pcaevalpy" title="Permanent link">&para;</a></h1>
+<h2 id="pcaeval">PCAEval<a class="headerlink" href="#pcaeval" title="Permanent link">&para;</a></h2>
+<h3 id="pcaeval_1">PCAEval<a class="headerlink" href="#pcaeval_1" title="Permanent link">&para;</a></h3>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<a id="vidr.PCAEval.PCAEval"></a>
+    <div class="doc doc-contents first">
+
+
+        <p>Implementation of scGen model for batch removal and perturbation prediction.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="anndata.AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An AnnData object that has been registered via <code>scgen.setup_anndata</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>hidden_dim</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of nodes per hidden layer.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>latent_dim</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dimensionality of the latent space.</p>
+              </div>
+            </td>
+            <td>
+                  <code>100</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>n_layers</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Number of hidden layers used for encoder and decoder NNs.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>dropout_rate</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dropout rate for neural networks.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**model_kwargs</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Additional keyword arguments for <code>scgen.SCGENVAE</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">vae</span> <span class="o">=</span> <span class="n">scgen</span><span class="o">.</span><span class="n">SCGEN</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vae</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adata</span><span class="o">.</span><span class="n">obsm</span><span class="p">[</span><span class="s2">&quot;X_scgen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">get_latent_representation</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+
+
+
+
+              <details class="quote">
+                <summary>Source code in <code>vidr/PCAEval.py</code></summary>
+                <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">PCAEval</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Implementation of scGen model for batch removal and perturbation prediction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): </span>
+<span class="sd">            An AnnData object that has been registered via `scgen.setup_anndata`.</span>
+<span class="sd">        hidden_dim (int): </span>
+<span class="sd">            Number of nodes per hidden layer.</span>
+<span class="sd">        latent_dim (int): </span>
+<span class="sd">            Dimensionality of the latent space.</span>
+<span class="sd">        n_layers (int): </span>
+<span class="sd">            Number of hidden layers used for encoder and decoder NNs.</span>
+<span class="sd">        dropout_rate (float): </span>
+<span class="sd">            Dropout rate for neural networks.</span>
+<span class="sd">        **model_kwargs: </span>
+<span class="sd">            Additional keyword arguments for `scgen.SCGENVAE`.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; vae = scgen.SCGEN(adata)</span>
+<span class="sd">        &gt;&gt;&gt; vae.train()</span>
+<span class="sd">        &gt;&gt;&gt; adata.obsm[&quot;X_scgen&quot;] = vae.get_latent_representation()</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">adata</span><span class="p">:</span> <span class="n">AnnData</span><span class="p">,</span>
+        <span class="n">latent_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PCAEval</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">latent_dim</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s2">&quot;arpack&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_summary_string</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;PCA Model with the following params: </span><span class="se">\n</span><span class="s2"> latent_dim: </span><span class="si">{}</span><span class="s2">&quot;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">latent_dim</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">cell_type_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">treatment_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">ctrl_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">treat_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">regression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">doses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnnData</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Predicts the cell type provided by the user in the treated condition.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cell_type_key (str, optional): </span>
+<span class="sd">                Key for the cell type information in `adata.obs`. Defaults to None.</span>
+<span class="sd">            treatment_key (str, optional): </span>
+<span class="sd">                Key for the treatment or condition information in `adata.obs`. Defaults to None.</span>
+<span class="sd">            ctrl_key (str, optional): </span>
+<span class="sd">                Key for the control condition in `treatment_key`. Defaults to None.</span>
+<span class="sd">            treat_key (str, optional): </span>
+<span class="sd">                Key for the treated condition in `treatment_key`. Defaults to None.</span>
+<span class="sd">            cell_type_to_predict (str, optional): </span>
+<span class="sd">                The cell type to be predicted. Defaults to None.</span>
+<span class="sd">            regression (bool, optional): </span>
+<span class="sd">                Whether to perform regression on the latent space. Defaults to False.</span>
+<span class="sd">            continuous (bool, optional): </span>
+<span class="sd">                Whether to predict continuous doses. Defaults to False.</span>
+<span class="sd">            doses (list, optional): </span>
+<span class="sd">                List of doses to predict if `continuous` is True. Defaults to None.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            AnnData: </span>
+<span class="sd">                An AnnData object containing the predicted cells in the primary space.</span>
+<span class="sd">                If `regression` is True, also returns the regression model.</span>
+<span class="sd">                If `continuous` is True, returns a dictionary of AnnData objects for each dose.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># use keys registered from `setup_anndata()</span>
+
+        <span class="n">ctrl_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">]</span>
+        <span class="n">treat_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">]</span>
+        <span class="n">ctrl_x</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span><span class="n">ctrl_x</span><span class="p">,</span> <span class="n">cell_type_key</span><span class="p">)</span>
+        <span class="n">treat_x</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span><span class="n">treat_x</span><span class="p">,</span> <span class="n">cell_type_key</span><span class="p">)</span>
+
+        <span class="c1"># Balancing across treatments</span>
+        <span class="n">new_adata</span> <span class="o">=</span> <span class="n">ctrl_x</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_x</span><span class="p">)</span>
+        <span class="n">new_adata</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span>
+            <span class="n">new_adata</span><span class="p">,</span> <span class="n">treatment_key</span><span class="p">,</span> <span class="n">max_or_min</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">new_adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="c1"># Getting testing data</span>
+        <span class="n">ctrl_data</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span>
+            <span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+            <span class="o">&amp;</span> <span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">latent_cd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="c1"># Are we regressing the delta on the latent space or not</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+            <span class="c1"># No regression on latent space</span>
+            <span class="n">ctrl_x</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">treat_x</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c1"># Compress data to latent space and then calculate the delta</span>
+            <span class="n">latent_ctrl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ctrl_x</span><span class="o">.</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">latent_treat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">treat_x</span><span class="o">.</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">latent_treat</span> <span class="o">-</span> <span class="n">latent_ctrl</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Regression on latent space</span>
+            <span class="n">latent_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+            <span class="n">latent_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">latent_X</span><span class="p">,</span> <span class="n">obs</span><span class="o">=</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="c1"># Get deltas and control centroids for each cell tpye in the training dataset</span>
+            <span class="n">deltas</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">latent_centroids</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">cell_types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cell_types</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cell</span> <span class="o">!=</span> <span class="n">cell_type_to_predict</span><span class="p">:</span>
+                    <span class="n">latent_ctrl</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[</span>
+                        <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span>
+                        <span class="o">&amp;</span> <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">)</span>
+                    <span class="p">]</span>
+                    <span class="n">latent_treat</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[</span>
+                        <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span>
+                        <span class="o">&amp;</span> <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">)</span>
+                    <span class="p">]</span>
+                    <span class="n">ctrl_centroid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">treat_centroid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span>
+                        <span class="n">latent_ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+                    <span class="p">)</span>
+                    <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+                    <span class="n">latent_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ctrl_centroid</span><span class="p">)</span>
+            <span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">latent_centroids</span><span class="p">,</span> <span class="n">deltas</span><span class="p">)</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_cd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)])[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Continuous or Binary Perturbation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">continuous</span><span class="p">:</span>
+            <span class="n">treat_pred</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">latent_cd</span>
+            <span class="n">predicted_cells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">treat_pred</span><span class="p">)</span>
+            <span class="n">predicted_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span>
+                <span class="n">X</span><span class="o">=</span><span class="n">predicted_cells</span><span class="p">,</span>
+                <span class="n">obs</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="n">var</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="n">obsm</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obsm</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">predicted_adata</span><span class="p">,</span> <span class="n">delta</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">predicted_adata</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">treat_pred_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">d</span><span class="p">:</span> <span class="n">delta</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">doses</span><span class="p">)))</span> <span class="o">+</span> <span class="n">latent_cd</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+                <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="n">predicted_cells_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">d</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">treat_pred_dict</span><span class="p">[</span><span class="n">d</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+                <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="n">predicted_adata_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">d</span><span class="p">:</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span>
+                    <span class="n">X</span><span class="o">=</span><span class="n">predicted_cells_dict</span><span class="p">[</span><span class="n">d</span><span class="p">],</span>
+                    <span class="n">obs</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                    <span class="n">var</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                    <span class="n">obsm</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obsm</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+                <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">predicted_adata_dict</span><span class="p">,</span> <span class="n">delta</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">predicted_adata_dict</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reg_mean_plot</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">adata</span><span class="p">,</span>
+        <span class="n">axis_keys</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">,</span>
+        <span class="n">condition_key</span><span class="p">,</span>
+        <span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;./reg_mean.pdf&quot;</span><span class="p">,</span>
+        <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">gene_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">top_100_genes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">x_coeff</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span>
+        <span class="n">y_coeff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Plots mean matching figure for a set of specific genes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        adata (AnnData): </span>
+<span class="sd">            AnnData object with equivalent structure to the initial AnnData. If `None`, defaults to the</span>
+<span class="sd">            AnnData object used to initialize the model. Must have been set up with `batch_key` and `labels_key`</span>
+<span class="sd">            corresponding to batch and cell type metadata, respectively.</span>
+<span class="sd">        axis_keys (dict): </span>
+<span class="sd">            Dictionary of `adata.obs` keys that are used by the axes of the plot. Must be in the form </span>
+<span class="sd">            `{&quot;x&quot;: &quot;Key for x-axis&quot;, &quot;y&quot;: &quot;Key for y-axis&quot;}`.</span>
+<span class="sd">        labels (dict): </span>
+<span class="sd">            Dictionary of axis labels in the form `{&quot;x&quot;: &quot;x-axis-name&quot;, &quot;y&quot;: &quot;y-axis name&quot;}`.</span>
+<span class="sd">        path_to_save (str): </span>
+<span class="sd">            Path where the plot will be saved.</span>
+<span class="sd">        save (bool): </span>
+<span class="sd">            If `True`, the plot will be saved to the specified path.</span>
+<span class="sd">        gene_list (list): </span>
+<span class="sd">            List of gene names to be plotted.</span>
+<span class="sd">        show (bool): </span>
+<span class="sd">            If `True`, the plot will be displayed after saving.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; import anndata</span>
+<span class="sd">        &gt;&gt;&gt; import scgen</span>
+<span class="sd">        &gt;&gt;&gt; import scanpy as sc</span>
+<span class="sd">        &gt;&gt;&gt; train = sc.read(&quot;./tests/data/train.h5ad&quot;, backup_url=&quot;https://goo.gl/33HtVh&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; scgen.setup_anndata(train)</span>
+<span class="sd">        &gt;&gt;&gt; network = scgen.SCGEN(train)</span>
+<span class="sd">        &gt;&gt;&gt; network.train()</span>
+<span class="sd">        &gt;&gt;&gt; unperturbed_data = train[((train.obs[&quot;cell_type&quot;] == &quot;CD4T&quot;) &amp; (train.obs[&quot;condition&quot;] == &quot;control&quot;))]</span>
+<span class="sd">        &gt;&gt;&gt; pred, delta = network.predict(</span>
+<span class="sd">        &gt;&gt;&gt;     adata=train,</span>
+<span class="sd">        &gt;&gt;&gt;     adata_to_predict=unperturbed_data,</span>
+<span class="sd">        &gt;&gt;&gt;     ctrl_key=&quot;control&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     treat_key=&quot;treatulated&quot;</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &gt;&gt;&gt; pred_adata = anndata.AnnData(</span>
+<span class="sd">        &gt;&gt;&gt;     pred,</span>
+<span class="sd">        &gt;&gt;&gt;     obs={&quot;condition&quot;: [&quot;pred&quot;] * len(pred)},</span>
+<span class="sd">        &gt;&gt;&gt;     var={&quot;var_names&quot;: train.var_names},</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &gt;&gt;&gt; CD4T = train[train.obs[&quot;cell_type&quot;] == &quot;CD4T&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; all_adata = CD4T.concatenate(pred_adata)</span>
+<span class="sd">        &gt;&gt;&gt; network.reg_mean_plot(</span>
+<span class="sd">        &gt;&gt;&gt;     all_adata,</span>
+<span class="sd">        &gt;&gt;&gt;     axis_keys={&quot;x&quot;: &quot;control&quot;, &quot;y&quot;: &quot;pred&quot;, &quot;y1&quot;: &quot;treatulated&quot;},</span>
+<span class="sd">        &gt;&gt;&gt;     gene_list=[&quot;ISG15&quot;, &quot;CD3D&quot;],</span>
+<span class="sd">        &gt;&gt;&gt;     path_to_save=&quot;tests/reg_mean.pdf&quot;,</span>
+<span class="sd">        &gt;&gt;&gt;     show=False</span>
+<span class="sd">        &gt;&gt;&gt; )</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+        <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+            <span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+        <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">top_100_genes</span>
+        <span class="n">treat</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+        <span class="n">ctrl</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">diff_genes</span><span class="p">,</span> <span class="s2">&quot;tolist&quot;</span><span class="p">):</span>
+                <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">adata_diff</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+            <span class="n">treat_diff</span> <span class="o">=</span> <span class="n">adata_diff</span><span class="p">[</span><span class="n">adata_diff</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+            <span class="n">ctrl_diff</span> <span class="o">=</span> <span class="n">adata_diff</span><span class="p">[</span><span class="n">adata_diff</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+            <span class="n">x_diff</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ctrl_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">y_diff</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="p">,</span> <span class="n">p_value_diff</span><span class="p">,</span> <span class="n">std_err_diff</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span>
+                <span class="n">x_diff</span><span class="p">,</span> <span class="n">y_diff</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;top_100 DEGs mean: &quot;</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All genes mean: &quot;</span><span class="p">,</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]:</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]:</span> <span class="n">y</span><span class="p">})</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;range&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;range&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">gene_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gene_list</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">x_bar</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">y_bar</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyplot</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">y_bar</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">))</span>
+                <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">y_bar</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+                <span class="c1"># if &quot;y1&quot; in axis_keys.keys():</span>
+                <span class="c1"># y1_bar = y1[j]</span>
+                <span class="c1"># pyplot.text(x_bar, y1_bar, i, fontsize=11, color=&quot;black&quot;)</span>
+        <span class="k">if</span> <span class="n">gene_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">adjust_text</span><span class="p">(</span>
+                <span class="n">texts</span><span class="p">,</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+                <span class="n">force_points</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_coeff</span><span class="p">,</span>
+            <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_coeff</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+            <span class="sa">r</span><span class="s2">&quot;$\mathrm{R^2_{\mathrm{\mathsf{all\ genes}}}}$= &quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r_value</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;textsize&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_coeff</span><span class="p">,</span>
+                <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_coeff</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">)</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+                <span class="sa">r</span><span class="s2">&quot;$\mathrm{R^2_{\mathrm{\mathsf{top\ 100\ DEGs}}}}$= &quot;</span>
+                <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r_value_diff</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;textsize&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_to_save</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_gene_perturb_coef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Get gene perturbation coefficients for a given delta.</span>
+
+<span class="sd">        This method calculates gene-specific perturbation coefficients using the decoder&#39;s weights and the provided delta.</span>
+<span class="sd">        If you have performed linear regression, you can input the regression weights for delta. This will provide general</span>
+<span class="sd">        regression weights instead of gene-specific ones. The method uses the dot product of the linear decoder&#39;s weights</span>
+<span class="sd">        with the delta to compute the coefficients and returns a DataFrame of genes and their perturbation coefficients.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            delta (numpy.ndarray): The delta vector, representing the difference between control and treated</span>
+<span class="sd">                                conditions in latent space.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: A DataFrame containing genes as the index and their perturbation coefficients as a column.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the model is not trained or the decoder is non-linear.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; delta = np.random.randn(latent_dim)</span>
+<span class="sd">            &gt;&gt;&gt; gene_coef_df = model.get_gene_perturb_coef(delta)</span>
+<span class="sd">            &gt;&gt;&gt; print(gene_coef_df)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_trained_</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_linear_decoder</span><span class="p">:</span>
+            <span class="n">W</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">decoder</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">gene_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="n">gene_weight_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                    <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">j</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">var_names</span><span class="p">,</span> <span class="n">gene_weights</span><span class="p">)},</span>
+                    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gene_weights&quot;</span><span class="p">],</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+            <span class="k">return</span> <span class="n">gene_weight_df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Either model isn&#39;t trained or has a non-linear decoder.&quot;</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pseudo_dose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">cell_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Calculate the pseudodose ordering of cells by projecting them orthogonally onto the span of the delta.</span>
+
+<span class="sd">        This method computes the pseudodose values of the cells by projecting the cells&#39; expression data onto the </span>
+<span class="sd">        latent vector (delta). It can be applied to specific cell types if provided. The pseudodose values represent </span>
+<span class="sd">        the orthogonal projection of each cell onto the delta, which can be interpreted as a measure of cell state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            delta (numpy.ndarray): The latent vector representing the perturbation or difference between two conditions </span>
+<span class="sd">                                in latent space.</span>
+<span class="sd">            cell_types (list of str, optional): A list of cell types to include in the pseudodose calculation. </span>
+<span class="sd">                                                If `None`, all cell types in the AnnData object will be used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: An array of pseudodose values for each cell, representing its position along the span of delta.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            &gt;&gt;&gt; delta = np.random.randn(latent_dim)</span>
+<span class="sd">            &gt;&gt;&gt; pseudo_dose = model.get_pseudo_dose(delta, cell_types=[&quot;CD4T&quot;, &quot;B-cells&quot;])</span>
+<span class="sd">            &gt;&gt;&gt; print(pseudo_dose)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cell_type_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scvi_setup_dict_</span><span class="p">[</span><span class="s2">&quot;categorical_mappings&quot;</span><span class="p">][</span>
+                <span class="s2">&quot;_scvi_labels&quot;</span>
+            <span class="p">][</span><span class="s2">&quot;original_key&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cell_types</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">adata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">adata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cell_types</span><span class="p">),</span> <span class="p">:]</span>
+
+        <span class="n">pt_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">:</span>
+            <span class="n">pt_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="n">pt_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pt_value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pt_values</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+              </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="vidr.PCAEval.PCAEval.get_gene_perturb_coef" class="doc doc-heading">
+            <code class=" language-python"><span class="n">get_gene_perturb_coef</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span></code>
+
+<a href="#vidr.PCAEval.PCAEval.get_gene_perturb_coef" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get gene perturbation coefficients for a given delta.</p>
+<p>This method calculates gene-specific perturbation coefficients using the decoder's weights and the provided delta.
+If you have performed linear regression, you can input the regression weights for delta. This will provide general
+regression weights instead of gene-specific ones. The method uses the dot product of the linear decoder's weights
+with the delta to compute the coefficients and returns a DataFrame of genes and their perturbation coefficients.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>delta</code>
+            </td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The delta vector, representing the difference between control and treated
+                conditions in latent space.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>pd.DataFrame: A DataFrame containing genes as the index and their perturbation coefficients as a column.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="Exception">Exception</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If the model is not trained or the decoder is non-linear.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>delta = np.random.randn(latent_dim)
+gene_coef_df = model.get_gene_perturb_coef(delta)
+print(gene_coef_df)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/PCAEval.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_gene_perturb_coef</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Get gene perturbation coefficients for a given delta.</span>
+
+<span class="sd">    This method calculates gene-specific perturbation coefficients using the decoder&#39;s weights and the provided delta.</span>
+<span class="sd">    If you have performed linear regression, you can input the regression weights for delta. This will provide general</span>
+<span class="sd">    regression weights instead of gene-specific ones. The method uses the dot product of the linear decoder&#39;s weights</span>
+<span class="sd">    with the delta to compute the coefficients and returns a DataFrame of genes and their perturbation coefficients.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        delta (numpy.ndarray): The delta vector, representing the difference between control and treated</span>
+<span class="sd">                            conditions in latent space.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: A DataFrame containing genes as the index and their perturbation coefficients as a column.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Exception: If the model is not trained or the decoder is non-linear.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; delta = np.random.randn(latent_dim)</span>
+<span class="sd">        &gt;&gt;&gt; gene_coef_df = model.get_gene_perturb_coef(delta)</span>
+<span class="sd">        &gt;&gt;&gt; print(gene_coef_df)</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_trained_</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_linear_decoder</span><span class="p">:</span>
+        <span class="n">W</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">decoder</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">gene_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">gene_weight_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">j</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">var_names</span><span class="p">,</span> <span class="n">gene_weights</span><span class="p">)},</span>
+                <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gene_weights&quot;</span><span class="p">],</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">gene_weight_df</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Either model isn&#39;t trained or has a non-linear decoder.&quot;</span>
+            <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="vidr.PCAEval.PCAEval.get_pseudo_dose" class="doc doc-heading">
+            <code class=" language-python"><span class="n">get_pseudo_dose</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">cell_types</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#vidr.PCAEval.PCAEval.get_pseudo_dose" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Calculate the pseudodose ordering of cells by projecting them orthogonally onto the span of the delta.</p>
+<p>This method computes the pseudodose values of the cells by projecting the cells' expression data onto the 
+latent vector (delta). It can be applied to specific cell types if provided. The pseudodose values represent 
+the orthogonal projection of each cell onto the delta, which can be interpreted as a measure of cell state.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>delta</code>
+            </td>
+            <td>
+                  <code><span title="numpy.ndarray">ndarray</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The latent vector representing the perturbation or difference between two conditions 
+                in latent space.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_types</code>
+            </td>
+            <td>
+                  <code>list of str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A list of cell types to include in the pseudodose calculation. 
+                                If <code>None</code>, all cell types in the AnnData object will be used.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>numpy.ndarray: An array of pseudodose values for each cell, representing its position along the span of delta.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>delta = np.random.randn(latent_dim)
+pseudo_dose = model.get_pseudo_dose(delta, cell_types=["CD4T", "B-cells"])
+print(pseudo_dose)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/PCAEval.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_pseudo_dose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">cell_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Calculate the pseudodose ordering of cells by projecting them orthogonally onto the span of the delta.</span>
+
+<span class="sd">    This method computes the pseudodose values of the cells by projecting the cells&#39; expression data onto the </span>
+<span class="sd">    latent vector (delta). It can be applied to specific cell types if provided. The pseudodose values represent </span>
+<span class="sd">    the orthogonal projection of each cell onto the delta, which can be interpreted as a measure of cell state.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        delta (numpy.ndarray): The latent vector representing the perturbation or difference between two conditions </span>
+<span class="sd">                            in latent space.</span>
+<span class="sd">        cell_types (list of str, optional): A list of cell types to include in the pseudodose calculation. </span>
+<span class="sd">                                            If `None`, all cell types in the AnnData object will be used.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: An array of pseudodose values for each cell, representing its position along the span of delta.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; delta = np.random.randn(latent_dim)</span>
+<span class="sd">        &gt;&gt;&gt; pseudo_dose = model.get_pseudo_dose(delta, cell_types=[&quot;CD4T&quot;, &quot;B-cells&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; print(pseudo_dose)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">cell_type_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scvi_setup_dict_</span><span class="p">[</span><span class="s2">&quot;categorical_mappings&quot;</span><span class="p">][</span>
+            <span class="s2">&quot;_scvi_labels&quot;</span>
+        <span class="p">][</span><span class="s2">&quot;original_key&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">cell_types</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">adata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">adata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cell_types</span><span class="p">),</span> <span class="p">:]</span>
+
+    <span class="n">pt_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">:</span>
+        <span class="n">pt_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">pt_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pt_value</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pt_values</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="vidr.PCAEval.PCAEval.predict" class="doc doc-heading">
+            <code class=" language-python"><span class="n">predict</span><span class="p">(</span><span class="n">cell_type_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">treatment_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ctrl_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">treat_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">doses</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#vidr.PCAEval.PCAEval.predict" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Predicts the cell type provided by the user in the treated condition.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for the cell type information in <code>adata.obs</code>. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>treatment_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for the treatment or condition information in <code>adata.obs</code>. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>ctrl_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for the control condition in <code>treatment_key</code>. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>treat_key</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Key for the treated condition in <code>treatment_key</code>. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>cell_type_to_predict</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The cell type to be predicted. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>regression</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to perform regression on the latent space. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>continuous</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Whether to predict continuous doses. Defaults to False.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>doses</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of doses to predict if <code>continuous</code> is True. Defaults to None.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>AnnData</code></td>            <td>
+                  <code><span title="anndata.AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An AnnData object containing the predicted cells in the primary space.
+If <code>regression</code> is True, also returns the regression model.
+If <code>continuous</code> is True, returns a dictionary of AnnData objects for each dose.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/PCAEval.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">cell_type_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">treatment_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">ctrl_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">treat_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">regression</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">continuous</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">doses</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnnData</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Predicts the cell type provided by the user in the treated condition.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cell_type_key (str, optional): </span>
+<span class="sd">            Key for the cell type information in `adata.obs`. Defaults to None.</span>
+<span class="sd">        treatment_key (str, optional): </span>
+<span class="sd">            Key for the treatment or condition information in `adata.obs`. Defaults to None.</span>
+<span class="sd">        ctrl_key (str, optional): </span>
+<span class="sd">            Key for the control condition in `treatment_key`. Defaults to None.</span>
+<span class="sd">        treat_key (str, optional): </span>
+<span class="sd">            Key for the treated condition in `treatment_key`. Defaults to None.</span>
+<span class="sd">        cell_type_to_predict (str, optional): </span>
+<span class="sd">            The cell type to be predicted. Defaults to None.</span>
+<span class="sd">        regression (bool, optional): </span>
+<span class="sd">            Whether to perform regression on the latent space. Defaults to False.</span>
+<span class="sd">        continuous (bool, optional): </span>
+<span class="sd">            Whether to predict continuous doses. Defaults to False.</span>
+<span class="sd">        doses (list, optional): </span>
+<span class="sd">            List of doses to predict if `continuous` is True. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        AnnData: </span>
+<span class="sd">            An AnnData object containing the predicted cells in the primary space.</span>
+<span class="sd">            If `regression` is True, also returns the regression model.</span>
+<span class="sd">            If `continuous` is True, returns a dictionary of AnnData objects for each dose.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># use keys registered from `setup_anndata()</span>
+
+    <span class="n">ctrl_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">]</span>
+    <span class="n">treat_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">]</span>
+    <span class="n">ctrl_x</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span><span class="n">ctrl_x</span><span class="p">,</span> <span class="n">cell_type_key</span><span class="p">)</span>
+    <span class="n">treat_x</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span><span class="n">treat_x</span><span class="p">,</span> <span class="n">cell_type_key</span><span class="p">)</span>
+
+    <span class="c1"># Balancing across treatments</span>
+    <span class="n">new_adata</span> <span class="o">=</span> <span class="n">ctrl_x</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_x</span><span class="p">)</span>
+    <span class="n">new_adata</span> <span class="o">=</span> <span class="n">random_sample</span><span class="p">(</span>
+        <span class="n">new_adata</span><span class="p">,</span> <span class="n">treatment_key</span><span class="p">,</span> <span class="n">max_or_min</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+        <span class="n">new_adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+    <span class="c1"># Getting testing data</span>
+    <span class="n">ctrl_data</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span>
+        <span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell_type_to_predict</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">latent_cd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="c1"># Are we regressing the delta on the latent space or not</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+        <span class="c1"># No regression on latent space</span>
+        <span class="n">ctrl_x</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">treat_x</span> <span class="o">=</span> <span class="n">new_adata</span><span class="p">[</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Compress data to latent space and then calculate the delta</span>
+        <span class="n">latent_ctrl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ctrl_x</span><span class="o">.</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">latent_treat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">treat_x</span><span class="o">.</span><span class="n">X</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">latent_treat</span> <span class="o">-</span> <span class="n">latent_ctrl</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Regression on latent space</span>
+        <span class="n">latent_X</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">new_adata</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">latent_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">latent_X</span><span class="p">,</span> <span class="n">obs</span><span class="o">=</span><span class="n">new_adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="c1"># Get deltas and control centroids for each cell tpye in the training dataset</span>
+        <span class="n">deltas</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">latent_centroids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">cell_types</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cell_types</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cell</span> <span class="o">!=</span> <span class="n">cell_type_to_predict</span><span class="p">:</span>
+                <span class="n">latent_ctrl</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[</span>
+                    <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span>
+                    <span class="o">&amp;</span> <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">ctrl_key</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="n">latent_treat</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[</span>
+                    <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_type_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span>
+                    <span class="o">&amp;</span> <span class="p">(</span><span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">treatment_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">treat_key</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="n">ctrl_centroid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">treat_centroid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span>
+                    <span class="n">latent_ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+                <span class="p">)</span>
+                <span class="n">deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+                <span class="n">latent_centroids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ctrl_centroid</span><span class="p">)</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="n">reg</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">latent_centroids</span><span class="p">,</span> <span class="n">deltas</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">latent_cd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)])[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Continuous or Binary Perturbation</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">continuous</span><span class="p">:</span>
+        <span class="n">treat_pred</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">+</span> <span class="n">latent_cd</span>
+        <span class="n">predicted_cells</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">treat_pred</span><span class="p">)</span>
+        <span class="n">predicted_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span>
+            <span class="n">X</span><span class="o">=</span><span class="n">predicted_cells</span><span class="p">,</span>
+            <span class="n">obs</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="n">var</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="n">obsm</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obsm</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">predicted_adata</span><span class="p">,</span> <span class="n">delta</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">predicted_adata</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">treat_pred_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">d</span><span class="p">:</span> <span class="n">delta</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">doses</span><span class="p">)))</span> <span class="o">+</span> <span class="n">latent_cd</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">predicted_cells_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">d</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">treat_pred_dict</span><span class="p">[</span><span class="n">d</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">predicted_adata_dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">d</span><span class="p">:</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span>
+                <span class="n">X</span><span class="o">=</span><span class="n">predicted_cells_dict</span><span class="p">[</span><span class="n">d</span><span class="p">],</span>
+                <span class="n">obs</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="n">var</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="n">obsm</span><span class="o">=</span><span class="n">ctrl_data</span><span class="o">.</span><span class="n">obsm</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">doses</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">doses</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">regression</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">predicted_adata_dict</span><span class="p">,</span> <span class="n">delta</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">predicted_adata_dict</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="vidr.PCAEval.PCAEval.reg_mean_plot" class="doc doc-heading">
+            <code class=" language-python"><span class="n">reg_mean_plot</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">axis_keys</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">condition_key</span><span class="p">,</span> <span class="n">path_to_save</span><span class="o">=</span><span class="s1">&#39;./reg_mean.pdf&#39;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gene_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">top_100_genes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_coeff</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">y_coeff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+<a href="#vidr.PCAEval.PCAEval.reg_mean_plot" class="headerlink" title="Permanent link">&para;</a></h2>
+
+
+    <div class="doc doc-contents ">
+
+        <div class="codehilite"><pre><span></span><code><span class="nv">Plots</span><span class="w"> </span><span class="nv">mean</span><span class="w"> </span><span class="nv">matching</span><span class="w"> </span><span class="nv">figure</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">set</span><span class="w"> </span><span class="nv">of</span><span class="w"> </span><span class="nv">specific</span><span class="w"> </span><span class="nv">genes</span>.
+</code></pre></div>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>adata</code>
+            </td>
+            <td>
+                  <code><span title="anndata.AnnData">AnnData</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>AnnData object with equivalent structure to the initial AnnData. If <code>None</code>, defaults to the
+AnnData object used to initialize the model. Must have been set up with <code>batch_key</code> and <code>labels_key</code>
+corresponding to batch and cell type metadata, respectively.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>axis_keys</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary of <code>adata.obs</code> keys that are used by the axes of the plot. Must be in the form 
+<code>{"x": "Key for x-axis", "y": "Key for y-axis"}</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>labels</code>
+            </td>
+            <td>
+                  <code><span title="dict">dict</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Dictionary of axis labels in the form <code>{"x": "x-axis-name", "y": "y-axis name"}</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>path_to_save</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Path where the plot will be saved.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;./reg_mean.pdf&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>save</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If <code>True</code>, the plot will be saved to the specified path.</p>
+              </div>
+            </td>
+            <td>
+                  <code>True</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>gene_list</code>
+            </td>
+            <td>
+                  <code><span title="list">list</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>List of gene names to be plotted.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>show</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>If <code>True</code>, the plot will be displayed after saving.</p>
+              </div>
+            </td>
+            <td>
+                  <code>False</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Examples:</span></p>
+    <div class="codehilite"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">anndata</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scgen</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;./tests/data/train.h5ad&quot;</span><span class="p">,</span> <span class="n">backup_url</span><span class="o">=</span><span class="s2">&quot;https://goo.gl/33HtVh&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scgen</span><span class="o">.</span><span class="n">setup_anndata</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span> <span class="o">=</span> <span class="n">scgen</span><span class="o">.</span><span class="n">SCGEN</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unperturbed_data</span> <span class="o">=</span> <span class="n">train</span><span class="p">[((</span><span class="n">train</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;cell_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CD4T&quot;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;condition&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;control&quot;</span><span class="p">))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">adata</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">adata_to_predict</span><span class="o">=</span><span class="n">unperturbed_data</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">ctrl_key</span><span class="o">=</span><span class="s2">&quot;control&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">treat_key</span><span class="o">=</span><span class="s2">&quot;treatulated&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pred_adata</span> <span class="o">=</span> <span class="n">anndata</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">pred</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">obs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;condition&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pred&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">pred</span><span class="p">)},</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">var</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;var_names&quot;</span><span class="p">:</span> <span class="n">train</span><span class="o">.</span><span class="n">var_names</span><span class="p">},</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CD4T</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;cell_type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CD4T&quot;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">all_adata</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">pred_adata</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">network</span><span class="o">.</span><span class="n">reg_mean_plot</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">all_adata</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">axis_keys</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;control&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y1&quot;</span><span class="p">:</span> <span class="s2">&quot;treatulated&quot;</span><span class="p">},</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">gene_list</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ISG15&quot;</span><span class="p">,</span> <span class="s2">&quot;CD3D&quot;</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;tests/reg_mean.pdf&quot;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">show</span><span class="o">=</span><span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">)</span>
+</code></pre></div>
+
+
+            <details class="quote">
+              <summary>Source code in <code>vidr/PCAEval.py</code></summary>
+              <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">reg_mean_plot</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">adata</span><span class="p">,</span>
+    <span class="n">axis_keys</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">condition_key</span><span class="p">,</span>
+    <span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;./reg_mean.pdf&quot;</span><span class="p">,</span>
+    <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">gene_list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">top_100_genes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">x_coeff</span><span class="o">=</span><span class="mf">0.30</span><span class="p">,</span>
+    <span class="n">y_coeff</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Plots mean matching figure for a set of specific genes.</span>
+
+<span class="sd">Args:</span>
+<span class="sd">    adata (AnnData): </span>
+<span class="sd">        AnnData object with equivalent structure to the initial AnnData. If `None`, defaults to the</span>
+<span class="sd">        AnnData object used to initialize the model. Must have been set up with `batch_key` and `labels_key`</span>
+<span class="sd">        corresponding to batch and cell type metadata, respectively.</span>
+<span class="sd">    axis_keys (dict): </span>
+<span class="sd">        Dictionary of `adata.obs` keys that are used by the axes of the plot. Must be in the form </span>
+<span class="sd">        `{&quot;x&quot;: &quot;Key for x-axis&quot;, &quot;y&quot;: &quot;Key for y-axis&quot;}`.</span>
+<span class="sd">    labels (dict): </span>
+<span class="sd">        Dictionary of axis labels in the form `{&quot;x&quot;: &quot;x-axis-name&quot;, &quot;y&quot;: &quot;y-axis name&quot;}`.</span>
+<span class="sd">    path_to_save (str): </span>
+<span class="sd">        Path where the plot will be saved.</span>
+<span class="sd">    save (bool): </span>
+<span class="sd">        If `True`, the plot will be saved to the specified path.</span>
+<span class="sd">    gene_list (list): </span>
+<span class="sd">        List of gene names to be plotted.</span>
+<span class="sd">    show (bool): </span>
+<span class="sd">        If `True`, the plot will be displayed after saving.</span>
+
+<span class="sd">Examples:</span>
+<span class="sd">    &gt;&gt;&gt; import anndata</span>
+<span class="sd">    &gt;&gt;&gt; import scgen</span>
+<span class="sd">    &gt;&gt;&gt; import scanpy as sc</span>
+<span class="sd">    &gt;&gt;&gt; train = sc.read(&quot;./tests/data/train.h5ad&quot;, backup_url=&quot;https://goo.gl/33HtVh&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; scgen.setup_anndata(train)</span>
+<span class="sd">    &gt;&gt;&gt; network = scgen.SCGEN(train)</span>
+<span class="sd">    &gt;&gt;&gt; network.train()</span>
+<span class="sd">    &gt;&gt;&gt; unperturbed_data = train[((train.obs[&quot;cell_type&quot;] == &quot;CD4T&quot;) &amp; (train.obs[&quot;condition&quot;] == &quot;control&quot;))]</span>
+<span class="sd">    &gt;&gt;&gt; pred, delta = network.predict(</span>
+<span class="sd">    &gt;&gt;&gt;     adata=train,</span>
+<span class="sd">    &gt;&gt;&gt;     adata_to_predict=unperturbed_data,</span>
+<span class="sd">    &gt;&gt;&gt;     ctrl_key=&quot;control&quot;,</span>
+<span class="sd">    &gt;&gt;&gt;     treat_key=&quot;treatulated&quot;</span>
+<span class="sd">    &gt;&gt;&gt; )</span>
+<span class="sd">    &gt;&gt;&gt; pred_adata = anndata.AnnData(</span>
+<span class="sd">    &gt;&gt;&gt;     pred,</span>
+<span class="sd">    &gt;&gt;&gt;     obs={&quot;condition&quot;: [&quot;pred&quot;] * len(pred)},</span>
+<span class="sd">    &gt;&gt;&gt;     var={&quot;var_names&quot;: train.var_names},</span>
+<span class="sd">    &gt;&gt;&gt; )</span>
+<span class="sd">    &gt;&gt;&gt; CD4T = train[train.obs[&quot;cell_type&quot;] == &quot;CD4T&quot;]</span>
+<span class="sd">    &gt;&gt;&gt; all_adata = CD4T.concatenate(pred_adata)</span>
+<span class="sd">    &gt;&gt;&gt; network.reg_mean_plot(</span>
+<span class="sd">    &gt;&gt;&gt;     all_adata,</span>
+<span class="sd">    &gt;&gt;&gt;     axis_keys={&quot;x&quot;: &quot;control&quot;, &quot;y&quot;: &quot;pred&quot;, &quot;y1&quot;: &quot;treatulated&quot;},</span>
+<span class="sd">    &gt;&gt;&gt;     gene_list=[&quot;ISG15&quot;, &quot;CD3D&quot;],</span>
+<span class="sd">    &gt;&gt;&gt;     path_to_save=&quot;tests/reg_mean.pdf&quot;,</span>
+<span class="sd">    &gt;&gt;&gt;     show=False</span>
+<span class="sd">    &gt;&gt;&gt; )</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="p">):</span>
+        <span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">A</span>
+
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">top_100_genes</span>
+    <span class="n">treat</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+    <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">diff_genes</span><span class="p">,</span> <span class="s2">&quot;tolist&quot;</span><span class="p">):</span>
+            <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">adata_diff</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span> <span class="n">diff_genes</span><span class="p">]</span>
+        <span class="n">treat_diff</span> <span class="o">=</span> <span class="n">adata_diff</span><span class="p">[</span><span class="n">adata_diff</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]]</span>
+        <span class="n">ctrl_diff</span> <span class="o">=</span> <span class="n">adata_diff</span><span class="p">[</span><span class="n">adata_diff</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">condition_key</span><span class="p">]</span> <span class="o">==</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]]</span>
+        <span class="n">x_diff</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ctrl_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">y_diff</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat_diff</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="p">,</span> <span class="n">p_value_diff</span><span class="p">,</span> <span class="n">std_err_diff</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span>
+            <span class="n">x_diff</span><span class="p">,</span> <span class="n">y_diff</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;top_100 DEGs mean: &quot;</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">ctrl</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">treat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All genes mean: &quot;</span><span class="p">,</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]:</span> <span class="n">x</span><span class="p">,</span> <span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]:</span> <span class="n">y</span><span class="p">})</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">axis_keys</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;range&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;range&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gene_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gene_list</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">var_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">x_bar</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">y_bar</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyplot</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">y_bar</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">))</span>
+            <span class="n">pyplot</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">y_bar</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+            <span class="c1"># if &quot;y1&quot; in axis_keys.keys():</span>
+            <span class="c1"># y1_bar = y1[j]</span>
+            <span class="c1"># pyplot.text(x_bar, y1_bar, i, fontsize=11, color=&quot;black&quot;)</span>
+    <span class="k">if</span> <span class="n">gene_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">adjust_text</span><span class="p">(</span>
+            <span class="n">texts</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+            <span class="n">force_points</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_coeff</span><span class="p">,</span>
+        <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_coeff</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+        <span class="sa">r</span><span class="s2">&quot;$\mathrm{R^2_{\mathrm{\mathsf{all\ genes}}}}$= &quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r_value</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;textsize&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_coeff</span><span class="p">,</span>
+            <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">y_coeff</span> <span class="o">+</span> <span class="mf">0.15</span><span class="p">)</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+            <span class="sa">r</span><span class="s2">&quot;$\mathrm{R^2_{\mathrm{\mathsf{top\ 100\ DEGs}}}}$= &quot;</span>
+            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r_value_diff</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="mi">2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;textsize&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path_to_save</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+        <span class="n">pyplot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">pyplot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">diff_genes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">r_value_diff</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "search.highlight", "search.share", "search.suggest", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

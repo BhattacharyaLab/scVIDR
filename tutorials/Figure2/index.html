@@ -1,0 +1,1151 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Comprehensive project documentation for scVIDR.">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes - scVIDR</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="scVIDR" class="md-header__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            scVIDR
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../installation/getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../API/API-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../tutorials-introduction/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tutorial
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="scVIDR" class="md-nav__button md-logo" aria-label="scVIDR" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    scVIDR
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API/API-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#importing-required-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing Required Libraries
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-preprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Preprocessing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training the Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure-2a-umap-projection-of-latent-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure 2A: UMAP Projection of Latent Space
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure-2b-pca-plots-comparing-prediction-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure 2B: PCA Plots Comparing Prediction Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure-2c-regression-analysis-with-predicted-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure 2C: Regression Analysis with Predicted Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#figure-2d-comparison-of-gene-expression-across-treatments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Figure 2D: Comparison of Gene Expression Across Treatments
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes"><strong>Prediction of In Vivo Single-Cell Gene Expression of Portal Hepatocytes</strong><a class="headerlink" href="#prediction-of-in-vivo-single-cell-gene-expression-of-portal-hepatocytes" title="Permanent link">&para;</a></h1>
+<p>This demonstrates the application of scVIDR to predict gene expression changes in liver cell types, focusing on portal hepatocytes treated with 30 μg/kg TCDD. It includes UMAP visualizations of latent spaces, PCA comparisons, regression plots for predicted vs. observed gene expression, and performance evaluations using R² scores across models and gene sets.</p>
+<h2 id="importing-required-libraries">Importing Required Libraries<a class="headerlink" href="#importing-required-libraries" title="Permanent link">&para;</a></h2>
+<p>Essential libraries are imported for data handling, single-cell analysis, statistical computations, and visualization.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;../vidr/&#39;</span><span class="p">)</span>
+
+<span class="c1"># Import the VIDR functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vidr</span><span class="w"> </span><span class="kn">import</span> <span class="n">VIDR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">utils</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">scanpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scgen</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">scg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gseapy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">spatial</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">anndata</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnnData</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">statannotations.Annotator</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1">#For calculating statistical distance</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geomloss</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pykeops</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pykeops</span>
+<span class="n">pykeops</span><span class="o">.</span><span class="n">clean_pykeops</span><span class="p">()</span>          <span class="c1"># just in case old build files are still present</span>
+<span class="n">pykeops</span><span class="o">.</span><span class="n">test_numpy_bindings</span><span class="p">()</span>    <span class="c1"># perform the compilation</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">scvi</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">set_figure_params</span><span class="p">(</span><span class="n">dpi</span> <span class="o">=</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">figdir</span> <span class="o">=</span> <span class="s2">&quot;../figures&quot;</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;dark&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="loading-data">Loading Data<a class="headerlink" href="#loading-data" title="Permanent link">&para;</a></h2>
+<p>The single-cell dataset is loaded in AnnData format.</p>
+<div class="highlight"><pre><span></span><code><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="s2">&quot;../data/nault2021_singleDose.h5ad&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="data-preprocessing">Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permanent link">&para;</a></h2>
+<p>Filters specific cell types, normalizes expression, selects the top 5000 highly variable genes, and formats dose information.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Prepare Data Set</span>
+<span class="n">cell_types_of_int</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hepatocytes - central&quot;</span><span class="p">,</span> <span class="s2">&quot;Hepatocytes - portal&quot;</span><span class="p">,</span> <span class="s2">&quot;Cholangiocytes&quot;</span><span class="p">,</span> <span class="s2">&quot;Stellate Cells&quot;</span><span class="p">,</span> <span class="s2">&quot;Portal Fibroblasts&quot;</span><span class="p">,</span> <span class="s2">&quot;Endothelial Cells&quot;</span><span class="p">]</span>
+<span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cell_types_of_int</span><span class="p">)]</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">normalize_total</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">highly_variable_genes</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_top_genes</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+
+<span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">Dose</span><span class="p">]</span>
+<span class="n">adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[:,</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">highly_variable</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="training-the-model">Training the Model<a class="headerlink" href="#training-the-model" title="Permanent link">&para;</a></h2>
+<p>Prepare data for training, instantiate the VIDR model, and load pre-trained weights.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Training model</span>
+<span class="n">cell</span> <span class="o">=</span> <span class="s2">&quot;Hepatocytes - portal&quot;</span>
+<span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span> <span class="o">=</span> <span class="n">prepare_data</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="n">normalized</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">train_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;cell_dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">train_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Dose&quot;</span><span class="p">],</span> <span class="n">train_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">])]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">VIDR</span><span class="p">(</span><span class="n">train_adata</span><span class="p">,</span> <span class="n">linear_decoder</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1">#     model.train(</span>
+<span class="c1">#     max_epochs=100,</span>
+<span class="c1">#     batch_size=128,</span>
+<span class="c1">#     early_stopping=True,</span>
+<span class="c1">#     early_stopping_patience=25)</span>
+
+<span class="c1">#     model.save(f&quot;../../data/VAE_Binary_Prediction_Dioxin_5000g_{cell}.pt&quot;)</span>
+<span class="n">vae</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../data/VAE_Binary_Prediction_Dioxin_5000g_</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">.pt/&quot;</span><span class="p">,</span> <span class="n">train_adata</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="figure-2a-umap-projection-of-latent-space">Figure 2A: UMAP Projection of Latent Space<a class="headerlink" href="#figure-2a-umap-projection-of-latent-space" title="Permanent link">&para;</a></h2>
+<p>UMAP visualization highlights the differences between control and treated samples in latent space.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#UMAP Projection of latent space</span>
+<span class="n">latent_X</span> <span class="o">=</span> <span class="n">vae</span><span class="o">.</span><span class="n">get_latent_representation</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">latent_adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">AnnData</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">latent_X</span><span class="p">,</span> <span class="n">obs</span><span class="o">=</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="n">cell_dose</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Dose&quot;</span><span class="p">],</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">])]</span>
+<span class="n">training</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Train&quot;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">cell</span><span class="o">+</span><span class="s2">&quot;_30&quot;</span> <span class="k">else</span> <span class="s2">&quot;Test&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">cell_dose</span><span class="p">]</span>
+<span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Cell_Dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cell_dose</span>
+<span class="n">latent_adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Training Split&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">training</span>
+
+<span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">latent_adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">latent_adata</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">latent_adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cell_Dose&#39;</span><span class="p">],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">palette</span> <span class="o">=</span> <span class="s2">&quot;Paired&quot;</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span><span class="s2">&quot;2A1.svg&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_8_2.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">latent_adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Training Split&#39;</span><span class="p">],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">palette</span> <span class="o">=</span><span class="s2">&quot;Dark2&quot;</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="s2">&quot;2A2.svg&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_9_1.png" /></p>
+<h2 id="figure-2b-pca-plots-comparing-prediction-models">Figure 2B: PCA Plots Comparing Prediction Models<a class="headerlink" href="#figure-2b-pca-plots-comparing-prediction-models" title="Permanent link">&para;</a></h2>
+<p>Predicts gene expression under treatment and control without regression, combines the data, visualizes it using PCA, identifies differentially expressed genes, and evaluates prediction accuracy using R².</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">vae</span>
+<span class="n">pred</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+<span class="n">ctrl_key</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="n">treat_key</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="n">cell_type_to_predict</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span>
+<span class="n">regression</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">pred</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;pred&#39;</span>
+<span class="n">ctrl_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">))]</span>
+<span class="n">treat_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">))]</span>
+<span class="n">eval_adata1</span> <span class="o">=</span> <span class="n">ctrl_adata</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_adata</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="n">treatments</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eval_adata1</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Control&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TCDD&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;VAEArith&quot;</span><span class="p">)</span>
+<span class="n">eval_adata1</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Treatment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">treatments</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">eval_adata1</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">eval_adata1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s2">&quot;2B1.svg&quot;</span><span class="p">)</span>
+<span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+<span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+<span class="n">r2_value</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">reg_mean_plot</span><span class="p">(</span>
+<span class="n">eval_adata1</span><span class="p">,</span>
+<span class="n">axis_keys</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">},</span>
+<span class="n">gene_list</span><span class="o">=</span><span class="n">diff_genes</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span>
+<span class="n">top_100_genes</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span>
+<span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;Predicted Expression&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;Real Expression&quot;</span><span class="p">},</span>
+<span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;../figures/2B2.svg&quot;</span><span class="p">,</span>
+<span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;VAEArith&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2_value</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_11_10.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_11_12.png" /></p>
+<div class="codehilite"><pre><span></span><code>(0.7412729808604916, 0.6055730593169139)
+</code></pre></div>
+
+<h2 id="figure-2c-regression-analysis-with-predicted-data">Figure 2C: Regression Analysis with Predicted Data<a class="headerlink" href="#figure-2c-regression-analysis-with-predicted-data" title="Permanent link">&para;</a></h2>
+<p>Predicts gene expression under treatment and control using regression, combines predicted and real data, and visualizes the results with PCA and regression plots. It also identifies differentially expressed genes and evaluates model accuracy using the R² value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">vae</span>
+<span class="n">pred</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+<span class="n">ctrl_key</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="n">treat_key</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+<span class="n">cell_type_to_predict</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span>
+<span class="n">regression</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">pred</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;pred&#39;</span>
+<span class="n">ctrl_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">))]</span>
+<span class="n">treat_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">))]</span>
+<span class="n">eval_adata2</span> <span class="o">=</span> <span class="n">ctrl_adata</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_adata</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+<span class="n">treatments</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">eval_adata2</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Control&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TCDD&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">treatments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;scVIDR&quot;</span><span class="p">)</span>
+<span class="n">eval_adata2</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;Treatment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">treatments</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">eval_adata2</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">pca</span><span class="p">(</span><span class="n">eval_adata2</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s2">&quot;2C1.svg&quot;</span><span class="p">)</span>
+<span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+<span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+<span class="n">r2_value</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">reg_mean_plot</span><span class="p">(</span>
+<span class="n">eval_adata2</span><span class="p">,</span>
+<span class="n">axis_keys</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;30&quot;</span><span class="p">},</span>
+<span class="n">gene_list</span><span class="o">=</span><span class="n">diff_genes</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span>
+<span class="n">top_100_genes</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span>
+<span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;Predicted Expression&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;Real Expression&quot;</span><span class="p">},</span>
+<span class="n">path_to_save</span><span class="o">=</span><span class="s2">&quot;../figures/Figure2C2.svg&quot;</span><span class="p">,</span>
+<span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;scVIDR&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2_value</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_13_8.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_13_10.png" /></p>
+<div class="codehilite"><pre><span></span><code>(0.9331575277168523, 0.8371578892235645)
+</code></pre></div>
+
+<h2 id="figure-2d-comparison-of-gene-expression-across-treatments">Figure 2D: Comparison of Gene Expression Across Treatments<a class="headerlink" href="#figure-2d-comparison-of-gene-expression-across-treatments" title="Permanent link">&para;</a></h2>
+<p>Combining predicted and real data to compare gene expression across treatments and visualizes <strong>Cyp1a2</strong> expression using a violin plot.</p>
+<div class="highlight"><pre><span></span><code><span class="n">eval_adata</span> <span class="o">=</span> <span class="n">eval_adata1</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">eval_adata2</span><span class="p">)</span>
+<span class="n">eval_adata</span><span class="o">.</span><span class="n">obs</span>
+</code></pre></div>
+<div style="overflow-x: auto; width: 100%; max-width: 100vw;">
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dose</th>
+      <th>batch</th>
+      <th>celltype</th>
+      <th>dose</th>
+      <th>_scvi_batch</th>
+      <th>_scvi_labels</th>
+      <th>_scvi_local_l_mean</th>
+      <th>_scvi_local_l_var</th>
+      <th>cell_dose</th>
+      <th>Treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>AAACCCACAGTTAGGG_1-0-0-0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>Hepatocytes - portal</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Control</td>
+    </tr>
+    <tr>
+      <th>AAACCCAGTGCCTGCA_1-0-0-0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>Hepatocytes - portal</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Control</td>
+    </tr>
+    <tr>
+      <th>AAACGAACATAGAATG_1-0-0-0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>Hepatocytes - portal</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Control</td>
+    </tr>
+    <tr>
+      <th>AAACGAAGTCGATTAC_1-0-0-0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>Hepatocytes - portal</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Control</td>
+    </tr>
+    <tr>
+      <th>AAACGCTTCGGCATCG_1-0-0-0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>Hepatocytes - portal</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Control</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>ATAGAGAAGGTCCCGT_3-0-0-2-1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Hepatocytes - portal</td>
+      <td>pred</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.716166</td>
+      <td>0.067732</td>
+      <td>Hepatocytes - portal_0</td>
+      <td>scVIDR</td>
+    </tr>
+    <tr>
+      <th>TTCCTTCTCTCCCAAC_3-0-0-2-1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Hepatocytes - portal</td>
+      <td>pred</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.716166</td>
+      <td>0.067732</td>
+      <td>Hepatocytes - portal_0</td>
+      <td>scVIDR</td>
+    </tr>
+    <tr>
+      <th>CAGCACGAGCTCCGAC_2-0-0-2-1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Hepatocytes - portal</td>
+      <td>pred</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.716166</td>
+      <td>0.067732</td>
+      <td>Hepatocytes - portal_0</td>
+      <td>scVIDR</td>
+    </tr>
+    <tr>
+      <th>AACCATGCAGGCCCTA_1-0-0-2-1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Hepatocytes - portal</td>
+      <td>pred</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.716166</td>
+      <td>0.067732</td>
+      <td>Hepatocytes - portal_0</td>
+      <td>scVIDR</td>
+    </tr>
+    <tr>
+      <th>CACGGGTTCGCACGAC_2-0-0-2-1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>Hepatocytes - portal</td>
+      <td>pred</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.716166</td>
+      <td>0.067732</td>
+      <td>Hepatocytes - portal_0</td>
+      <td>scVIDR</td>
+    </tr>
+  </tbody>
+</table>
+<p>21902 rows × 10 columns</p>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">violin</span><span class="p">(</span><span class="n">eval_adata</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Cyp1a2&quot;</span><span class="p">],</span> <span class="n">groupby</span> <span class="o">=</span> <span class="s2">&quot;Treatment&quot;</span><span class="p">,</span> <span class="n">rotation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s2">&quot;tab10&quot;</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s2">&quot;2D.svg&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_17_2.png" /></p>
+<h1 id="figure-2e-comprehensive-analysis-of-gene-expression-predictions-across-cell-types">Figure 2E: Comprehensive Analysis of Gene Expression Predictions Across Cell Types<a class="headerlink" href="#figure-2e-comprehensive-analysis-of-gene-expression-predictions-across-cell-types" title="Permanent link">&para;</a></h1>
+<p>Each cell type in the dataset is analyzed to predict gene expression changes between control and treated conditions. First, VIDR models are trained for each cell type, evaluated using non-regression-based predictions, and their performance is quantified. Next, pre-trained scVIDR models are used to make regression-based predictions for more precise analysis. Differentially expressed genes are identified for both approaches, and R² metrics are calculated to assess the accuracy of predictions.</p>
+<div class="highlight"><pre><span></span><code><span class="n">df_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">celltypes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">celltypes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span> <span class="o">=</span> <span class="n">prepare_data</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="n">normalized</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">VIDR</span><span class="p">(</span><span class="n">train_adata</span><span class="p">,</span> <span class="n">linear_decoder</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">max_epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">early_stopping</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">early_stopping_patience</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">.pt&quot;</span><span class="p">,</span> <span class="n">overwrite</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../data/VAE_Binary_Prediction_Dioxin_5000g_</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">.pt/&quot;</span><span class="p">,</span> <span class="n">train_adata</span><span class="p">)</span>
+
+    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;VAEArith&quot;</span>
+
+    <span class="n">pred</span><span class="p">,</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">ctrl_key</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="n">treat_key</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+    <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span>
+    <span class="n">regression</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">pred</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;pred&#39;</span>
+    <span class="n">ctrl_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">))]</span>
+    <span class="n">treat_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">))]</span>
+    <span class="n">eval_adata</span> <span class="o">=</span> <span class="n">ctrl_adata</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_adata</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+
+    <span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+
+    <span class="n">r2_df</span> <span class="o">=</span> <span class="n">calculate_r2_singledose</span><span class="p">(</span>
+        <span class="n">eval_adata</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">,</span> 
+        <span class="s2">&quot;dose&quot;</span><span class="p">,</span> 
+        <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">},</span> 
+        <span class="n">diff_genes</span><span class="o">=</span><span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> 
+        <span class="n">random_sample_coef</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="p">)</span>
+    <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_df</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">celltypes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+    <span class="n">train_adata</span><span class="p">,</span> <span class="n">test_adata</span> <span class="o">=</span> <span class="n">prepare_data</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">,</span> <span class="n">normalized</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">VIDR</span><span class="p">(</span><span class="n">train_adata</span><span class="p">,</span> <span class="n">linear_decoder</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1">#     model.train(</span>
+<span class="c1">#     max_epochs=100,</span>
+<span class="c1">#     batch_size=128,</span>
+<span class="c1">#     early_stopping=True,</span>
+<span class="c1">#     early_stopping_patience=25)</span>
+
+<span class="c1">#     model.save(f&quot;../../data/VAE_Binary_Prediction_Dioxin_5000g_{cell}.pt&quot;)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../../data/VAE_Binary_Prediction_Dioxin_5000g_</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">.pt/&quot;</span><span class="p">,</span> <span class="n">train_adata</span><span class="p">)</span>
+
+    <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;scVIDR&quot;</span>
+
+    <span class="n">pred</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
+    <span class="n">ctrl_key</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="n">treat_key</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="p">,</span>
+    <span class="n">cell_type_to_predict</span><span class="o">=</span><span class="n">cell</span><span class="p">,</span>
+    <span class="n">regression</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">pred</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;pred&#39;</span>
+    <span class="n">ctrl_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">))]</span>
+    <span class="n">treat_adata</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">))]</span>
+    <span class="n">eval_adata</span> <span class="o">=</span> <span class="n">ctrl_adata</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">treat_adata</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+
+    <span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+
+    <span class="n">r2_df</span> <span class="o">=</span> <span class="n">calculate_r2_singledose</span><span class="p">(</span>
+        <span class="n">eval_adata</span><span class="p">,</span> <span class="n">cell</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">,</span> 
+        <span class="s2">&quot;dose&quot;</span><span class="p">,</span> 
+        <span class="p">{</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="s2">&quot;pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="s2">&quot;30&quot;</span><span class="p">},</span> 
+        <span class="n">diff_genes</span><span class="o">=</span><span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> 
+        <span class="n">random_sample_coef</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">500</span>
+    <span class="p">)</span>
+    <span class="n">df_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r2_df</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">r2_values_allCells_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df_list</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">r2_values_allCells_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../data/SingleDose_Model_Results.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Comparing R<sup>2</sup> values of scVIDR and VAEArith across gene sets with statistical annotations.</p>
+<div class="highlight"><pre><span></span><code><span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scVIDR&#39;</span><span class="p">,</span> <span class="s1">&#39;VAEArith&#39;</span><span class="p">]</span>
+<span class="n">hue_order</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All HVGs&quot;</span><span class="p">,</span> <span class="s2">&quot;DEGs&quot;</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;R^2&quot;</span><span class="p">,</span>  <span class="n">data</span> <span class="o">=</span> <span class="n">r2_values_allCells_df</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;Gene Set&quot;</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">order</span><span class="p">,</span> <span class="n">hue_order</span> <span class="o">=</span> <span class="n">hue_order</span><span class="p">)</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">((</span><span class="s1">&#39;scVIDR&#39;</span><span class="p">,</span><span class="s1">&#39;All HVGs&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;VAEArith&#39;</span><span class="p">,</span> <span class="s1">&#39;All HVGs&#39;</span><span class="p">)),</span>
+    <span class="p">((</span><span class="s1">&#39;scVIDR&#39;</span><span class="p">,</span><span class="s1">&#39;DEGs&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;VAEArith&#39;</span><span class="p">,</span> <span class="s1">&#39;DEGs&#39;</span><span class="p">))</span>
+<span class="p">]</span>
+<span class="n">annotator</span> <span class="o">=</span> <span class="n">Annotator</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">r2_values_allCells_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Model&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;R^2&quot;</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;Gene Set&quot;</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">order</span><span class="p">)</span>
+<span class="n">annotator</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="s1">&#39;Mann-Whitney-gt&#39;</span><span class="p">,</span> <span class="n">text_format</span><span class="o">=</span><span class="s1">&#39;star&#39;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;outside&#39;</span><span class="p">)</span>
+<span class="n">annotator</span><span class="o">.</span><span class="n">apply_and_annotate</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$R^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../figures/Figure2E.svg&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_23_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">r2_values_allCells_df</span><span class="p">[</span><span class="n">r2_values_allCells_df</span><span class="p">[</span><span class="s2">&quot;Gene Set&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DEGs&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>Comparing R² values of scVIDR and VAEArith across cell types using a bar plot.</p>
+<div class="highlight"><pre><span></span><code><span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;scVIDR&#39;</span><span class="p">,</span> <span class="s1">&#39;VAEArith&#39;</span><span class="p">]</span>
+<span class="n">hue_order</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;All HVGs&quot;</span><span class="p">,</span> <span class="s2">&quot;DEGs&quot;</span><span class="p">]</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;Cell&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;R^2&quot;</span><span class="p">,</span>  <span class="n">data</span> <span class="o">=</span> <span class="n">r2_values_allCells_df</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span> <span class="n">hue_order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$R^2$ Top 100 DEGs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_25_1.png" /></p>
+<p>Identifies differentially expressed genes (DEGs) between treatment groups for each cell type, performs KEGG pathway enrichment analysis, and visualizes enriched pathways with bar plots.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">celltypes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+
+    <span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+    <span class="n">glist</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+    <span class="n">CD4T</span><span class="o">.</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">celltypes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+
+    <span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;celltype&quot;</span><span class="p">]</span> <span class="o">==</span><span class="n">cell</span><span class="p">]</span>
+    <span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;dose&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">)</span>
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;30&quot;</span><span class="p">]</span>
+    <span class="n">glist</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="p">[:</span><span class="mi">125</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">glist</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">glist</span> <span class="o">=</span> <span class="n">glist</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">enr</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">enrichr</span><span class="p">(</span><span class="n">gene_list</span><span class="o">=</span><span class="n">glist</span><span class="p">,</span>
+                     <span class="n">gene_sets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;KEGG_2019_Mouse&quot;</span><span class="p">],</span>
+                     <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mouse&#39;</span><span class="p">,</span> <span class="c1"># don&#39;t forget to set organism to the one you desired! e.g. Yeast</span>
+                     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;test_name&#39;</span><span class="p">,</span>
+                     <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;test/enrichr_kegg&#39;</span><span class="p">,</span>
+                     <span class="c1"># no_plot=True,</span>
+                     <span class="n">cutoff</span><span class="o">=</span><span class="mf">0.5</span> <span class="c1"># test dataset, use lower value from range(0,1)</span>
+                    <span class="p">)</span>
+    <span class="n">gp</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">enr</span><span class="o">.</span><span class="n">res2d</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_27_3.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_27_7.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_27_11.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_27_17.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_27_21.png" /></p>
+<p><img alt="png" src="../Figure2_files/Figure2_27_25.png" /></p>
+<p>Identifies and visualizes differentially expressed genes (DEGs) across cell types within the treated group (dose=30) using a Wilcoxon rank-sum test.</p>
+<div class="highlight"><pre><span></span><code><span class="n">CD4T</span> <span class="o">=</span> <span class="n">adata</span><span class="p">[</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;wilcoxon&quot;</span><span class="p">,</span> <span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">rank_genes_groups</span><span class="p">(</span><span class="n">CD4T</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_31_0.png" /></p>
+<p>Identifies and visualizes differentially expressed genes (DEGs) across cell types within the treated group (dose=30) using a Wilcoxon rank-sum test. differentially expressed genes (DEGs) between treatment groups for each cell type, performs WikiPathways enrichment analysis, and visualizes enriched pathways with bar plots.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cell_types_of_int</span><span class="p">:</span>
+    <span class="n">diff_genes</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="n">cell</span><span class="p">]</span>
+    <span class="n">glist</span> <span class="o">=</span> <span class="n">diff_genes</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">glist</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+    <span class="n">glist</span> <span class="o">=</span> <span class="n">glist</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">enr</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">enrichr</span><span class="p">(</span><span class="n">gene_list</span><span class="o">=</span><span class="n">glist</span><span class="p">,</span>
+                     <span class="n">gene_sets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;WikiPathways_2019_Mouse&quot;</span><span class="p">],</span>
+                     <span class="n">organism</span><span class="o">=</span><span class="s1">&#39;Mouse&#39;</span><span class="p">,</span> <span class="c1"># don&#39;t forget to set organism to the one you desired! e.g. Yeast</span>
+                     <span class="n">description</span><span class="o">=</span><span class="s1">&#39;test_name&#39;</span><span class="p">,</span>
+                     <span class="n">outdir</span><span class="o">=</span><span class="s1">&#39;test/enrichr_kegg&#39;</span><span class="p">,</span>
+                     <span class="c1"># no_plot=True,</span>
+                     <span class="n">cutoff</span><span class="o">=</span><span class="mf">0.5</span> <span class="c1"># test dataset, use lower value from range(0,1)</span>
+                    <span class="p">)</span>
+    <span class="n">gp</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">enr</span><span class="o">.</span><span class="n">res2d</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>[&#39;Airn&#39; &#39;Tbc1d16&#39; &#39;Them7&#39; &#39;Nfe2l2&#39; &#39;Ugdh&#39; &#39;Esrrg&#39; &#39;Fmo3&#39; &#39;Fabp12&#39; &#39;Fbp1&#39;
+ &#39;Neat1&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_2.png" /></p>
+<div class="codehilite"><pre><span></span><code>[&#39;Cps1&#39; &#39;Arg1&#39; &#39;Slc7a2&#39; &#39;Ass1&#39; &#39;Gm26917&#39; &#39;Itih2&#39; &#39;Nr1i3&#39; &#39;Neat1&#39; &#39;Por&#39;
+ &#39;Sult5a1&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_5.png" /></p>
+<div class="codehilite"><pre><span></span><code>[&#39;Glis3&#39; &#39;Pkhd1&#39; &#39;Bicc1&#39; &#39;Carmil1&#39; &#39;Alcam&#39; &#39;2610035D17Rik&#39; &#39;Naaladl2&#39;
+ &#39;Shank2&#39; &#39;Erbb4&#39; &#39;Pdgfd&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_8.png" /></p>
+<div class="codehilite"><pre><span></span><code>[&#39;Pde3a&#39; &#39;Lhfp&#39; &#39;Rbms3&#39; &#39;Sox5&#39; &#39;Zfpm2&#39; &#39;Arhgap24&#39; &#39;Gpc6&#39; &#39;Cacnb2&#39; &#39;Pde1a&#39;
+ &#39;Prkg1&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_11.png" /></p>
+<div class="codehilite"><pre><span></span><code>[&#39;Celf2&#39; &#39;Mast4&#39; &#39;Syne2&#39; &#39;Efna5&#39; &#39;Pcnx2&#39; &#39;Thsd4&#39; &#39;Wdr17&#39; &#39;Gpm6a&#39; &#39;Bnc2&#39;
+ &#39;Plxna4&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_14.png" /></p>
+<div class="codehilite"><pre><span></span><code>[&#39;Ptprb&#39; &#39;St6galnac3&#39; &#39;Plekhg1&#39; &#39;Meis2&#39; &#39;Plpp1&#39; &#39;Arhgap31&#39; &#39;Fbxl7&#39; &#39;Fyn&#39;
+ &#39;Stab2&#39; &#39;Tmem2&#39;]
+</code></pre></div>
+
+<p><img alt="png" src="../Figure2_files/Figure2_32_17.png" /></p>
+<p>Calculates Jaccard similarity between top 50 DEGs of cell types, creates a similarity matrix, and visualizes it as a heatmap.</p>
+<div class="highlight"><pre><span></span><code><span class="n">jaccard_sim</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">jaccard_sim</span><span class="p">(</span><span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;Portal Fibroblasts&quot;</span><span class="p">][:</span><span class="mi">100</span><span class="p">],</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="s2">&quot;Cholangiocytes&quot;</span><span class="p">][:</span><span class="mi">100</span><span class="p">])</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="mf">0.09289617486338798</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cell_types_of_int</span><span class="p">)</span>
+<span class="n">dist_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">cell_i</span> <span class="o">=</span> <span class="n">cell_types_of_int</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">cell_j</span> <span class="o">=</span> <span class="n">cell_types_of_int</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">diff_i</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="n">cell_i</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span>
+        <span class="n">diff_j</span> <span class="o">=</span> <span class="n">CD4T</span><span class="o">.</span><span class="n">uns</span><span class="p">[</span><span class="s2">&quot;rank_genes_groups&quot;</span><span class="p">][</span><span class="s2">&quot;names&quot;</span><span class="p">][</span><span class="n">cell_j</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span>
+        <span class="n">dist_ij</span> <span class="o">=</span> <span class="n">jaccard_sim</span><span class="p">(</span><span class="n">diff_i</span><span class="p">,</span> <span class="n">diff_j</span><span class="p">)</span>
+        <span class="n">dist_mat</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist_ij</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">dist_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">cell_types_of_int</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">cell_types_of_int</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dist_df</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../Figure2_files/Figure2_37_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">mmd</span> <span class="o">=</span> <span class="n">geomloss</span><span class="o">.</span><span class="n">SamplesLoss</span><span class="p">(</span><span class="s2">&quot;sinkhorn&quot;</span><span class="p">)</span>
+<span class="n">cos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CosineSimilarity</span><span class="p">(</span><span class="n">dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cell_types_of_int</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span><span class="p">))]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">latent_adata</span><span class="p">[((</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cell</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="s2">&quot;dose&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;30&quot;</span><span class="p">))]</span>
+    <span class="n">x_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">y_tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cell</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">mmd</span><span class="p">(</span><span class="n">x_tensor</span><span class="p">,</span><span class="w"> </span><span class="n">y_tensor</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="codehilite"><pre><span></span><code>Hepatocytes - central: 267.10369873046875
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "search.highlight", "search.share", "search.suggest", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
